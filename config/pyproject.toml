@@ -1,0 +1,115 @@
+[tool.ruff]
+
+line-length = 88
+indent-width = 4
+fix = true
+# https://docs.astral.sh/ruff/settings/#src
+# src = ["back", "tools", "scripts"]
+src = ["back"]
+
+extend-include = ["*.ipynb"]
+
+preview = false
+respect-gitignore = true
+
+
+namespace-packages = ["../scripts", "../tools"]
+
+
+# https://docs.astral.sh/ruff/settings/#typing-modules
+# typing-modules = ["airflow.typing_compat"]
+
+[tool.ruff.lint.per-file-ignores]
+"__init__.py" = ["TID252"]
+# https://github.com/astral-sh/ruff/issues/8795#issuecomment-1868950524
+"/**/tests/*" = ["S101", "S105", "PLR2004"]
+
+
+[tool.ruff.format]
+
+skip-magic-trailing-comma = true
+line-ending = "lf"
+docstring-code-format = true
+docstring-code-line-length = "dynamic"
+
+
+[tool.ruff.lint]
+
+select = ["ALL"]
+
+ignore = [
+    "D1",     # No pita si falta el docstrings, pero si existe debe seguir las convenciones
+    "DJ001",  # Avoid using null=True on string-based fields
+    "TD003",  # Missing issue link on the line following this TODO
+    "FIX002", # Line contains TODO, consider resolving the issue
+    # TODO
+    "DJ012", # Order of model's properties does not follow the Django Style Guide. https://github.com/astral-sh/ruff/issues/2425
+    # "UP030",  # Use implicit references for positional format fields
+    "ERA", # flake8-eradicate. TODO. Quizás demasiado agresivo
+    # "ARG002", # Unused method argument: `request`
+    # "ARG001", # Unused function argument: `request`
+    "DJ007", # Do not use `__all__` with `ModelForm`, use `fields` instead
+    "DTZ",   #  Datetime issues
+    # Compatibility with black/formatter
+    "W191",
+    "E111",
+    "E114",
+    "E117",
+    "E501",
+    "D206",
+    "D300",
+    "Q000",
+    "Q001",
+    "Q002",
+    "Q003",
+    "COM812",
+    "COM819",
+    "ISC001",
+]
+
+[tool.ruff.lint.pydocstyle]
+convention = "google"
+
+[tool.ruff.lint.isort]
+lines-after-imports = 2
+combine-as-imports = true
+split-on-trailing-comma = false
+
+# [tool.ruff.lint.flake8-annotations]
+# allow-star-arg-any = true
+# # ignore-fully-untyped = true
+# # mypy-init-return = true
+# suppress-dummy-args = true
+
+[tool.ruff.lint.flake8-builtins]
+# https://github.com/encode/django-rest-framework/issues/1776
+builtins-ignorelist = ["format"]
+
+
+# [tool.ruff.lint.flake8-import-conventions.banned-aliases]
+# https://docs.astral.sh/ruff/settings/#flake8-import-conventions-banned-from
+# https://docs.astral.sh/ruff/settings/#flake8-tidy-imports-banned-api
+
+[tool.ruff.lint.flake8-self]
+extend-ignore-names = ["_meta"]
+
+[tool.ruff.lint.flake8-tidy-imports]
+ban-relative-imports = "all"
+
+[tool.ruff.lint.flake8-type-checking]
+exempt-modules = ["typing", "typing_extensions"]
+quote-annotations = true
+
+[tool.ruff.lint.flake8-unused-arguments]
+ignore-variadic-names = true
+
+[tool.ruff.lint.mccabe]
+max-complexity = 6
+
+[tool.ruff.lint.pylint]
+max-args = 4
+max-bool-expr = 3
+max-branches = 5
+max-locals = 5
+max-public-methods = 10
+max-statements = 30

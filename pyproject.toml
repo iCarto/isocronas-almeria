@@ -1,0 +1,91 @@
+[tool.pyright]
+typeCheckingMode = "basic"
+reportIncompatibleMethodOverride = false
+reportIncompatibleVariableOverride = false
+reportArgumentType = false
+# reportUnreachable = true
+# reportCallIssue = false
+executionEnvironments = [{ root = "back" }]
+
+[tool.pytest.ini_options]
+addopts = "--strict-markers"
+DJANGO_SETTINGS_MODULE = "back.settings"
+python_files = ["test_*.py"]
+markers = ["slow: marks tests as slow (deselect with '-m \"not slow\"')"]
+
+[tool.coverage.run]
+omit = ["manage.py"]
+
+[build-system]
+requires = ["setuptools==72.1.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "isocronas_almeria"
+version = "0.0.1"
+authors = [{ name = "iCarto", email = "info@icarto.es" }]
+readme = "README.md"
+classifiers = [
+    "License :: OSI Approved :: GNU Affero General Public License v3 or later (AGPLv3+)",
+    "Private :: Do Not Upload",
+]
+requires-python = "==3.11.*"
+dependencies = [
+    "psycopg[binary]==3.2.2",
+    "geopandas==1.0.1",
+    "openpyxl==3.1.5 ",
+    # "docxcompose==1.4.0",
+    # "python-docx==1.1.2",
+    # "docxtpl==0.16.4",
+    # "pypdf==4.3.1",
+]
+
+# https://stackoverflow.com/questions/75490231/
+[project.optional-dependencies]
+test = [
+    "pytest==7.4.0",
+    "pytest-cov==4.1.0",
+    "selenium==4.14.0",
+    "webdriver-manager==4.0.1",
+    "factory_boy==3.3.0",
+]
+dev = [
+    "ruff==0.5.6",
+    "ipython==8.12.0",
+    "ipdb==0.13.13",
+    "pre-commit==3.2.2",
+]
+
+all = ["isocronas_almeria[dev, test]"]
+
+[tool.setuptools]
+package-dir = { "snimf" = "back" }
+include-package-data = true
+
+[tool.setuptools.package-data]
+# *.css *.woff *.svg *.js *.gif *.ico *.png *.jpg *.html *.js.map
+"snimf.static" = ["**"]
+"snimf.templates" = ["**"]
+
+
+[tool.ruff]
+extend = "./config/pyproject.toml"
+
+extend-exclude = [
+    "/**/migrations/*", # folders excluded when working with django
+]
+
+[tool.ruff.lint]
+
+extend-ignore = ["ANN", "ERA", "TCH"]
+
+[tool.ruff.lint.isort]
+# https://docs.astral.sh/ruff/settings/#isort-known-third-party
+known-first-party = [
+    "base",
+    "users",
+    "app",
+    "back",
+    "domains",
+    "config",
+] # Ajustar en cada proyecto
