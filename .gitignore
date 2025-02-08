@@ -33,5 +33,5 @@ ubuntu-*-cloudimg-console.log
 .env
 private
 tools/fixtures
-
+.cache
 # Custom

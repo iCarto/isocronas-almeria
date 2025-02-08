@@ -34,8 +34,8 @@ dependencies = [
     "psycopg[binary]==3.2.2",
     "geopandas==1.0.1",
     "openpyxl==3.1.5 ",
+    "python-docx==1.1.2",
     # "docxcompose==1.4.0",
-    # "python-docx==1.1.2",
     # "docxtpl==0.16.4",
     # "pypdf==4.3.1",
 ]
@@ -49,12 +49,7 @@ test = [
     "webdriver-manager==4.0.1",
     "factory_boy==3.3.0",
 ]
-dev = [
-    "ruff==0.5.6",
-    "ipython==8.12.0",
-    "ipdb==0.13.13",
-    "pre-commit==3.2.2",
-]
+dev = ["ruff==0.5.6", "ipython==8.12.0", "ipdb==0.13.13", "pre-commit==3.2.2"]
 
 all = ["isocronas_almeria[dev, test]"]
 
