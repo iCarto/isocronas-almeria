@@ -1,0 +1,14 @@
+.leaflet-control-resetview a {
+    cursor: pointer;
+}
+
+.leaflet-control-resetview a .leaflet-control-resetview-icon {
+    background-color: #000;
+    display: inline-block;
+    height: 16px;
+    margin: 7px;
+    mask-image: url("redo-solid.svg");
+    mask-position: center;
+    mask-repeat: no-repeat;
+    width: 16px;
+}
