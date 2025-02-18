@@ -1,0 +1,652 @@
+msgid ""
+msgstr ""
+"POT-Creation-Date: 2025-01-30 14:10+0100\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: @lingui/cli\n"
+"Language: es-ES\n"
+
+#: src/base/file/components/UploadingFileItem.jsx:33
+msgid "{0}"
+msgstr ""
+
+#: src/base/entity/components/presentational/EntityCounter.jsx:37
+msgid "{size, plural, one {{0}} other {{1}}}"
+msgstr ""
+
+#: src/base/user/components/LoginForm.jsx:97
+msgid "Access"
+msgstr ""
+
+#: src/base/ui/menu/ActionsMenu.jsx:57
+msgid "Actions"
+msgstr ""
+
+#: src/base/entity/components/presentational/EntityAddButtonGroup.jsx:38
+#: src/base/table/components/EditableTable.jsx:85
+msgid "Add"
+msgstr ""
+
+#: src/base/form/components/FormInputTextList.jsx:78
+#: src/base/form/components/FormTextAreaList.jsx:80
+msgid "Add {0}"
+msgstr ""
+
+#: src/base/image/components/ImageUploadButton.jsx:60
+msgid "Add image"
+msgstr ""
+
+#: src/base/ui/menu/hooks/CreateActionHook.jsx:45
+#: src/base/ui/menu/hooks/CreateActionHook.jsx:55
+msgid "Add new"
+msgstr ""
+
+#: src/base/location/components/LocationSection.jsx:53
+msgid "Address"
+msgstr ""
+
+#: src/base/location/components/FormLocationCombo.jsx:247
+#: src/base/location/components/LocationSection.jsx:10
+msgid "Admin level 1"
+msgstr ""
+
+#: src/base/location/components/FormLocationCombo.jsx:262
+#: src/base/location/components/LocationSection.jsx:18
+msgid "Admin level 2"
+msgstr ""
+
+#: src/base/location/components/FormLocationCombo.jsx:279
+#: src/base/location/components/LocationSection.jsx:26
+msgid "Admin level 3"
+msgstr ""
+
+#: src/base/location/components/FormLocationCombo.jsx:296
+#: src/base/location/components/LocationSection.jsx:34
+msgid "Admin level 4"
+msgstr ""
+
+#: src/base/location/components/FormLocationCombo.jsx:313
+#: src/base/location/components/LocationSection.jsx:42
+msgid "Admin level 5"
+msgstr ""
+
+#: src/base/file/components/DeleteDocumentDialog.jsx:39
+msgid "Are you sure you want to permanently delete this file?"
+msgstr ""
+
+#: src/base/delete/components/DeleteItemDialog.jsx:19
+msgid "Are you sure you want to permanently delete this item?"
+msgstr ""
+
+#: src/base/stepper/components/CancelProcessDialog.jsx:20
+msgid "Are you sure you wish to cancel the process?"
+msgstr ""
+
+#: src/base/stepper/components/CompleteProcessDialog.jsx:19
+msgid "Are you sure you wish to complete the process?"
+msgstr ""
+
+#: src/base/file/components/ViewOrUpdateFilesDataContent.jsx:10
+msgid "Attached files"
+msgstr ""
+
+#: src/base/entity/components/presentational/sections/EntityAuditSection.jsx:15
+msgid "Audit details"
+msgstr ""
+
+#: src/base/stepper/components/StepperButtons.jsx:35
+msgid "Back"
+msgstr ""
+
+#: src/base/map/actions/MapBaseLayerAction.jsx:40
+#: src/base/map/actions/MapBaseLayerAction.jsx:72
+msgid "Base layer"
+msgstr ""
+
+#: src/base/dialog/components/DialogLayout.jsx:24
+#: src/base/entity/components/form/EntityFormHorizontal.jsx:31
+#: src/base/file/components/SelectFileSection.jsx:142
+#: src/base/table/components/EditableTableRow.jsx:64
+msgid "Cancel"
+msgstr ""
+
+#: src/base/stepper/components/StepperButtons.jsx:50
+msgid "Cancel process"
+msgstr ""
+
+#: src/base/form/components/FormCheckboxGroup.jsx:46
+msgid "Check at least one option"
+msgstr ""
+
+#: src/base/form/components/FormClearButton.jsx:9
+#: src/base/form/components/FormClearButtonSmall.jsx:10
+msgid "Clear"
+msgstr ""
+
+#: src/base/entity/components/container/EntityManageDialog.jsx:19
+#: src/base/ui/sidebar/SidebarPanelLayout.jsx:72
+msgid "Close"
+msgstr ""
+
+#: src/base/entity/components/presentational/sections/EntityCommentsSection.jsx:9
+#: src/base/form/components/FormCommentsField.jsx:11
+msgid "Comments"
+msgstr ""
+
+#: src/base/stepper/components/StepperButtons.jsx:65
+msgid "Complete process"
+msgstr ""
+
+#: src/base/file/components/FolderTableRowMenu.jsx:85
+#: src/base/file/components/ViewDocumentPanel.jsx:125
+msgid "Copy link"
+msgstr ""
+
+#: src/base/entity/components/presentational/EntityCreateButton.jsx:21
+#: src/base/map/layer/geojson/MapGeojsonLayerFeatureListItem.jsx:110
+msgid "Create"
+msgstr ""
+
+#: src/base/ui/menu/hooks/CreateActionHook.jsx:63
+msgid "Create {0}"
+msgstr ""
+
+#: src/base/entity/components/presentational/EntityAddButtonGroup.jsx:59
+#: src/base/shared/components/ListSelector.jsx:89
+msgid "Create new"
+msgstr ""
+
+#: src/base/entity/components/presentational/sections/EntityAuditSection.jsx:18
+msgid "Created at"
+msgstr ""
+
+#: src/base/entity/components/presentational/sections/EntityAuditSection.jsx:21
+msgid "Created by"
+msgstr ""
+
+#: src/base/entity/components/presentational/EntityTableDownloadButton.jsx:106
+#: src/base/table/components/TableDownloadButton.jsx:85
+msgid "CSV"
+msgstr ""
+
+#: src/base/delete/components/DeleteEntityButton.jsx:18
+#: src/base/delete/components/DeleteItemDialog.jsx:22
+#: src/base/file/components/DeleteDocumentDialog.jsx:43
+#: src/base/file/components/FolderTableRowMenu.jsx:98
+#: src/base/table/components/EditableTableRow.jsx:85
+#: src/base/ui/menu/hooks/DeleteActionHook.jsx:47
+#: src/base/ui/menu/hooks/DeleteActionHook.jsx:57
+#: src/base/ui/sidebar/SidebarDeleteAction.jsx:13
+msgid "Delete"
+msgstr ""
+
+#: src/base/image/components/ImageUploadFormSection.jsx:118
+msgid "Delete {label}"
+msgstr ""
+
+#: src/base/file/components/DeleteDocumentDialog.jsx:38
+msgid "Delete file"
+msgstr ""
+
+#: src/base/delete/components/DeleteItemDialog.jsx:18
+msgid "Delete item"
+msgstr ""
+
+#: src/base/ui/menu/MenuListDetailButton.jsx:10
+msgid "Detail"
+msgstr ""
+
+#: src/base/delete/components/RemoveItemDialog.jsx:20
+msgid "Do you want to remove this item from the list?"
+msgstr ""
+
+#: src/base/file/components/FeaturedDocumentDownload.jsx:29
+#: src/base/file/components/ViewDocumentPanel.jsx:166
+msgid "Download"
+msgstr ""
+
+#: src/base/map/actions/MapImageAction.jsx:31
+msgid "Download as image"
+msgstr ""
+
+#: src/base/file/components/FeaturedDocumentDownload.jsx:22
+msgid "Download file"
+msgstr ""
+
+#: src/base/file/components/ListFolder.jsx:107
+msgid "Download files"
+msgstr ""
+
+#: src/base/pdf/hooks/DownloadPDFHook.jsx:36
+#: src/base/pdf/hooks/DownloadPDFHook.jsx:46
+#: src/base/pdf/presentational/DownloadPDFButton.jsx:13
+#: src/base/pdf/presentational/DownloadPDFButton.jsx:21
+msgid "Download PDF"
+msgstr ""
+
+#: src/base/entity/components/presentational/EntityTableDownloadButton.jsx:79
+#: src/base/table/components/TableDownloadButton.jsx:58
+msgid "Download table"
+msgstr ""
+
+#: src/base/file/components/SelectFileSection.jsx:99
+msgid "Drag your files here"
+msgstr ""
+
+#: src/base/file/components/SelectFileSection.jsx:97
+msgid "Drop your files"
+msgstr ""
+
+#: src/base/entity/components/presentational/EntityContentSection.jsx:74
+#: src/base/entity/components/presentational/EntityNestedContentSection.jsx:96
+#: src/base/entity/components/presentational/sections/EntityGeneralDataSection.jsx:52
+#: src/base/map/layer/geojson/MapGeojsonLayerFeatureListItem.jsx:77
+#: src/base/table/components/EditableTableRow.jsx:76
+#: src/base/ui/menu/hooks/EditActionHook.jsx:43
+#: src/base/ui/sidebar/SidebarEditAction.jsx:13
+msgid "Edit"
+msgstr ""
+
+#: src/base/ui/menu/hooks/EditActionHook.jsx:50
+msgid "Edit {0}"
+msgstr ""
+
+#: src/base/ui/section/components/SectionFieldEditButton.jsx:9
+msgid "Edit file"
+msgstr ""
+
+#: src/base/form/components/FormInputYear.jsx:35
+msgid "Enter a valid year (4 digits)"
+msgstr ""
+
+#: src/base/form/components/FormInputYear.jsx:38
+msgid "Enter a year between 1900 and 2100"
+msgstr ""
+
+#: src/base/user/components/LoginForm.jsx:77
+msgid "Enter your password"
+msgstr ""
+
+#: src/base/user/components/LoginForm.jsx:52
+msgid "Enter your user name"
+msgstr ""
+
+#: src/base/file/utilities/XMLHttpRequestService.js:113
+msgid "Error"
+msgstr ""
+
+#: src/base/entity/components/presentational/EntityTableDownloadButton.jsx:98
+#: src/base/table/components/TableDownloadButton.jsx:77
+msgid "Excel"
+msgstr ""
+
+#: src/base/file/components/ViewDocumentPanel.jsx:164
+msgid "File details"
+msgstr ""
+
+#: src/base/file/components/DocumentSection.jsx:27
+msgid "File size"
+msgstr ""
+
+#: src/base/file/components/DocumentSection.jsx:31
+msgid "File type"
+msgstr ""
+
+#: src/base/file/components/ViewDocumentsSubPage.jsx:54
+#: src/base/ui/menu/MenuListDocumentsButton.jsx:10
+msgid "Files"
+msgstr ""
+
+#: src/base/entity/components/presentational/sections/EntityLocationSection.jsx:30
+msgid "Go to Location Page"
+msgstr ""
+
+#: src/base/file/components/UploadingFileItem.jsx:78
+msgid "has been uploaded successfully."
+msgstr ""
+
+#: src/base/map/actions/MapBaseLayerAction.jsx:83
+msgid "Hide"
+msgstr ""
+
+#: src/base/entity/components/presentational/EntityListPageHeader.jsx:57
+msgid "Hide filters"
+msgstr ""
+
+#: src/base/file/components/DeleteDocumentDialog.jsx:40
+msgid "If you click Delete, the file cannot be recovered."
+msgstr ""
+
+#: src/base/delete/components/DeleteItemDialog.jsx:20
+msgid "If you click Delete, the item cannot be recovered."
+msgstr ""
+
+#: src/base/shared/components/ListSelector.jsx:102
+msgid "Import existing"
+msgstr ""
+
+#: src/base/user/service/UserService.js:7
+msgid "Incorrect password. Please try again or contact your system administrator."
+msgstr ""
+
+#: src/base/error/service/ErrorService.js:29
+msgid "Internal server error: {0}"
+msgstr ""
+
+#: src/base/error/service/AlertService.js:22
+msgid "Invalid alert type: {type}"
+msgstr ""
+
+#: src/base/form/components/FormDatePicker.jsx:61
+msgid "Invalid date"
+msgstr ""
+
+#: src/base/map/actions/MapActionsToolbar.jsx:37
+msgid "Layers"
+msgstr ""
+
+#: src/base/entity/components/presentational/sections/EntityLocationSection.jsx:55
+#: src/base/ui/menu/MenuListLocationButton.jsx:10
+msgid "Location"
+msgstr ""
+
+#: src/base/user/components/AccountMenu.jsx:108
+msgid "Log out"
+msgstr ""
+
+#: src/base/map/layout/MapDialog.jsx:31
+msgid "Map"
+msgstr ""
+
+#: src/base/file/components/FolderTable.jsx:26
+msgid "Name"
+msgstr ""
+
+#: src/base/form/components/FormStepper.jsx:75
+#: src/base/stepper/components/StepperButtons.jsx:67
+msgid "Next"
+msgstr ""
+
+#: src/base/stepper/components/CancelProcessDialog.jsx:27
+#: src/base/stepper/components/CompleteProcessDialog.jsx:21
+#: src/base/ui/section/components/SectionField.jsx:89
+msgid "No"
+msgstr ""
+
+#: src/base/shared/components/NoContentMessage.jsx:5
+msgid "No item found."
+msgstr ""
+
+#: src/base/entity/components/presentational/LinkedEntitySection.jsx:40
+msgid "No linked items."
+msgstr ""
+
+#: src/base/form/components/FormAutocomplete.jsx:51
+#: src/base/form/components/FormComboBox.jsx:85
+#: src/base/form/components/FormSelect.jsx:98
+#: src/base/form/components/FormSelectUncontrolled.jsx:58
+#: src/base/search/components/SearchAutocomplete.jsx:93
+msgid "No options available"
+msgstr ""
+
+#: src/base/file/components/UploadingFileItem.jsx:40
+msgid "of"
+msgstr ""
+
+#: src/base/map/layout/MapDialogHook.jsx:30
+msgid "Open map"
+msgstr ""
+
+#: src/base/error/components/PageNotFoundAlert.jsx:9
+msgid "Page not found"
+msgstr ""
+
+#: src/base/user/components/LoginForm.jsx:71
+#: src/base/user/components/LoginForm.jsx:93
+msgid "Password"
+msgstr ""
+
+#: src/base/stepper/components/StepperButtons.jsx:14
+msgid "Process completed."
+msgstr ""
+
+#: src/base/delete/components/RemoveItemDialog.jsx:23
+#: src/base/file/components/ViewDocumentPanel.jsx:155
+#: src/base/ui/menu/hooks/MenuGenericRemoveActionHook.jsx:41
+#: src/base/ui/menu/hooks/MenuGenericRemoveFromListActionHook.jsx:65
+#: src/base/ui/sidebar/SidebarRemoveAction.jsx:13
+msgid "Remove"
+msgstr ""
+
+#: src/base/delete/components/RemoveItemDialog.jsx:19
+msgid "Remove item"
+msgstr ""
+
+#: src/base/error/components/ErrorFallback.jsx:35
+#: src/base/stepper/components/StepperButtons.jsx:20
+msgid "Reset"
+msgstr ""
+
+#: src/base/location/components/WaterLocationSection.jsx:52
+msgid "River"
+msgstr ""
+
+#: src/base/entity/components/form/EntityFormSubmitButton.jsx:20
+#: src/base/form/components/FormStepper.jsx:66
+#: src/base/map/layer/geojson/MapGeojsonLayerFeatureListItem.jsx:131
+#: src/base/table/components/EditableTableRow.jsx:52
+msgid "Save"
+msgstr ""
+
+#: src/base/navigation/components/ScrollTopButton.jsx:11
+msgid "Scroll to top"
+msgstr ""
+
+#: src/base/entity/components/presentational/EntityListSearchForm.jsx:37
+msgid "Search for {0}"
+msgstr ""
+
+#: src/base/file/components/FileSelector.jsx:69
+#: src/base/form/components/FormSelect.jsx:86
+#: src/base/form/components/FormSelectUncontrolled.jsx:46
+msgid "Select"
+msgstr ""
+
+#: src/base/form/components/FormAutocomplete.jsx:83
+msgid "Select an option"
+msgstr ""
+
+#: src/base/form/components/FormSelect.jsx:97
+#: src/base/form/components/FormSelectUncontrolled.jsx:57
+msgid "Select an option from the list"
+msgstr ""
+
+#: src/base/entity/components/presentational/EntityAddButtonGroup.jsx:72
+msgid "Select existing"
+msgstr ""
+
+#: src/base/file/components/FileSelectButton.jsx:10
+msgid "Select files on the disk"
+msgstr ""
+
+#: src/base/file/components/SelectFileSection.jsx:127
+msgid "Selected files"
+msgstr ""
+
+#: src/base/file/components/ViewDocumentPanel.jsx:144
+msgid "Set as featured file"
+msgstr ""
+
+#: src/base/file/components/ViewDocumentPanel.jsx:135
+msgid "Set as featured image"
+msgstr ""
+
+#: src/base/location/components/LocationSection.jsx:49
+msgid "Settlement"
+msgstr ""
+
+#: src/base/entity/components/presentational/EntityListPageHeader.jsx:55
+msgid "Show filters"
+msgstr ""
+
+#: src/base/user/components/LoginForm.jsx:86
+msgid "Show/hide password"
+msgstr ""
+
+#: src/base/file/components/FolderTable.jsx:36
+msgid "Size"
+msgstr ""
+
+#: src/base/error/components/ErrorFallback.jsx:23
+msgid "Something went wrong:"
+msgstr ""
+
+#: src/base/ui/menu/MenuListStatsButton.jsx:10
+msgid "Stats"
+msgstr ""
+
+#: src/base/form/components/FormDatePicker.jsx:68
+msgid "The date must be between {0} and{1}."
+msgstr ""
+
+#: src/base/file/components/FileUploadSection.jsx:19
+msgid "The file {0} is larger than 20MB\\n"
+msgstr ""
+
+#: src/base/image/components/ImageUploadFormSection.jsx:24
+msgid "The file for \"{label}\" cannot exceed 20Mb\\n"
+msgstr ""
+
+#: src/base/image/components/ImageUploadFormSection.jsx:21
+msgid "The file for \"{label}\" must be of type jpg, jpeg o png."
+msgstr ""
+
+#: src/base/file/utilities/FileValidation.js:10
+msgid "The file must be of type {0}."
+msgstr ""
+
+#: src/base/file/utilities/FileValidation.js:13
+msgid "The file size cannot exceed {0}."
+msgstr ""
+
+#: src/base/delete/components/RemoveItemDialog.jsx:21
+msgid "The item will be removed from this list."
+msgstr ""
+
+#: src/base/file/utilities/FileValidation.js:7
+msgid "The selected file is not valid."
+msgstr ""
+
+#: src/base/stepper/components/CancelProcessDialog.jsx:21
+msgid "This action cannot be undone."
+msgstr ""
+
+#: src/base/form/validation/index.js:4
+msgid "This field is required."
+msgstr ""
+
+#: src/base/file/components/ListFolder.jsx:76
+msgid "This folder is empty."
+msgstr ""
+
+#: src/base/image/utilities/getImagesData.js:42
+msgid "This image could not be uploaded"
+msgstr ""
+
+#: src/base/table/components/NestedEntityTable.jsx:172
+msgid "Total"
+msgstr ""
+
+#: src/base/error/components/PageNotFoundAlert.jsx:20
+msgid "Try clearing the active filters or navigating to a different page."
+msgstr ""
+
+#: src/base/file/components/FolderTable.jsx:31
+msgid "Type"
+msgstr ""
+
+#: src/base/search/components/SearchAutocomplete.jsx:148
+msgid "Type to search"
+msgstr ""
+
+#: src/base/entity/components/presentational/sections/EntityAuditSection.jsx:23
+msgid "Updated at"
+msgstr ""
+
+#: src/base/entity/components/presentational/sections/EntityAuditSection.jsx:26
+msgid "Updated by"
+msgstr ""
+
+#: src/base/file/components/DocumentSection.jsx:35
+msgid "Upload date"
+msgstr ""
+
+#: src/base/file/components/FileUploadSection.jsx:85
+#: src/base/file/components/SelectFileSection.jsx:151
+msgid "Upload files"
+msgstr ""
+
+#: src/base/file/components/UploadingFileItem.jsx:34
+msgid "Uploaded"
+msgstr ""
+
+#: src/base/file/components/DocumentSection.jsx:39
+msgid "Uploaded by"
+msgstr ""
+
+#: src/base/file/components/UploadingFileSection.jsx:103
+msgid "Uploading files"
+msgstr ""
+
+#: src/base/user/components/LoginForm.jsx:55
+msgid "User name"
+msgstr ""
+
+#: src/base/user/service/UserService.js:6
+msgid "User not found. Please try again or contact your system administrator."
+msgstr ""
+
+#: src/base/user/components/AccountMenu.jsx:40
+msgid "User profile"
+msgstr ""
+
+#: src/base/entity/components/presentational/sections/EntityLocationSection.jsx:44
+msgid "UTM Coordinates"
+msgstr ""
+
+#: src/base/entity/components/container/EntitySummaryPanel.jsx:25
+#: src/base/ui/menu/hooks/MenuGenericViewActionHook.jsx:19
+msgid "View detail"
+msgstr ""
+
+#: src/base/location/components/FormLocationCombo.jsx:246
+#: src/base/location/components/WaterLocationSection.jsx:13
+msgid "Water level 1"
+msgstr ""
+
+#: src/base/location/components/FormLocationCombo.jsx:261
+#: src/base/location/components/WaterLocationSection.jsx:21
+msgid "Water level 2"
+msgstr ""
+
+#: src/base/location/components/FormLocationCombo.jsx:278
+#: src/base/location/components/WaterLocationSection.jsx:29
+msgid "Water level 3"
+msgstr ""
+
+#: src/base/location/components/FormLocationCombo.jsx:295
+#: src/base/location/components/WaterLocationSection.jsx:37
+msgid "Water level 4"
+msgstr ""
+
+#: src/base/location/components/FormLocationCombo.jsx:312
+#: src/base/location/components/WaterLocationSection.jsx:45
+msgid "Water level 5"
+msgstr ""
+
+#: src/base/stepper/components/CancelProcessDialog.jsx:23
+#: src/base/stepper/components/CompleteProcessDialog.jsx:20
+#: src/base/ui/section/components/SectionField.jsx:88
+msgid "Yes"
+msgstr ""
