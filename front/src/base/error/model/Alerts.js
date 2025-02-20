@@ -1,3 +1,5 @@
+import {t} from "@lingui/macro";
+
 const alertType = Object.freeze({
     ERROR: "error",
     WARNING: "warning",
@@ -8,7 +10,7 @@ class BaseAlert {
     constructor(type, message, field = null, status = null) {
         this.#validateType(type);
         this.type = type;
-        this.message = this.#formatMessage(message, field);
+        this.message = this.#formatMessage(message, field, status);
         this.field = field;
         this.status = status;
     }
@@ -19,8 +21,18 @@ class BaseAlert {
         }
     }
 
-    #formatMessage(message, field) {
-        return field ? `${field}: ${message}` : message;
+    #formatMessage(message = null, field = null, status = null) {
+        let formattedMessage = "";
+
+        if (field) {
+            formattedMessage += `${field}: `;
+        }
+        if (status) {
+            formattedMessage += t` [Status: ${status}] `;
+        }
+        formattedMessage += ` ${message}`;
+
+        return formattedMessage;
     }
 
     toString() {

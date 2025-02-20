@@ -49,7 +49,7 @@ const FetchService = {
                         response.status !== 302 &&
                         response.status !== 0))
             ) {
-                return ErrorUtil.throwFetchError(response);
+                return ErrorUtil.handleFetchResponse(response);
             }
             if (
                 "headers" in response &&
@@ -71,18 +71,7 @@ const FetchService = {
                 "Content-Type": contentType,
                 ...headers,
             },
-        }).then(response => {
-            if (response.status !== 200 && response.status !== 201) {
-                return ErrorUtil.throwFetchError(response);
-            }
-            if (
-                response.headers.get("content-type") &&
-                response.headers.get("content-type").includes("json")
-            ) {
-                return response.json();
-            }
-            return response;
-        });
+        }).then(ErrorUtil.handleFetchResponse);
     },
 
     put(url = "", body = {}, headers = {}) {
@@ -94,15 +83,7 @@ const FetchService = {
                 "Content-Type": "application/json",
                 ...headers,
             },
-        }).then(response => {
-            if (response.status !== 200) {
-                return ErrorUtil.throwFetchError(response);
-            }
-            if (response.headers.get("content-type") === "application/json") {
-                return response.json();
-            }
-            return response;
-        });
+        }).then(ErrorUtil.handleFetchResponse);
     },
 
     patch(url = "", body = {}, headers = {}) {
@@ -116,7 +97,7 @@ const FetchService = {
             },
         }).then(response => {
             if (response.status !== 200 && response.status !== 204) {
-                return ErrorUtil.throwFetchError(response);
+                return ErrorUtil.handleFetchResponse(response);
             }
             if (parseInt(response.headers.get("content-length")) === 0) {
                 return true;
@@ -138,7 +119,7 @@ const FetchService = {
             },
         }).then(response => {
             if (response.status !== 200 && response.status !== 204) {
-                return ErrorUtil.throwFetchError(response);
+                return ErrorUtil.handleFetchResponse(response);
             }
             return true;
         });

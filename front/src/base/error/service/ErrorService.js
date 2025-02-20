@@ -1,8 +1,8 @@
 import {t} from "@lingui/macro";
-import {FetchError} from "base/error/model";
 import {AlertService} from "base/error/service";
 import {AuthService} from "base/api/service";
 import {ErrorUtil} from "base/error/utilities";
+import {FetchError} from "../model";
 
 const ErrorService = {
     handleError(error) {
@@ -18,7 +18,7 @@ const ErrorService = {
     },
 
     handleFetchError(error) {
-        const json = error.json();
+        const json = error.data;
         if (json && json.code === "token_not_valid") {
             return this.handleTokenError(json);
         }

@@ -1,11 +1,29 @@
+import {t} from "@lingui/macro";
 import {alertType, FetchError} from "base/error/model";
 import {AlertService, ErrorService} from "base/error/service";
 
 const ErrorUtil = {
-    throwFetchError(response) {
-        return response.text().then(text => {
-            throw new FetchError(text, response.status);
-        });
+    async handleFetchResponse(response) {
+        if (!response.ok) {
+            const contentType = response.headers.get("content-type");
+            let errorData;
+
+            if (contentType?.includes("application/json")) {
+                errorData = await response.json();
+            } else {
+                errorData = await response.text();
+            }
+
+            throw new FetchError(
+                errorData.message || t`Error when fetching data`,
+                response.status,
+                errorData
+            );
+        }
+        if (response.headers.get("content-type")?.includes("application/json")) {
+            return response.json();
+        }
+        return response;
     },
 
     handleError(error) {

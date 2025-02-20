@@ -15,8 +15,6 @@ const ErrorAlerts = ({error: propError = null, onlyFieldless = false, ...props})
         return null;
     }
 
-    console.log({filteredErrors});
-
     if (filteredErrors.some(error => error.status === 404)) {
         return <PageNotFoundAlert errors={filteredErrors} />;
     }
