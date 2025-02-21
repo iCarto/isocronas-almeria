@@ -3,7 +3,7 @@ import {PoiFilterFormFields} from ".";
 
 const PoiFilterForm = ({}) => {
     return (
-        <EntityListFilterForm defaultValues={{}} layout={{columns: 1}}>
+        <EntityListFilterForm defaultValues={{category: ""}} layout={{columns: 1}}>
             <PoiFilterFormFields />
         </EntityListFilterForm>
     );

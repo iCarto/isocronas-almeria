@@ -1,11 +1,12 @@
 import {IsocronasLayout} from "app/ui";
+import {DomainProvider} from "base/domain/provider";
 
 export const IsocronasAuthApp = () => {
     return (
         // <LocationProvider>
-        //     <DomainProvider>
-        <IsocronasLayout />
-        //     </DomainProvider>
+        <DomainProvider dataSource="json">
+            <IsocronasLayout />
+        </DomainProvider>
         // </LocationProvider>
     );
 };

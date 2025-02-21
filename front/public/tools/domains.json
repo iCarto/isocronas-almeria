@@ -1,0 +1,499 @@
+{
+    "poi_category_group": [
+        {
+            "category": "poi_category_group",
+            "value": "Finanzas",
+            "label": "Finanzas",
+            "children": {
+                "poi_category": [
+                    {
+                        "category": "poi_category",
+                        "value": "Agencia de préstamos",
+                        "parent": "Finanzas",
+                        "label": "Agencia de préstamos"
+                    },
+                    {
+                        "category": "poi_category",
+                        "value": "Banco de inversión",
+                        "parent": "Finanzas",
+                        "label": "Banco de inversión"
+                    },
+                    {
+                        "category": "poi_category",
+                        "value": "Caja de ahorros",
+                        "parent": "Finanzas",
+                        "label": "Caja de ahorros"
+                    },
+                    {
+                        "category": "poi_category",
+                        "value": "Financiero banco",
+                        "parent": "Finanzas",
+                        "label": "Financiero banco"
+                    },
+                    {
+                        "category": "poi_category",
+                        "value": "Institución financiera",
+                        "parent": "Finanzas",
+                        "label": "Institución financiera"
+                    }
+                ]
+            }
+        },
+        {
+            "category": "poi_category_group",
+            "value": "Salud y bienestar",
+            "label": "Salud y bienestar",
+            "children": {
+                "poi_category": [
+                    {
+                        "category": "poi_category",
+                        "value": "Hospital",
+                        "parent": "Salud y bienestar",
+                        "label": "Hospital"
+                    },
+                    {
+                        "category": "poi_category",
+                        "value": "Clínica",
+                        "parent": "Salud y bienestar",
+                        "label": "Clínica"
+                    },
+                    {
+                        "category": "poi_category",
+                        "value": "Farmacia",
+                        "parent": "Salud y bienestar",
+                        "label": "Farmacia"
+                    },
+                    {
+                        "category": "poi_category",
+                        "value": "Centro de salud",
+                        "parent": "Salud y bienestar",
+                        "label": "Centro de salud"
+                    },
+                    {
+                        "category": "poi_category",
+                        "value": "Gimnasio",
+                        "parent": "Salud y bienestar",
+                        "label": "Gimnasio"
+                    },
+                    {
+                        "category": "poi_category",
+                        "value": "Spa",
+                        "parent": "Salud y bienestar",
+                        "label": "Spa"
+                    }
+                ]
+            }
+        },
+        {
+            "category": "poi_category_group",
+            "value": "Alimentación y bebidas",
+            "label": "Alimentación y bebidas",
+            "children": {
+                "poi_category": [
+                    {
+                        "category": "poi_category",
+                        "value": "Restaurante",
+                        "parent": "Alimentación y bebidas",
+                        "label": "Restaurante"
+                    },
+                    {
+                        "category": "poi_category",
+                        "value": "Cafetería",
+                        "parent": "Alimentación y bebidas",
+                        "label": "Cafetería"
+                    },
+                    {
+                        "category": "poi_category",
+                        "value": "Bar",
+                        "parent": "Alimentación y bebidas",
+                        "label": "Bar"
+                    },
+                    {
+                        "category": "poi_category",
+                        "value": "Supermercado",
+                        "parent": "Alimentación y bebidas",
+                        "label": "Supermercado"
+                    },
+                    {
+                        "category": "poi_category",
+                        "value": "Panadería",
+                        "parent": "Alimentación y bebidas",
+                        "label": "Panadería"
+                    }
+                ]
+            }
+        },
+        {
+            "category": "poi_category_group",
+            "value": "Compras",
+            "label": "Compras",
+            "children": {
+                "poi_category": [
+                    {
+                        "category": "poi_category",
+                        "value": "Tienda",
+                        "parent": "Compras",
+                        "label": "Tienda"
+                    },
+                    {
+                        "category": "poi_category",
+                        "value": "Centro comercial",
+                        "parent": "Compras",
+                        "label": "Centro comercial"
+                    },
+                    {
+                        "category": "poi_category",
+                        "value": "Mercado",
+                        "parent": "Compras",
+                        "label": "Mercado"
+                    },
+                    {
+                        "category": "poi_category",
+                        "value": "Ferretería",
+                        "parent": "Compras",
+                        "label": "Ferretería"
+                    }
+                ]
+            }
+        },
+        {
+            "category": "poi_category_group",
+            "value": "Entretenimiento y ocio",
+            "label": "Entretenimiento y ocio",
+            "children": {
+                "poi_category": [
+                    {
+                        "category": "poi_category",
+                        "value": "Cine",
+                        "parent": "Entretenimiento y ocio",
+                        "label": "Cine"
+                    },
+                    {
+                        "category": "poi_category",
+                        "value": "Teatro",
+                        "parent": "Entretenimiento y ocio",
+                        "label": "Teatro"
+                    },
+                    {
+                        "category": "poi_category",
+                        "value": "Museo",
+                        "parent": "Entretenimiento y ocio",
+                        "label": "Museo"
+                    },
+                    {
+                        "category": "poi_category",
+                        "value": "Parque de atracciones",
+                        "parent": "Entretenimiento y ocio",
+                        "label": "Parque de atracciones"
+                    }
+                ]
+            }
+        },
+        {
+            "category": "poi_category_group",
+            "value": "Cultura y educación",
+            "label": "Cultura y educación",
+            "children": {
+                "poi_category": [
+                    {
+                        "category": "poi_category",
+                        "value": "Biblioteca",
+                        "parent": "Cultura y educación",
+                        "label": "Biblioteca"
+                    },
+                    {
+                        "category": "poi_category",
+                        "value": "Escuela",
+                        "parent": "Cultura y educación",
+                        "label": "Escuela"
+                    },
+                    {
+                        "category": "poi_category",
+                        "value": "Universidad",
+                        "parent": "Cultura y educación",
+                        "label": "Universidad"
+                    },
+                    {
+                        "category": "poi_category",
+                        "value": "Academia",
+                        "parent": "Cultura y educación",
+                        "label": "Academia"
+                    }
+                ]
+            }
+        },
+        {
+            "category": "poi_category_group",
+            "value": "Gobierno e instituciones",
+            "label": "Gobierno e instituciones",
+            "children": {
+                "poi_category": [
+                    {
+                        "category": "poi_category",
+                        "value": "Ayuntamiento",
+                        "parent": "Gobierno e instituciones",
+                        "label": "Ayuntamiento"
+                    },
+                    {
+                        "category": "poi_category",
+                        "value": "Embajada",
+                        "parent": "Gobierno e instituciones",
+                        "label": "Embajada"
+                    },
+                    {
+                        "category": "poi_category",
+                        "value": "Juzgado",
+                        "parent": "Gobierno e instituciones",
+                        "label": "Juzgado"
+                    },
+                    {
+                        "category": "poi_category",
+                        "value": "Comisaría",
+                        "parent": "Gobierno e instituciones",
+                        "label": "Comisaría"
+                    }
+                ]
+            }
+        },
+        {
+            "category": "poi_category_group",
+            "value": "Transporte",
+            "label": "Transporte",
+            "children": {
+                "poi_category": [
+                    {
+                        "category": "poi_category",
+                        "value": "Estación de tren",
+                        "parent": "Transporte",
+                        "label": "Estación de tren"
+                    },
+                    {
+                        "category": "poi_category",
+                        "value": "Parada de autobús",
+                        "parent": "Transporte",
+                        "label": "Parada de autobús"
+                    },
+                    {
+                        "category": "poi_category",
+                        "value": "Aeropuerto",
+                        "parent": "Transporte",
+                        "label": "Aeropuerto"
+                    },
+                    {
+                        "category": "poi_category",
+                        "value": "Puerto",
+                        "parent": "Transporte",
+                        "label": "Puerto"
+                    }
+                ]
+            }
+        },
+        {
+            "category": "poi_category_group",
+            "value": "Alojamiento",
+            "label": "Alojamiento",
+            "children": {
+                "poi_category": [
+                    {
+                        "category": "poi_category",
+                        "value": "Hotel",
+                        "parent": "Alojamiento",
+                        "label": "Hotel"
+                    },
+                    {
+                        "category": "poi_category",
+                        "value": "Hostal",
+                        "parent": "Alojamiento",
+                        "label": "Hostal"
+                    },
+                    {
+                        "category": "poi_category",
+                        "value": "Apartamento turístico",
+                        "parent": "Alojamiento",
+                        "label": "Apartamento turístico"
+                    }
+                ]
+            }
+        },
+        {
+            "category": "poi_category_group",
+            "value": "Lugares de culto",
+            "label": "Lugares de culto",
+            "children": {
+                "poi_category": [
+                    {
+                        "category": "poi_category",
+                        "value": "Iglesia",
+                        "parent": "Lugares de culto",
+                        "label": "Iglesia"
+                    },
+                    {
+                        "category": "poi_category",
+                        "value": "Mezquita",
+                        "parent": "Lugares de culto",
+                        "label": "Mezquita"
+                    },
+                    {
+                        "category": "poi_category",
+                        "value": "Sinagoga",
+                        "parent": "Lugares de culto",
+                        "label": "Sinagoga"
+                    },
+                    {
+                        "category": "poi_category",
+                        "value": "Templo",
+                        "parent": "Lugares de culto",
+                        "label": "Templo"
+                    }
+                ]
+            }
+        },
+        {
+            "category": "poi_category_group",
+            "value": "Espacios naturales",
+            "label": "Espacios naturales",
+            "children": {
+                "poi_category": [
+                    {
+                        "category": "poi_category",
+                        "value": "Parque",
+                        "parent": "Espacios naturales",
+                        "label": "Parque"
+                    },
+                    {
+                        "category": "poi_category",
+                        "value": "Reserva natural",
+                        "parent": "Espacios naturales",
+                        "label": "Reserva natural"
+                    },
+                    {
+                        "category": "poi_category",
+                        "value": "Playa",
+                        "parent": "Espacios naturales",
+                        "label": "Playa"
+                    },
+                    {
+                        "category": "poi_category",
+                        "value": "Montaña",
+                        "parent": "Espacios naturales",
+                        "label": "Montaña"
+                    }
+                ]
+            }
+        },
+        {
+            "category": "poi_category_group",
+            "value": "Automoción",
+            "label": "Automoción",
+            "children": {
+                "poi_category": [
+                    {
+                        "category": "poi_category",
+                        "value": "Taller mecánico",
+                        "parent": "Automoción",
+                        "label": "Taller mecánico"
+                    },
+                    {
+                        "category": "poi_category",
+                        "value": "Gasolinera",
+                        "parent": "Automoción",
+                        "label": "Gasolinera"
+                    },
+                    {
+                        "category": "poi_category",
+                        "value": "Concesionario de coches",
+                        "parent": "Automoción",
+                        "label": "Concesionario de coches"
+                    }
+                ]
+            }
+        },
+        {
+            "category": "poi_category_group",
+            "value": "Servicios",
+            "label": "Servicios",
+            "children": {
+                "poi_category": [
+                    {
+                        "category": "poi_category",
+                        "value": "Peluquería",
+                        "parent": "Servicios",
+                        "label": "Peluquería"
+                    },
+                    {
+                        "category": "poi_category",
+                        "value": "Lavandería",
+                        "parent": "Servicios",
+                        "label": "Lavandería"
+                    },
+                    {
+                        "category": "poi_category",
+                        "value": "Agencia de viajes",
+                        "parent": "Servicios",
+                        "label": "Agencia de viajes"
+                    },
+                    {
+                        "category": "poi_category",
+                        "value": "Asesoría",
+                        "parent": "Servicios",
+                        "label": "Asesoría"
+                    }
+                ]
+            }
+        },
+        {
+            "category": "poi_category_group",
+            "value": "Deportes",
+            "label": "Deportes",
+            "children": {
+                "poi_category": [
+                    {
+                        "category": "poi_category",
+                        "value": "Campo de fútbol",
+                        "parent": "Deportes",
+                        "label": "Campo de fútbol"
+                    },
+                    {
+                        "category": "poi_category",
+                        "value": "Pista de tenis",
+                        "parent": "Deportes",
+                        "label": "Pista de tenis"
+                    },
+                    {
+                        "category": "poi_category",
+                        "value": "Polideportivo",
+                        "parent": "Deportes",
+                        "label": "Polideportivo"
+                    }
+                ]
+            }
+        },
+        {
+            "category": "poi_category_group",
+            "value": "Turismo",
+            "label": "Turismo",
+            "children": {
+                "poi_category": [
+                    {
+                        "category": "poi_category",
+                        "value": "Monumento",
+                        "parent": "Turismo",
+                        "label": "Monumento"
+                    },
+                    {
+                        "category": "poi_category",
+                        "value": "Punto de información turística",
+                        "parent": "Turismo",
+                        "label": "Punto de información turística"
+                    },
+                    {
+                        "category": "poi_category",
+                        "value": "Museo",
+                        "parent": "Turismo",
+                        "label": "Museo"
+                    }
+                ]
+            }
+        }
+    ]
+}

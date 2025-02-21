@@ -1,16 +1,14 @@
 const JsonFileService = {
-    get(url = "", headers = {}) {
+    get(url = "", baseUrl = "/api_data", headers = {}) {
+        console.log("Fetching " + baseUrl + url + ".json");
         url = url.replace(/\/$/, "");
         url = url.split("?")[0];
-        console.log("Fetching /api_data" + url + ".json");
-        return fetch("/api_data" + url + ".json", {
+        return fetch(baseUrl + url + ".json", {
             headers: {
                 "Content-Type": "application/json",
                 Accept: "application/json",
             },
-        }).then(function (response) {
-            return response.json();
-        });
+        }).then(response => response.json());
     },
 
     post(url = "", body = {}, contentType = "application/json", headers = {}) {
