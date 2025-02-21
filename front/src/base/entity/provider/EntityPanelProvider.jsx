@@ -17,6 +17,7 @@ export default function EntityPanelProvider({children}) {
     useEffect(() => {
         setLoading(true);
         setElement(null);
+        console.log({id});
         service
             .get(id)
             .then(data => {

@@ -14,12 +14,11 @@ export default function IsocronasRoutes() {
                     <Route path="poi" element={<PoiModule path="poi" />}>
                         <Route
                             key="poi-list-page-group"
-                            path=""
+                            path="all"
                             element={
                                 <EntityListPageGroup
                                     key="poi-list-page-group"
-                                    path=""
-                                    defaultFilter={{date: "all"}} // Page filter
+                                    path="all"
                                     urlParamsConfig={IsocronasUrlParamsConfig}
                                 />
                             }
@@ -36,13 +35,12 @@ export default function IsocronasRoutes() {
                                 />
                             </Route>
                         </Route>
-                        {/* 
-                        <Route
-                            key="redirect-poi-index"
-                            index
-                            element={<Navigate to="" replace />}
-                        /> */}
                     </Route>
+                    <Route
+                        key="redirect-poi-index"
+                        index
+                        element={<Navigate to="poi/all" replace />}
+                    />
                 </Route>
             </Routes>
         </Router>

@@ -18,6 +18,13 @@ export default defineConfig(({mode}) => {
         ],
         server: {
             port: 3000,
+            proxy: {
+                "/geoserver": {
+                    target: "http://localhost:8080",
+                    changeOrigin: true,
+                    secure: false,
+                },
+            },
         },
         define: {
             "process.env": env,

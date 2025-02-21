@@ -4,7 +4,7 @@ import {IsocronasHeaderHero} from ".";
 
 export const IsocronasLayout = () => {
     return (
-        <AppProvider defaultFilter={{app: "isocronas"}}>
+        <AppProvider>
             <AppLayout hero={<IsocronasHeaderHero />} />
         </AppProvider>
     );

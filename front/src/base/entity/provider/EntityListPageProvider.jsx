@@ -11,7 +11,7 @@ export default function EntityListPageProvider({service, children}) {
     const location = useLocation();
 
     const [elements, setElements] = useState([]);
-    const [view, setView] = useState("table");
+    const [view, setView] = useState("map");
     const [page, setPage] = useState(1);
     const [size, setSize] = useState(0);
     const [sort, setSort] = useState("name");
@@ -21,8 +21,6 @@ export default function EntityListPageProvider({service, children}) {
     const [selectedElement, setSelectedElement] = useState(null);
 
     const {pageGroupFilter} = useListPageGroupContext();
-
-    console.log({...pageGroupFilter}, page, sort, order);
 
     useEffect(() => {
         setLoading(true);
