@@ -18,7 +18,6 @@ export default function ListPageGroupProvider({
         queryParamsEnabled,
         searchParams,
         setSearchParams,
-        defaultParams,
         urlFilters: initialUrlFilters,
     } = useUrlParams();
 
@@ -35,8 +34,6 @@ export default function ListPageGroupProvider({
             ...initialUrlFilters,
         });
     });
-
-    SearchParamsUtil.getSearchParamsByType(searchParams, defaultParams);
 
     useEffect(() => {
         console.log("path", `/${modulePath}/${path}`);

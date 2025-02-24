@@ -2,6 +2,7 @@ import {createContext, useContext, useEffect, useState} from "react";
 import {useMapGeojsonLayerContext} from ".";
 import {useMapContext} from "base/map";
 import {useDownload} from "base/file/utilities";
+import {ErrorUtil} from "base/error/utilities";
 import {ServiceRequestFormat} from "base/api/utilities";
 
 let MapGeojsonLayerDataContext = createContext(null);
@@ -51,12 +52,12 @@ export default function MapGeojsonLayerDataProvider({children}) {
         loadDataCall
             .then(response => {
                 setElements(response);
-                setLoading(false);
             })
             .catch(error => {
-                console.log({error});
+                ErrorUtil.error(error);
+            })
+            .finally(() => {
                 setLoading(false);
-                setError(error);
             });
     };
 

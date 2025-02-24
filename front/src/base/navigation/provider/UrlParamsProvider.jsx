@@ -26,7 +26,6 @@ export default function UrlParamsProvider({config = defaultUrlParamsConfig, chil
         <UrlParamsContext.Provider
             value={{
                 queryParamsEnabled: config.queryParamsEnabled,
-                defaultParams: config.params,
                 searchParams,
                 setSearchParams,
                 urlFilters,

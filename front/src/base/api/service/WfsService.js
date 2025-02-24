@@ -9,11 +9,6 @@ const WfsService = {
         typeNames: "isocronas:poi",
         outputFormat: "json",
     },
-    cache: {
-        data: null,
-        timestamp: null,
-        expirationMinutes: 5,
-    },
 
     get(extraParams = {}) {
         const params = new URLSearchParams({
