@@ -77,12 +77,6 @@ export function createPoiLayerConfig({
                 excluded_id: excludedPlotId,
             });
         },
-        update: (id, feature) => {
-            console.log(`Updating ${id}`, feature);
-            return PoiRepository.updateFeature(id, feature).then(response => {
-                return response;
-            });
-        },
         layer: poisLayer,
         legend: poisLegend,
         discriminators: [],
@@ -97,15 +91,6 @@ export function createSinglePoiLayerConfig({poi, onUpdate = null}) {
             }
             return Promise.resolve(false);
         },
-        update: (id, feature) => {
-            console.log(`Updating ${id}`, feature);
-            return PoiRepository.updateFeature(id, feature).then(response => {
-                if (onUpdate) {
-                    onUpdate(response);
-                }
-                return response;
-            });
-        },
         layer: useGeojsonLayer({
             type: "polygon",
             style: {
@@ -118,7 +103,7 @@ export function createSinglePoiLayerConfig({poi, onUpdate = null}) {
         }),
         legend: createLayerLegend({
             code: "single-poi",
-            label: t`Operation area ${poi?.code}`,
+            label: t`POI ${poi?.name}`,
             icon: createWMSLegendIcon({
                 type: "square",
             }),

@@ -2,14 +2,14 @@ import {msg} from "@lingui/macro";
 import {i18n} from "@lingui/core";
 import {MapProvider} from "base/map";
 import {MapBaseLayersProvider} from "base/map/layer";
-// import {useSirhMapConfig} from "app/map";
 import {createPoiLayerConfig} from "poi/map";
 import {useListPageGroupContext} from "base/ui/page/provider";
+import {useIsocronasMapConfig} from "app/map";
 // import {createWaterLevelLayer} from "base/location/map";
 
 const PoisMapProvider = ({children = null, poi = null}) => {
     // map config
-    // const {crs, crsType, tocOptions, mapOptions, baseLayers} = useSirhMapConfig();
+    const {crs, crsType, tocOptions, mapOptions, baseLayers} = useIsocronasMapConfig();
 
     const poiLayerConfig = createPoiLayerConfig({fitBounds: true});
 
@@ -37,11 +37,11 @@ const PoisMapProvider = ({children = null, poi = null}) => {
 
     return (
         <MapProvider
-            // crs={crs}
-            // crsType={crsType}
-            // baseLayers={baseLayers}
-            // tocOptions={tocOptions}
-            // mapOptions={mapOptions}
+            crs={crs}
+            crsType={crsType}
+            baseLayers={baseLayers}
+            tocOptions={tocOptions}
+            mapOptions={mapOptions}
             defaultMapFilter={{...pageGroupFilter}}
         >
             <MapBaseLayersProvider
