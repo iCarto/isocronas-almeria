@@ -22,7 +22,6 @@ const TRANSITION_TIME = 200;
 const RightBarContainer = styled("div", {
     shouldForwardProp: prop => prop !== "open",
 })(({theme, style, open}) => {
-    console.log({open});
     return {
         flexGrow: 1,
         transition: theme.transitions.create("width", {

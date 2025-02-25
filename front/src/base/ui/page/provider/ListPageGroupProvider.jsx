@@ -1,25 +1,26 @@
 import {useState, createContext, useContext, useEffect} from "react";
-import {useSearchParams} from "react-router-dom";
 import {FilterUtil} from "base/filter/utilities";
 import {SearchParamsUtil} from "base/navigation/utilities";
 
 import {useModuleContext} from "base/ui/module/provider";
+import {useUrlParams} from "base/navigation/provider";
 
 let ListPageGroupContext = createContext(null);
-
-const defaultUrlParamsConfig = {
-    useQueryParams: false,
-};
 
 export default function ListPageGroupProvider({
     path: defaultPath,
     defaultFilter: defaultPageFilter,
-    urlParamsConfig = defaultUrlParamsConfig,
     children,
 }) {
-    const {useQueryParams} = urlParamsConfig;
     const {moduleFilter, path: modulePath} = useModuleContext();
     const {updateParamsFromFilter} = SearchParamsUtil;
+    const {
+        queryParamsEnabled,
+        searchParams,
+        setSearchParams,
+        defaultParams,
+        urlFilters: initialUrlFilters,
+    } = useUrlParams();
 
     const persistentFilters = FilterUtil.cleanFilter({
         ...moduleFilter,
@@ -28,15 +29,14 @@ export default function ListPageGroupProvider({
 
     const [path, setPath] = useState(defaultPath);
     const [basePath, setBasePath] = useState(null);
-    const [searchParams, setSearchParams] = useSearchParams();
-
-    const urlParams = Object.fromEntries(searchParams.entries());
 
     const [pageGroupFilter, setInternalPageGroupFilter] = useState(() => {
         return FilterUtil.cleanFilter({
-            ...urlParams,
+            ...initialUrlFilters,
         });
     });
+
+    SearchParamsUtil.getSearchParamsByType(searchParams, defaultParams);
 
     useEffect(() => {
         console.log("path", `/${modulePath}/${path}`);
@@ -44,21 +44,21 @@ export default function ListPageGroupProvider({
     }, [path, modulePath]);
 
     useEffect(() => {
-        if (!FilterUtil.equalsFilter(urlParams, persistentFilters)) {
-            changeFilter(urlParams);
+        if (!FilterUtil.equalsFilter(initialUrlFilters, persistentFilters)) {
+            changeFilter(initialUrlFilters);
         }
-    }, [urlParams]);
+    }, [initialUrlFilters]);
 
     // Keep URL changes synched with filter
     useEffect(() => {
-        if (!useQueryParams) return;
+        if (!queryParamsEnabled) return;
 
         if (searchParams.size === 0) {
             resetFilter();
         }
 
-        if (!FilterUtil.equalsFilter(urlParams, pageGroupFilter)) {
-            changeFilter(urlParams);
+        if (!FilterUtil.equalsFilter(initialUrlFilters, pageGroupFilter)) {
+            changeFilter(initialUrlFilters);
         }
     }, [searchParams]);
 
@@ -73,7 +73,7 @@ export default function ListPageGroupProvider({
 
             setInternalPageGroupFilter({...cleanedFilter});
 
-            if (useQueryParams) {
+            if (queryParamsEnabled) {
                 const params = updateParamsFromFilter(searchParams, cleanedFilter);
 
                 setSearchParams(params);
@@ -91,7 +91,7 @@ export default function ListPageGroupProvider({
         console.log("resetting page group filter");
         setInternalPageGroupFilter(persistentFilters);
 
-        if (useQueryParams) {
+        if (queryParamsEnabled) {
             const persistentParams = new URLSearchParams(persistentFilters);
             setSearchParams(persistentParams);
         }
@@ -104,6 +104,7 @@ export default function ListPageGroupProvider({
         pageGroupFilter,
         setFilterValue,
         resetFilter,
+        searchParams,
     };
 
     return (

@@ -35,13 +35,13 @@ export function useIsocronasMapConfig() {
     const mapOptions = {
         minZoom: 5,
         maxZoom: 18,
-        center: [-26.479274, 31.512005],
+        center: [37.203228, -2.293171],
         zoom: 9,
     };
 
     const tocOptions = {
         buffer: {show: false},
-        image: {show: true},
+        image: {show: false},
     };
 
     return {crs, crsType, baseLayers, mapOptions, tocOptions};

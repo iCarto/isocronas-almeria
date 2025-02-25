@@ -10,9 +10,10 @@ const mapDefaultStyle = {
 };
 
 const MapView = ({style: mapCustomStyle = {}}) => {
-    const {createMap, isMapLoaded, removeMap, setBaseLayer} = useLeafletMap();
+    const {createMap, isMapLoaded, removeMap, setBaseLayer, zoomToBbox} =
+        useLeafletMap();
 
-    const {mapDOMRef, selectedBaseLayer} = useMapContext();
+    const {mapDOMRef, selectedBaseLayer, boundingBox} = useMapContext();
 
     useEffect(() => {
         createMap();
@@ -27,6 +28,10 @@ const MapView = ({style: mapCustomStyle = {}}) => {
     useEffect(() => {
         setBaseLayer(selectedBaseLayer);
     }, [selectedBaseLayer]);
+
+    useEffect(() => {
+        if (boundingBox) zoomToBbox(boundingBox);
+    }, [boundingBox]);
 
     return (
         <div id="map" style={{...mapDefaultStyle, ...mapCustomStyle}} ref={mapDOMRef} />

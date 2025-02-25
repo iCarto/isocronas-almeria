@@ -62,6 +62,13 @@ export function useLeafletMap() {
         return map;
     };
 
+    const zoomToBbox = bbox => {
+        // bbox: [oeste, sur, este, norte]
+        console.log("CARTO >> Zooming to bbox", {bbox});
+        const bounds = L.latLngBounds([bbox[1], bbox[0]], [bbox[3], bbox[2]]);
+        mapObjectRef.current.fitBounds(bounds, {padding: [20, 20]});
+    };
+
     const isMapLoaded = () => mapObjectRef.current._loaded;
 
     const removeMap = () => {
@@ -91,5 +98,5 @@ export function useLeafletMap() {
         }
     };
 
-    return {createMap, isMapLoaded, removeMap, setBaseLayer};
+    return {createMap, isMapLoaded, removeMap, setBaseLayer, zoomToBbox};
 }

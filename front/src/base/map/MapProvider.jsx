@@ -1,6 +1,7 @@
 import {createContext, useContext, useEffect, useRef, useState} from "react";
 import {useMapConfig} from "./MapConfig";
 import {FilterUtil} from "base/filter/utilities";
+import useBoundingBox from "./hooks/BoundingBoxHook";
 
 let MapContext = createContext(null);
 
@@ -22,6 +23,8 @@ export default function MapProvider({
         controlOptions: defaultControlOptions,
         tocOptions: defaultTocOptions,
     } = useMapConfig();
+
+    const {boundingBox} = useBoundingBox();
 
     const [selectedBaseLayer, setSelectedBaseLayer] = useState(null);
     const [mapFilter, setMapFilter] = useState({...defaultMapFilter});
@@ -48,8 +51,8 @@ export default function MapProvider({
         ...customTocOptions,
     });
 
-    const mapDOMRef = useRef(null);
-    const mapObjectRef = useRef(null);
+    const mapDOMRef = useRef(null); // MapView
+    const mapObjectRef = useRef(null); // LeafletMap
 
     useEffect(() => {
         setSelectedBaseLayer(baseLayers[0]);
@@ -105,6 +108,7 @@ export default function MapProvider({
                 setTocOptions,
                 showToc,
                 setShowToc,
+                boundingBox,
             }}
         >
             {children}

@@ -1,6 +1,5 @@
 import {BrowserRouter as Router, Route, Routes, Navigate} from "react-router-dom";
 import {IsocronasAuthApp} from "app/ui";
-import {IsocronasUrlParamsConfig} from "app/urlParams/config";
 import {EntityListPageGroup} from "base/entity/components/container";
 import {PoiModule} from "poi/module";
 import {PoiListPage} from "poi/page/list";
@@ -19,7 +18,6 @@ export default function IsocronasRoutes() {
                                 <EntityListPageGroup
                                     key="poi-list-page-group"
                                     path="all"
-                                    urlParamsConfig={IsocronasUrlParamsConfig}
                                 />
                             }
                         >
