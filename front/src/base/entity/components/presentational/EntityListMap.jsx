@@ -3,7 +3,7 @@ import {useMapContext} from "base/map";
 import {MapBaseLayout} from "base/map/layout";
 import {useListPageGroupContext} from "base/ui/page/provider";
 
-const EntityListMap = () => {
+const EntityListMap = ({rightBarOptions}) => {
     const {pageGroupFilter} = useListPageGroupContext();
     const {updateMapFilter} = useMapContext();
 
@@ -11,7 +11,7 @@ const EntityListMap = () => {
         updateMapFilter(pageGroupFilter);
     }, [pageGroupFilter]);
 
-    return <MapBaseLayout />;
+    return <MapBaseLayout rightBarOptions={rightBarOptions} />;
 };
 
 export default EntityListMap;

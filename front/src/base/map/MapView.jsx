@@ -7,6 +7,7 @@ const mapDefaultStyle = {
     width: "100%",
     height: "100%",
     minHeight: `calc(100vh - ${HEADER_HEIGHT * 2}px)`,
+    zIndex: 0,
 };
 
 const MapView = ({style: mapCustomStyle = {}}) => {

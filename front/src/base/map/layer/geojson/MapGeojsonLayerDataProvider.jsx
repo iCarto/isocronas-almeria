@@ -15,7 +15,7 @@ export default function MapGeojsonLayerDataProvider({children}) {
 
     const download = useDownload();
 
-    const [elements, setElements] = useState([]);
+    const [featureCollection, setFeatureCollection] = useState([]);
     const [selectedItem, setSelectedItem] = useState(null);
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState(null);
@@ -34,12 +34,12 @@ export default function MapGeojsonLayerDataProvider({children}) {
     }, [mapFilter]);
 
     useEffect(() => {
-        console.log("CARTO >> Changing layer items", {items: elements});
-        if (!elements["crs"]) {
-            elements["crs"] = mapCRSType;
+        console.log("CARTO >> Changing layer items", {items: featureCollection});
+        if (!featureCollection["crs"]) {
+            featureCollection["crs"] = mapCRSType;
         }
-        layer.update(elements);
-    }, [elements]);
+        layer.update(featureCollection);
+    }, [featureCollection]);
 
     const loadData = filter => {
         setLoading(true);
@@ -51,7 +51,7 @@ export default function MapGeojsonLayerDataProvider({children}) {
                 : load.getFeatures({...filter});
         loadDataCall
             .then(response => {
-                setElements(response);
+                setFeatureCollection(response);
             })
             .catch(error => {
                 ErrorUtil.error(error);
@@ -84,7 +84,13 @@ export default function MapGeojsonLayerDataProvider({children}) {
 
     return (
         <MapGeojsonLayerDataContext.Provider
-            value={{elements, loading, error, selectedItem, setSelectedItem}}
+            value={{
+                elements: featureCollection,
+                loading,
+                error,
+                selectedItem,
+                setSelectedItem,
+            }}
         >
             {children}
         </MapGeojsonLayerDataContext.Provider>

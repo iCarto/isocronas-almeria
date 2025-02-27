@@ -8,6 +8,7 @@ import {usePoisTable} from "poi/shared/table";
 import {EntityListPage} from "base/entity/components/container";
 import {PoiFilterForm} from "poi/shared/filter";
 import {PoiCard} from ".";
+import {IsocronasMapControlPanel} from "app/map";
 
 const PoiListPage = ({}) => {
     const {tableColumns} = usePoisTable();
@@ -26,7 +27,10 @@ const PoiListPage = ({}) => {
                 listOptions={{
                     card: <PoiCard />,
                 }}
-                mapOptions={{provider: <PoisMapProvider />}}
+                mapOptions={{
+                    provider: <PoisMapProvider />,
+                    rightBarOptions: {component: <IsocronasMapControlPanel />},
+                }}
                 header={{
                     filter: <PoiFilterForm />,
                 }}

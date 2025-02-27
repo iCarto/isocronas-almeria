@@ -52,11 +52,7 @@ export function createPoiLegend() {
     });
 }
 
-export function createPoiLayerConfig({
-    label = t`POI`,
-    excludedPlotId = null,
-    fitBounds = false,
-} = {}) {
+export function createPoiLayerConfig({label = t`POI`, fitBounds = false} = {}) {
     const poisLayer = createPoiLayer({
         interactive: true,
         cluster: true,
@@ -74,40 +70,10 @@ export function createPoiLayerConfig({
         load: filter => {
             return PoiRepository.getFeatures({
                 ...filter,
-                excluded_id: excludedPlotId,
             });
         },
         layer: poisLayer,
         legend: poisLegend,
         discriminators: [],
-    });
-}
-
-export function createSinglePoiLayerConfig({poi, onUpdate = null}) {
-    return useMapGeojsonLayerConfig({
-        load: () => {
-            if (poi) {
-                return PoiRepository.getFeature(poi.id);
-            }
-            return Promise.resolve(false);
-        },
-        layer: useGeojsonLayer({
-            type: "polygon",
-            style: {
-                color: "#729b6f",
-                fillColor: "#729b6fcc",
-                weight: 2,
-            },
-            interactive: false,
-            fitBounds: true,
-        }),
-        legend: createLayerLegend({
-            code: "single-poi",
-            label: t`POI ${poi?.name}`,
-            icon: createWMSLegendIcon({
-                type: "square",
-            }),
-        }),
-        list: {},
     });
 }

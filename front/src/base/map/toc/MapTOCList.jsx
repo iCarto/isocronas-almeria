@@ -4,7 +4,8 @@ import styled from "@mui/material/styles/styled";
 
 const MapTOCBox = styled(Box)(({theme}) => ({
     height: "100%",
-    minWidth: "270px",
+    overflowY: "auto",
+    width: "320px",
     backgroundColor: theme.palette.secondary.lighter,
     borderLeft: `1px solid ${theme.palette.secondary.main}`,
     fontSize: "0.9rem",

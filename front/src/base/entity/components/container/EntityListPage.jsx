@@ -25,7 +25,11 @@ const EntityListPage = ({
     list = null,
     listOptions: {card: cardList = null, show: showList = true} = {},
     map = null,
-    mapOptions: {provider: providerMap, show: showMap = true} = {
+    mapOptions: {
+        provider: providerMap,
+        show: showMap = true,
+        rightBarOptions: mapRightBarOptions = null,
+    } = {
         provider: null,
     },
     header: {search = null, filter = null, counter = null, create = null} = {},
@@ -77,7 +81,11 @@ const EntityListPage = ({
                 ? cloneElement(map)
                 : providerMap &&
                       showMap &&
-                      cloneElement(providerMap, null, <EntityListMap />);
+                      cloneElement(
+                          providerMap,
+                          null,
+                          <EntityListMap rightBarOptions={mapRightBarOptions} />
+                      );
         }
         if (view === "list") {
             return list
