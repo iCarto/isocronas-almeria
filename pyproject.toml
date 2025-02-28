@@ -9,7 +9,6 @@ executionEnvironments = [{ root = "back" }]
 
 [tool.pytest.ini_options]
 addopts = "--strict-markers"
-DJANGO_SETTINGS_MODULE = "back.settings"
 python_files = ["test_*.py"]
 markers = ["slow: marks tests as slow (deselect with '-m \"not slow\"')"]
 
@@ -38,6 +37,7 @@ dependencies = [
     # "docxcompose==1.4.0",
     # "docxtpl==0.16.4",
     # "pypdf==4.3.1",
+    "geopy==2.4.1",
 ]
 
 # https://stackoverflow.com/questions/75490231/
