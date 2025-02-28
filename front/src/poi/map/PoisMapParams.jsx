@@ -19,7 +19,7 @@ const PoisMapParams = ({children = null}) => {
         if (municipalityCode) {
             setBoundingBox(municipality?.bbox ?? null);
         }
-    }, [municipalities, searchParams]);
+    }, [municipalities]);
 
     return <>{children}</>;
 };
