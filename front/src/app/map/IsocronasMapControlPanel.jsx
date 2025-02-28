@@ -1,12 +1,13 @@
 import {useEffect} from "react";
+import {t} from "@lingui/macro";
 
 import {useMapContext} from "base/map";
 import {
     MapGeojsonLayerFeatureListProvider,
     MapGeojsonLayerFeatureList,
 } from "base/map/layer/geojson";
-import {MapTOC} from "base/map/toc";
 import {IsocronasMapActionsToolbar} from ".";
+import {MapTOC} from "base/map/toc";
 
 import styled from "@mui/material/styles/styled";
 import Box from "@mui/material/Box";
@@ -55,7 +56,7 @@ const ToggleRightBarButton = ({showToc, onClick}) => {
                 height: "100%",
             }}
         >
-            <Tooltip title={`${showToc ? "Ocultar" : "Mostrar"} legenda`}>
+            <Tooltip title={t`${showToc ? "Show" : "Hide"} legend`}>
                 <IconButton
                     onClick={onClick}
                     color="primary"
@@ -109,7 +110,7 @@ const IsocronasMapControlPanel = ({show = true}) => {
                     <MapGeojsonLayerFeatureListProvider>
                         {/* <MapGeojsonLayerFeatureList /> */}
                         <Stack>
-                            <MapActionsToolbar />
+                            <IsocronasMapActionsToolbar />
                             <MapTOC />
                         </Stack>
                     </MapGeojsonLayerFeatureListProvider>

@@ -24,6 +24,8 @@ export default function MapProvider({
     } = useMapConfig();
 
     const [selectedBaseLayer, setSelectedBaseLayer] = useState(null);
+    const [selectedTravelTime, setSelectedTravelTime] = useState(); // Isocronas
+    const [selectedTransport, setSelectedTransport] = useState(); // Isocronas
     const [boundingBox, setBoundingBox] = useState(null);
     const [mapFilter, setMapFilter] = useState({...defaultMapFilter});
     const [buffer, setBuffer] = useState(null);
@@ -108,6 +110,10 @@ export default function MapProvider({
                 setShowToc,
                 boundingBox,
                 setBoundingBox,
+                selectedTravelTime,
+                setSelectedTravelTime,
+                selectedTransport,
+                setSelectedTransport,
             }}
         >
             {children}
