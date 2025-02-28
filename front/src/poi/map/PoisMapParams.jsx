@@ -1,12 +1,12 @@
-import {useState, useEffect} from "react";
+import {useEffect} from "react";
 import {useDomainContext} from "base/domain/provider";
 import {useUrlParams} from "base/navigation/provider";
+import {useMapContext} from "base/map";
 
-const useBoundingBox = () => {
+const PoisMapParams = ({children = null}) => {
     const {municipalities} = useDomainContext();
     const {searchParams} = useUrlParams();
-
-    const [boundingBox, setBoundingBox] = useState(null);
+    const {setBoundingBox} = useMapContext();
 
     const findMunicipalityByCode = code =>
         municipalities.find(municipality => municipality.code === code);
@@ -21,7 +21,6 @@ const useBoundingBox = () => {
         }
     }, [municipalities, searchParams]);
 
-    return {boundingBox, setBoundingBox};
+    return <>{children}</>;
 };
-
-export default useBoundingBox;
+export default PoisMapParams;

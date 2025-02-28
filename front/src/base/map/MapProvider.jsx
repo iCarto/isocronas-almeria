@@ -1,7 +1,6 @@
 import {createContext, useContext, useEffect, useRef, useState} from "react";
 import {useMapConfig} from "./MapConfig";
 import {FilterUtil} from "base/filter/utilities";
-import useBoundingBox from "./hooks/BoundingBoxHook";
 
 let MapContext = createContext(null);
 
@@ -24,9 +23,8 @@ export default function MapProvider({
         tocOptions: defaultTocOptions,
     } = useMapConfig();
 
-    const {boundingBox} = useBoundingBox();
-
     const [selectedBaseLayer, setSelectedBaseLayer] = useState(null);
+    const [boundingBox, setBoundingBox] = useState(null);
     const [mapFilter, setMapFilter] = useState({...defaultMapFilter});
     const [buffer, setBuffer] = useState(null);
     const [showToc, setShowToc] = useState(true);
@@ -109,6 +107,7 @@ export default function MapProvider({
                 showToc,
                 setShowToc,
                 boundingBox,
+                setBoundingBox,
             }}
         >
             {children}
