@@ -8,6 +8,7 @@ export function useCoordinatesMapControl() {
         L.control
             .coordProjection({
                 emptyString: `${map.getCenter().lat} | ${map.getCenter().lng}`,
+                position: "bottomright",
             })
             .addTo(map);
     };

@@ -1,6 +1,7 @@
 import {useEffect} from "react";
 import {t} from "@lingui/macro";
 
+import {theme} from "Theme";
 import {useMapContext} from "base/map";
 import {
     MapGeojsonLayerFeatureListProvider,
@@ -20,12 +21,13 @@ import KeyboardDoubleArrowLeftIcon from "@mui/icons-material/KeyboardDoubleArrow
 
 const TRANSITION_TIME = 200;
 
-const RightBarContainer = styled("div", {
+const SideBarContainer = styled("div", {
     shouldForwardProp: prop => prop !== "open",
 })(({theme, style, open}) => {
     return {
         overflow: "auto",
-        height: "97%",
+        height: "100%",
+        boxShadow: theme.shadows[2],
 
         transition: theme.transitions.create("width", {
             easing: theme.transitions.easing.sharp,
@@ -44,7 +46,7 @@ const RightBarContainer = styled("div", {
     };
 });
 
-const ToggleRightBarButton = ({showToc, onClick}) => {
+const ToggleSideBarButton = ({showToc, onClick}) => {
     return (
         <Box
             sx={{
@@ -54,18 +56,23 @@ const ToggleRightBarButton = ({showToc, onClick}) => {
                 zIndex: 1,
                 // width: 0,
                 height: "100%",
+                ml: 1,
             }}
         >
             <Tooltip title={t`${showToc ? "Show" : "Hide"} legend`}>
                 <IconButton
                     onClick={onClick}
                     color="primary"
-                    sx={{p: 0.5, background: "rgba(230, 217, 199, 0.8)"}}
+                    sx={{
+                        p: 0.5,
+                        background: "rgba(230, 217, 199, 0.8)",
+                        boxShadow: theme.shadows[2],
+                    }}
                 >
                     {showToc ? (
-                        <KeyboardDoubleArrowRightIcon />
-                    ) : (
                         <KeyboardDoubleArrowLeftIcon />
+                    ) : (
+                        <KeyboardDoubleArrowRightIcon />
                     )}
                 </IconButton>
             </Tooltip>
@@ -88,24 +95,16 @@ const IsocronasMapControlPanel = ({show = true}) => {
         <Stack
             direction="row"
             sx={{
-                zIndex: 1,
                 position: "absolute",
                 top: 0,
-                right: 0,
+                left: 0,
                 height: "100%",
+                zIndex: 1,
                 py: 1,
-                pr: 1,
+                pl: 1,
             }}
         >
-            {show && (
-                <ToggleRightBarButton
-                    showToc={showToc}
-                    onClick={() => {
-                        setShowToc(!showToc);
-                    }}
-                />
-            )}
-            <RightBarContainer open={show && showToc}>
+            <SideBarContainer open={show && showToc}>
                 <Stack direction="row" sx={{height: "100%"}}>
                     <MapGeojsonLayerFeatureListProvider>
                         {/* <MapGeojsonLayerFeatureList /> */}
@@ -115,7 +114,15 @@ const IsocronasMapControlPanel = ({show = true}) => {
                         </Stack>
                     </MapGeojsonLayerFeatureListProvider>
                 </Stack>
-            </RightBarContainer>
+            </SideBarContainer>
+            {show && (
+                <ToggleSideBarButton
+                    showToc={showToc}
+                    onClick={() => {
+                        setShowToc(!showToc);
+                    }}
+                />
+            )}
         </Stack>
     );
 };

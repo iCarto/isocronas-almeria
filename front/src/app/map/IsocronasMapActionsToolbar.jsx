@@ -33,7 +33,7 @@ const IsocronasMapActionsToolbar = ({}) => {
             sx={{
                 bgcolor: theme.palette.secondary.light,
                 borderBottom: `1px solid ${theme.palette.secondary.main}`,
-                borderLeft: `1px solid ${theme.palette.secondary.main}`,
+                // borderLeft: `1px solid ${theme.palette.secondary.main}`,
                 height: "50px",
             }}
         >

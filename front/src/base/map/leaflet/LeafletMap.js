@@ -37,8 +37,15 @@ export function useLeafletMap() {
         console.log("CARTO >> Creating map", {mapOptions});
         const map = L.map(mapDOMRef.current, {
             zoomSnap: 0, // http://leafletjs.com/reference.html#map-zoomsnap
+            zoomControl: false,
             ...mapOptions,
         });
+
+        L.control
+            .zoom({
+                position: "topright",
+            })
+            .addTo(map);
 
         console.log("CARTO >> Setting map options", {controlOptions});
         if (controlOptions.coordinates?.show) {

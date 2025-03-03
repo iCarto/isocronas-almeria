@@ -7,7 +7,6 @@ const MapTOCBox = styled(Box)(({theme}) => ({
     overflowY: "auto",
     width: "320px",
     backgroundColor: theme.palette.secondary.lighter,
-    borderLeft: `1px solid ${theme.palette.secondary.main}`,
     fontSize: "0.9rem",
     "& .MapMenuList": {
         width: "100%",

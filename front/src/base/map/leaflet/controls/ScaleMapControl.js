@@ -10,6 +10,7 @@ export function useScaleMapControl() {
                 fill: "fill",
                 doubleLine: false,
                 showSubunits: false,
+                position: "bottomright",
             })
             .addTo(map);
     };
