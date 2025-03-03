@@ -63,7 +63,7 @@ bash scripts/install.front.sh
 #-------------
 "${this_dir}"/util/setup-custom.sh
 mkdir -p .cache/fixtures
-ln -s ../1_DEFINITIVOS .cache/raw
+# ln -s ../1_DEFINITIVOS .cache/raw
 # "${this_dir}"/reset_and_create_db.sh
 
 echo "* DONE :)"
