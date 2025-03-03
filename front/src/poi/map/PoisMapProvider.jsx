@@ -1,6 +1,6 @@
 import {MapProvider} from "base/map";
 import {MapBaseLayersProvider} from "base/map/layer";
-import {createPoiLayerConfig, PoisMapParams} from "poi/map";
+import {createIsochroneLayerConfig, createPoiLayerConfig, PoisMapParams} from "poi/map";
 import {useListPageGroupContext} from "base/ui/page/provider";
 import {useIsocronasMapConfig} from "app/map";
 
@@ -12,6 +12,7 @@ const PoisMapProvider = ({children = null}) => {
     const poiLayerConfig = createPoiLayerConfig({
         fitBounds: false,
     });
+
     // end map config
 
     return (
@@ -24,7 +25,9 @@ const PoisMapProvider = ({children = null}) => {
             defaultMapFilter={{...pageGroupFilter}}
         >
             <PoisMapParams>
-                <MapBaseLayersProvider layers={[poiLayerConfig]}>
+                <MapBaseLayersProvider
+                    layers={[poiLayerConfig, createIsochroneLayerConfig()]}
+                >
                     {children}
                 </MapBaseLayersProvider>
             </PoisMapParams>
