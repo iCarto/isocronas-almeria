@@ -3,11 +3,8 @@ import {t} from "@lingui/macro";
 
 import {theme} from "Theme";
 import {useMapContext} from "base/map";
-import {
-    MapGeojsonLayerFeatureListProvider,
-    MapGeojsonLayerFeatureList,
-} from "base/map/layer/geojson";
-import {IsocronasMapActionsToolbar} from ".";
+import {MapGeojsonLayerFeatureListProvider} from "base/map/layer/geojson";
+import {IsocronasMapActionsToolbar, IsocronasMapCategoriesSelector} from ".";
 import {MapTOC} from "base/map/toc";
 
 import styled from "@mui/material/styles/styled";
@@ -25,6 +22,8 @@ const SideBarContainer = styled("div", {
     shouldForwardProp: prop => prop !== "open",
 })(({theme, style, open}) => {
     return {
+        display: "flex",
+        flexDirection: "column",
         overflow: "auto",
         height: "100%",
         boxShadow: theme.shadows[2],
@@ -42,6 +41,7 @@ const SideBarContainer = styled("div", {
             width: "100%",
         }),
         borderRadius: 5,
+        backgroundColor: theme.palette.pageBackground.secondary,
         ...style,
     };
 });
@@ -98,6 +98,7 @@ const IsocronasMapControlPanel = ({show = true}) => {
                 position: "absolute",
                 top: 0,
                 left: 0,
+                maxWidth: 400,
                 height: "100%",
                 zIndex: 1,
                 py: 1,
@@ -105,15 +106,11 @@ const IsocronasMapControlPanel = ({show = true}) => {
             }}
         >
             <SideBarContainer open={show && showToc}>
-                <Stack direction="row" sx={{height: "100%"}}>
-                    <MapGeojsonLayerFeatureListProvider>
-                        {/* <MapGeojsonLayerFeatureList /> */}
-                        <Stack>
-                            <IsocronasMapActionsToolbar />
-                            <MapTOC />
-                        </Stack>
-                    </MapGeojsonLayerFeatureListProvider>
-                </Stack>
+                <MapGeojsonLayerFeatureListProvider>
+                    <IsocronasMapActionsToolbar />
+                    <IsocronasMapCategoriesSelector />
+                    <MapTOC />
+                </MapGeojsonLayerFeatureListProvider>
             </SideBarContainer>
             {show && (
                 <ToggleSideBarButton

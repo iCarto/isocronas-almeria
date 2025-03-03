@@ -3,10 +3,9 @@ import List from "@mui/material/List";
 import styled from "@mui/material/styles/styled";
 
 const MapTOCBox = styled(Box)(({theme}) => ({
+    width: "100%",
     height: "100%",
     overflowY: "auto",
-    width: "320px",
-    backgroundColor: theme.palette.secondary.lighter,
     fontSize: "0.9rem",
     "& .MapMenuList": {
         width: "100%",
