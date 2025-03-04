@@ -54,7 +54,7 @@ export default function MapGeojsonLayerDataProvider({children}) {
                 setFeatureCollection(response);
             })
             .catch(error => {
-                ErrorUtil.error(error);
+                ErrorUtil.handleError(error);
             })
             .finally(() => {
                 setLoading(false);

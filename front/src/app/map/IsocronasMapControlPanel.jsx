@@ -109,7 +109,7 @@ const IsocronasMapControlPanel = ({show = true}) => {
                 <MapGeojsonLayerFeatureListProvider>
                     <IsocronasMapActionsToolbar />
                     <IsocronasMapCategoriesSelector />
-                    {/* <MapTOC /> */}
+                    <MapTOC />
                 </MapGeojsonLayerFeatureListProvider>
             </SideBarContainer>
             {show && (

@@ -1,6 +1,6 @@
-import {FilterUtil} from "base/filter/utilities";
+import {useState, createContext, useContext} from "react";
+import {useScopedFilters} from "base/filter/hooks";
 import {useAppContext} from "base/ui/baseApp/provider";
-import {useState, createContext, useContext, useEffect} from "react";
 
 let ModuleConfigContext = createContext(null);
 
@@ -11,34 +11,17 @@ export default function ModuleProvider({
 }) {
     const {appFilter} = useAppContext();
 
-    const [moduleFilter, setInternalModuleFilter] = useState({
-        ...appFilter,
-        ...defaultFilter,
-    });
-    const [path, setPath] = useState(defaultPath);
-
-    useEffect(() => {
-        console.log("changing app filter", {appFilter});
-        changeFilter(appFilter);
-    }, [appFilter]);
-
-    const changeFilter = propertiesChanged => {
-        const cleanedFilter = FilterUtil.cleanFilter({
-            ...moduleFilter,
-            ...propertiesChanged,
+    const {filter: moduleFilter, setFilterValue: setModuleFilterValue} =
+        useScopedFilters({
+            defaultFilter: {
+                ...appFilter,
+                ...defaultFilter,
+            },
+            scope: "module",
+            externalFilter: appFilter,
         });
-        if (!FilterUtil.equalsFilter(moduleFilter, cleanedFilter)) {
-            setInternalModuleFilter({...cleanedFilter});
-            console.log("filter module changed", {cleanedFilter});
-        }
-    };
 
-    const setModuleFilterValue = (property, value) => {
-        const newProperty = {};
-        newProperty[property] = value;
-        console.log("changing modlue filter property", {newProperty});
-        changeFilter(newProperty);
-    };
+    const [path, setPath] = useState(defaultPath);
 
     let value = {
         moduleFilter,

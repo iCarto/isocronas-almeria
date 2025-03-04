@@ -1,28 +1,13 @@
-import {FilterUtil} from "base/filter/utilities";
-import {useState, createContext, useContext} from "react";
+import {createContext, useContext} from "react";
+import {useScopedFilters} from "base/filter/hooks";
 
 let AppProviderContext = createContext(null);
 
 export default function AppProvider({defaultFilter = {}, children}) {
-    const [appFilter, setInternalAppFilter] = useState({...defaultFilter});
-
-    const changeFilter = propertiesChanged => {
-        const cleanedFilter = FilterUtil.cleanFilter({
-            ...appFilter,
-            ...propertiesChanged,
-        });
-        if (!FilterUtil.equalsFilter(appFilter, cleanedFilter)) {
-            setInternalAppFilter({...cleanedFilter});
-            console.log("app filter changed", {cleanedFilter});
-        }
-    };
-
-    const setFilterValue = (property, value) => {
-        const newProperty = {};
-        newProperty[property] = value;
-        console.log("changing app filter property", {newProperty});
-        changeFilter(newProperty);
-    };
+    const {filter: appFilter, setFilterValue} = useScopedFilters({
+        defaultFilter,
+        scope: "app",
+    });
 
     let value = {
         appFilter,

@@ -1,6 +1,6 @@
 import {createContext, useContext, useEffect, useRef, useState} from "react";
 import {useMapConfig} from "./MapConfig";
-import {FilterUtil} from "base/filter/utilities";
+import {useScopedFilters} from "base/filter/hooks";
 
 let MapContext = createContext(null);
 
@@ -27,7 +27,6 @@ export default function MapProvider({
     const [selectedTravelTime, setSelectedTravelTime] = useState(); // Isocronas
     const [selectedTransport, setSelectedTransport] = useState(); // Isocronas
     const [boundingBox, setBoundingBox] = useState(null);
-    const [mapFilter, setMapFilter] = useState({...defaultMapFilter});
     const [buffer, setBuffer] = useState(null);
     const [showToc, setShowToc] = useState(true);
 
@@ -54,32 +53,32 @@ export default function MapProvider({
     const mapDOMRef = useRef(null); // MapView
     const mapObjectRef = useRef(null); // LeafletMap
 
+    const {filter: mapFilter, setFilterValue} = useScopedFilters({
+        defaultFilter: defaultMapFilter,
+        scope: "map",
+        externalFilter: {buffer},
+    });
+
     useEffect(() => {
         setSelectedBaseLayer(baseLayers[0]);
     }, []);
 
-    // And this component have to check changes in moduleFilter to update mapFilter
     useEffect(() => {
-        replaceFilter({...mapFilter, buffer: buffer});
+        addBufferToFilter();
     }, [buffer]);
 
-    const replaceFilter = newFilter => {
-        console.log("map filter change", {propertiesChanged: newFilter});
-        const cleanedFilter = FilterUtil.cleanFilter({
-            ...newFilter,
-        });
-        if (!FilterUtil.equalsFilter(mapFilter, cleanedFilter)) {
-            setMapFilter({...cleanedFilter});
-            console.log("filter page changed", {cleanedFilter});
-        }
+    const addBufferToFilter = () => {
+        setFilterValue("buffer", buffer);
     };
 
     const updateMapFilter = filter => {
-        console.log("map filter update", {filter});
         if (!filter || !Object.keys(filter).length) {
-            replaceFilter({buffer: buffer});
+            addBufferToFilter();
         } else {
-            replaceFilter({buffer: buffer, ...filter});
+            addBufferToFilter();
+            Object.entries(filter).forEach(([key, value]) => {
+                setFilterValue(key, value);
+            });
         }
     };
 

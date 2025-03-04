@@ -1,15 +1,15 @@
 import {useEffect} from "react";
 import {useMapContext} from "base/map";
 import {MapBaseLayout} from "base/map/layout";
-import {useListPageGroupContext} from "base/ui/page/provider";
+import {useScopedFilters} from "base/filter/hooks";
 
 const EntityListMap = ({rightBarOptions}) => {
-    const {pageGroupFilter} = useListPageGroupContext();
+    const {filter} = useScopedFilters({defaultFilter: null, scope: "map"});
     const {updateMapFilter} = useMapContext();
 
     useEffect(() => {
-        updateMapFilter(pageGroupFilter);
-    }, [pageGroupFilter]);
+        updateMapFilter(filter);
+    }, [filter]);
 
     return <MapBaseLayout rightBarOptions={rightBarOptions} />;
 };

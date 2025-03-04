@@ -136,6 +136,8 @@ const PoiMapGeojsonLayerFeatureList = () => {
         elements: featureCollection,
     } = useMapGeojsonLayerDataContext();
 
+    console.log(featureCollection);
+
     return loading ? (
         <Spinner />
     ) : error ? (

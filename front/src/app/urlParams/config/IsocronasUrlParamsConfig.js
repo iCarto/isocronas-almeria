@@ -4,12 +4,12 @@ const IsocronasUrlParamsConfig = {
         {
             key: "municipality",
             type: "action",
-            scope: "map",
+            scope: ["map"],
         },
         {
             key: "category",
             type: "filter",
-            scope: "map",
+            scope: ["map"],
         },
     ],
 };
