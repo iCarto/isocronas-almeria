@@ -13,11 +13,13 @@ export default function PageProvider({children}) {
     const [basePath, setBasePath] = useState(null);
     const [isSidebarPanelOpen, setSidebarPanelOpen] = useState(false);
 
-    const {path: modulePath} = useModuleContext();
-    const {path: pageGroupPath} = useListPageGroupContext();
+    const moduleContext = useModuleContext();
+    const pageGroupContext = useListPageGroupContext();
+    const modulePath = moduleContext ? `${moduleContext.modulePath}/` : "";
+    const pageGroupPath = pageGroupContext ? `${pageGroupContext.pageGroupPath}/` : "";
 
     useEffect(() => {
-        setBasePath(`/${modulePath}/${pageGroupPath}/${path}`);
+        setBasePath(`/${modulePath}${pageGroupPath}${path}`);
     }, [path, modulePath]);
 
     let value = {
