@@ -24,19 +24,19 @@ const PoiRepository = {
     // Hacemos una primera llamada al servicio para almacenar en local storage los datos sin filtrar, y luego todos el filtrado lo hacemos siempre en el cliente.
     getFeatures: async (filters = {}) => {
         const storedData = Storage.get(storageKey);
-        let data;
 
-        if (storedData) {
-            data = JSON.parse(storedData).data;
-        }
+        let data = storedData ? JSON.parse(storedData) : null;
 
         if (!data) {
-            data = await WfsService.get({});
-            Storage.set(storageKey, JSON.stringify({data}));
+            const params = WfsServiceUtil.buildFeatureParams(filters);
+            data = await WfsService.get(params);
+
+            Storage.set(storageKey, JSON.stringify(data));
         }
 
         const features = data?.features || [];
-        const filteredFeatures = filterFeatures(features, filters);
+
+        const filteredFeatures = applyFilters(features, filters);
 
         return {
             type: "FeatureCollection",
@@ -48,22 +48,15 @@ const PoiRepository = {
 
 export default PoiRepository;
 
-const filterFeatures = (data, filters) => {
+// Move this
+const applyFilters = (data, filters) => {
     if (!filters || Object.keys(filters).length === 0) return data;
 
-    return data.filter(feature => {
+    const filteredFeatures = data.filter(feature => {
         return Object.entries(filters).every(([key, value]) => {
-            let filterValues;
-            if (Array.isArray(value)) {
-                filterValues = value;
-            } else if (typeof value === "string" && value.includes(",")) {
-                filterValues = value.split(",").map(v => v.trim());
-            } else {
-                filterValues = [value];
-            }
-            return filterValues.some(
-                filterValue => feature.properties[key] === filterValue
-            );
+            return feature.properties[key] === value;
         });
     });
+
+    return filteredFeatures;
 };
