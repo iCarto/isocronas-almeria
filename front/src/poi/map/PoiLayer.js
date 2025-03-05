@@ -55,7 +55,7 @@ export function createPoiLegend() {
 export function createPoiLayerConfig({label = t`POI`, fitBounds = false} = {}) {
     const poisLayer = createPoiLayer({
         interactive: true,
-        cluster: true,
+        cluster: false,
         fitBounds,
     });
     const poisLegend = createLayerLegend({
