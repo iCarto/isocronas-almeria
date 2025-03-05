@@ -1,10 +1,10 @@
 import {useEffect} from "react";
-import {useDomainContext} from "base/domain/provider";
 import {useUrlParams} from "base/navigation/provider";
 import {useMapContext} from "base/map";
+import {useMunicipalities} from "municipality/hooks";
 
-const PoisMapParams = ({children = null}) => {
-    const {municipalities} = useDomainContext();
+const PoisMapParamsProvider = ({children = null}) => {
+    const {municipalities} = useMunicipalities();
     const {searchParams} = useUrlParams();
     const {setBoundingBox} = useMapContext();
 
@@ -23,4 +23,4 @@ const PoisMapParams = ({children = null}) => {
 
     return <>{children}</>;
 };
-export default PoisMapParams;
+export default PoisMapParamsProvider;

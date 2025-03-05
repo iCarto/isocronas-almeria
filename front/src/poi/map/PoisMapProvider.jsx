@@ -1,6 +1,10 @@
 import {MapProvider} from "base/map";
 import {MapBaseLayersProvider} from "base/map/layer";
-import {createIsochroneLayerConfig, createPoiLayerConfig, PoisMapParams} from "poi/map";
+import {
+    createIsochroneLayerConfig,
+    createPoiLayerConfig,
+    PoisMapParamsProvider,
+} from "poi/map";
 import {useIsocronasMapConfig} from "app/map";
 
 const PoisMapProvider = ({children = null}) => {
@@ -21,13 +25,13 @@ const PoisMapProvider = ({children = null}) => {
             tocOptions={tocOptions}
             mapOptions={mapOptions}
         >
-            <PoisMapParams>
+            <PoisMapParamsProvider>
                 <MapBaseLayersProvider
                     layers={[poiLayerConfig, createIsochroneLayerConfig()]}
                 >
                     {children}
                 </MapBaseLayersProvider>
-            </PoisMapParams>
+            </PoisMapParamsProvider>
         </MapProvider>
     );
 };
