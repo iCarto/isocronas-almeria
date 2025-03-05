@@ -1,28 +1,30 @@
 import {cloneElement, useState} from "react";
 import {t} from "@lingui/macro";
+import styled from "@mui/material/styles/styled";
+
 import {theme} from "Theme";
 import {FieldUtil} from "base/ui/section/utilities";
 import {useMapGeojsonLayerDataContext} from "base/map/layer/geojson";
 
 import {Spinner} from "base/shared/components";
 import {ErrorAlertList} from "base/error/components";
-import CircleIcon from "@mui/icons-material/Circle";
+import Stack from "@mui/material/Stack";
+import Tooltip from "@mui/material/Tooltip";
+import Typography from "@mui/material/Typography";
+import ListItem from "@mui/material/ListItem";
+import ListItemButton from "@mui/material/ListItemButton";
+import ListItemIcon from "@mui/material/ListItemIcon";
 import ListItemText from "@mui/material/ListItemText";
 import Accordion from "@mui/material/Accordion";
 import AccordionDetails from "@mui/material/AccordionDetails";
 import MuiAccordionSummary from "@mui/material/AccordionSummary";
-import styled from "@mui/material/styles/styled";
-import ListItem from "@mui/material/ListItem";
-import ListItemButton from "@mui/material/ListItemButton";
-import ListItemIcon from "@mui/material/ListItemIcon";
+
+import CircleIcon from "@mui/icons-material/Circle";
 import ArrowForwardIosSharpIcon from "@mui/icons-material/ArrowForwardIosSharp";
 import FmdGoodOutlinedIcon from "@mui/icons-material/FmdGoodOutlined";
 import PublicIcon from "@mui/icons-material/Public";
 import LocalPhoneOutlinedIcon from "@mui/icons-material/LocalPhoneOutlined";
 import AccountBoxOutlinedIcon from "@mui/icons-material/AccountBoxOutlined";
-import Stack from "@mui/material/Stack";
-import Tooltip from "@mui/material/Tooltip";
-import Typography from "@mui/material/Typography";
 
 const AccordionSummary = styled(props => (
     <MuiAccordionSummary
@@ -135,8 +137,6 @@ const PoiMapGeojsonLayerFeatureList = () => {
         error,
         elements: featureCollection,
     } = useMapGeojsonLayerDataContext();
-
-    console.log(featureCollection);
 
     return loading ? (
         <Spinner />

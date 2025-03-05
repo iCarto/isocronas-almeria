@@ -4,7 +4,11 @@ import {t} from "@lingui/macro";
 import {theme} from "Theme";
 import {useMapContext} from "base/map";
 import {MapGeojsonLayerFeatureListProvider} from "base/map/layer/geojson";
-import {IsocronasMapActionsToolbar, IsocronasMapCategoriesSelector} from ".";
+import {
+    IsocronasMapActionsToolbar,
+    IsocronasMapCategoriesSelector,
+    IsocronasMapTOC,
+} from ".";
 import {MapTOC} from "base/map/toc";
 
 import styled from "@mui/material/styles/styled";
@@ -106,11 +110,9 @@ const IsocronasMapControlPanel = ({show = true}) => {
             }}
         >
             <SideBarContainer open={show && showToc}>
-                <MapGeojsonLayerFeatureListProvider>
-                    <IsocronasMapActionsToolbar />
-                    <IsocronasMapCategoriesSelector />
-                    <MapTOC />
-                </MapGeojsonLayerFeatureListProvider>
+                <IsocronasMapActionsToolbar />
+                <IsocronasMapCategoriesSelector />
+                <IsocronasMapTOC />
             </SideBarContainer>
             {show && (
                 <ToggleSideBarButton

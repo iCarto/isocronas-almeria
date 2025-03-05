@@ -3,3 +3,4 @@ export {default as IsocronasMapActionsToolbar} from "./IsocronasMapActionsToolba
 export {default as IsocronasMapCategoriesSelector} from "./IsocronasMapCategoriesSelector";
 export * from "./IsocronasMapConfig";
 export {default as IsocronasMapControlPanel} from "./IsocronasMapControlPanel";
+export {default as IsocronasMapTOC} from "./IsocronasMapTOC";

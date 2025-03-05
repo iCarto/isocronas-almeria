@@ -2,10 +2,13 @@ import {useMapContext} from "base/map";
 import {useLayerElementEditable} from "base/map/leaflet/layer/LayerElementEditable";
 import {GeojsonUtil} from "base/map/utilities";
 import {createContext, useContext, useEffect, useState} from "react";
+import {useMapGeojsonLayerContext} from "./MapGeojsonLayerProvider";
 
 let MapGeojsonLayerFeatureListContext = createContext(null);
 
 export default function MapGeojsonLayerFeatureListProvider({children}) {
+    const mapGeoJson = useMapGeojsonLayerContext();
+
     const [layerConfig, setLayerConfigInternal] = useState(null);
     const [featureCollection, setFeatureCollectionInternal] = useState(null);
     const [selectedItem, setSelectedItem] = useState(null);
@@ -17,6 +20,10 @@ export default function MapGeojsonLayerFeatureListProvider({children}) {
     const [error, setError] = useState(null);
 
     const {mapObjectRef} = useMapContext();
+
+    useEffect(() => {
+        if (mapGeoJson?.layerConfig) setLayerConfig(mapGeoJson.layerConfig);
+    }, [mapGeoJson]);
 
     const setLayerConfig = newLayerConfig => {
         if (layerConfig) {
