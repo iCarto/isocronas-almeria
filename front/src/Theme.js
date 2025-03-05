@@ -38,7 +38,7 @@ export const CUSTOM_COLORS = {
     },
     pageBackground: {primary: "#e4e9e2", secondary: "#f1f4f0"},
     text: {
-        primary: "#1b2631",
+        primary: "#1f3931",
     },
     grey: blueGrey,
     white: "#fff",
