@@ -5,7 +5,7 @@ import {
     MapGeojsonLayerDataProvider,
     MapGeojsonLayerFeatureListProvider,
 } from "base/map/layer/geojson";
-import {PoiMapGeojsonLayerFeatureList} from "poi/map";
+import {PoisMapGeojsonLayerFeatureList} from "poi/map";
 import {useMapBaseLayersContext} from "base/map/layer";
 import {MapTOCList} from "base/map/toc";
 
@@ -25,7 +25,7 @@ const IsocronasMapTOC = () => {
                             <MapGeojsonLayerDataProvider>
                                 {layerConfig?.layer instanceof GeojsonClusterLayer ? ( // TO-DO: Fix this.
                                     <MapGeojsonLayerFeatureListProvider>
-                                        <PoiMapGeojsonLayerFeatureList />
+                                        <PoisMapGeojsonLayerFeatureList />
                                     </MapGeojsonLayerFeatureListProvider>
                                 ) : null}
                             </MapGeojsonLayerDataProvider>

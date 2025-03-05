@@ -4,13 +4,10 @@ import styled from "@mui/material/styles/styled";
 
 import {theme} from "Theme";
 import {FieldUtil} from "base/ui/section/utilities";
-import {useMapGeojsonLayerDataContext} from "base/map/layer/geojson";
 
-import {Spinner} from "base/shared/components";
-import {ErrorAlertList} from "base/error/components";
 import Stack from "@mui/material/Stack";
-import Tooltip from "@mui/material/Tooltip";
 import Typography from "@mui/material/Typography";
+import Tooltip from "@mui/material/Tooltip";
 import ListItem from "@mui/material/ListItem";
 import ListItemButton from "@mui/material/ListItemButton";
 import ListItemIcon from "@mui/material/ListItemIcon";
@@ -131,22 +128,4 @@ const PoiListItem = ({feature}) => {
     );
 };
 
-const PoiMapGeojsonLayerFeatureList = () => {
-    const {
-        loading,
-        error,
-        elements: featureCollection,
-    } = useMapGeojsonLayerDataContext();
-
-    return loading ? (
-        <Spinner />
-    ) : error ? (
-        <ErrorAlertList errors={[error]} />
-    ) : (
-        featureCollection?.features?.map(feature => (
-            <PoiListItem key={feature.id} feature={feature} />
-        ))
-    );
-};
-
-export default PoiMapGeojsonLayerFeatureList;
+export default PoiListItem;
