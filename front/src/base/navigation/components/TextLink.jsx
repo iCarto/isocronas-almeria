@@ -10,6 +10,7 @@ const TextLink = ({
     textStyle = {},
     textVariant = "body1",
     isHashLink = false,
+    isExternalLink = false,
 }) => {
     const theme = useTheme();
     const textLinkStyle = {
@@ -37,7 +38,16 @@ const TextLink = ({
         window.scrollTo({top: yCoordinate, behavior: "smooth"});
     };
 
-    return (
+    return isExternalLink ? (
+        <Link href={to} target="_blank" rel="noopener noreferrer" style={textLinkStyle}>
+            <Typography
+                variant={textVariant}
+                sx={{...textLinkHoverStyle, ...textStyle}}
+            >
+                {text}
+            </Typography>
+        </Link>
+    ) : (
         <Link
             component={HashLink}
             to={to}

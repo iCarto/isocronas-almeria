@@ -3,13 +3,11 @@ import {t} from "@lingui/macro";
 
 import {theme} from "Theme";
 import {useMapContext} from "base/map";
-import {MapGeojsonLayerFeatureListProvider} from "base/map/layer/geojson";
 import {
     IsocronasMapActionsToolbar,
     IsocronasMapCategoriesSelector,
     IsocronasMapTOC,
 } from ".";
-import {MapTOC} from "base/map/toc";
 
 import styled from "@mui/material/styles/styled";
 import Box from "@mui/material/Box";

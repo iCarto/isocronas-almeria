@@ -29,11 +29,6 @@ export default function MapGeojsonLayerDataProvider({children}) {
     }, []);
 
     useEffect(() => {
-        console.log("CARTO >> Changing filter", {mapFilter});
-        loadData({...mapFilter});
-    }, [mapFilter]);
-
-    useEffect(() => {
         console.log("CARTO >> Changing layer items", {items: featureCollection});
         if (!featureCollection["crs"]) {
             featureCollection["crs"] = mapCRSType;
@@ -41,16 +36,22 @@ export default function MapGeojsonLayerDataProvider({children}) {
         layer.update(featureCollection);
     }, [featureCollection]);
 
+    useEffect(() => {
+        console.log("CARTO >> Changing filter", {mapFilter});
+        loadData({...mapFilter});
+    }, [mapFilter]);
+
     const loadData = filter => {
         setLoading(true);
         setError(null);
-        console.log("CARTO >> Loading data", {filter});
+
         const loadDataCall =
             typeof load === "function"
                 ? load({...filter})
                 : load.getFeatures({...filter});
         loadDataCall
             .then(response => {
+                console.log({response});
                 setFeatureCollection(response);
             })
             .catch(error => {

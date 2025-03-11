@@ -5,7 +5,7 @@ import styled from "@mui/material/styles/styled";
 const MapTOCBox = styled(Box)(({theme}) => ({
     width: "100%",
     height: "100%",
-    overflowY: "auto",
+    overflowY: "hidden",
     fontSize: "0.9rem",
     "& .MapMenuList": {
         width: "100%",

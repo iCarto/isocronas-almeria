@@ -1,11 +1,11 @@
-import {GeojsonClusterLayer} from "base/map/leaflet/layer";
+import {GeojsonClusterLayer, GeojsonLayer} from "base/map/leaflet/layer";
 import {
     MapGeojsonLayerProvider,
     MapGeojsonLayerDiscriminatorProvider,
     MapGeojsonLayerDataProvider,
     MapGeojsonLayerFeatureListProvider,
 } from "base/map/layer/geojson";
-import {PoisMapGeojsonLayerFeatureList} from "poi/map";
+import {PoisMapFeatureList} from "poi/map";
 import {useMapBaseLayersContext} from "base/map/layer";
 import {MapTOCList} from "base/map/toc";
 
@@ -18,14 +18,20 @@ const IsocronasMapTOC = () => {
     return (
         <MapTOCList>
             {layersConfig.map((layerConfig, index) => {
-                console.log("CARTO >> Creating TOC entry", {index}, {layerConfig});
+                console.log(
+                    "CARTO >> Creating TOC entry",
+                    {index},
+                    {layerConfig},
+                    layerConfig.legend.label
+                );
+                console.log(layerConfig?.layer instanceof GeojsonLayer);
                 return (
                     <MapGeojsonLayerProvider key={index} layerConfig={layerConfig}>
                         <MapGeojsonLayerDiscriminatorProvider>
                             <MapGeojsonLayerDataProvider>
-                                {layerConfig?.layer instanceof GeojsonClusterLayer ? ( // TO-DO: Fix this.
+                                {layerConfig.legend.label === "POI" ? ( // TO-DO: Fix this.
                                     <MapGeojsonLayerFeatureListProvider>
-                                        <PoisMapGeojsonLayerFeatureList />
+                                        <PoisMapFeatureList />
                                     </MapGeojsonLayerFeatureListProvider>
                                 ) : null}
                             </MapGeojsonLayerDataProvider>

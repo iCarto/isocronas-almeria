@@ -1,9 +1,9 @@
-import {cloneElement, useState} from "react";
-import {t} from "@lingui/macro";
+import {cloneElement} from "react";
 import styled from "@mui/material/styles/styled";
 
 import {theme} from "Theme";
 import {FieldUtil} from "base/ui/section/utilities";
+import {usePoiListItemFields} from "poi/shared/map";
 
 import Stack from "@mui/material/Stack";
 import Typography from "@mui/material/Typography";
@@ -15,13 +15,10 @@ import ListItemText from "@mui/material/ListItemText";
 import Accordion from "@mui/material/Accordion";
 import AccordionDetails from "@mui/material/AccordionDetails";
 import MuiAccordionSummary from "@mui/material/AccordionSummary";
+import Collapse from "@mui/material/Collapse";
 
 import CircleIcon from "@mui/icons-material/Circle";
 import ArrowForwardIosSharpIcon from "@mui/icons-material/ArrowForwardIosSharp";
-import FmdGoodOutlinedIcon from "@mui/icons-material/FmdGoodOutlined";
-import PublicIcon from "@mui/icons-material/Public";
-import LocalPhoneOutlinedIcon from "@mui/icons-material/LocalPhoneOutlined";
-import AccountBoxOutlinedIcon from "@mui/icons-material/AccountBoxOutlined";
 
 const AccordionSummary = styled(props => (
     <MuiAccordionSummary
@@ -31,46 +28,29 @@ const AccordionSummary = styled(props => (
 ))(() => ({
     "& .MuiAccordionSummary-expandIconWrapper.Mui-expanded": {
         transform: "rotate(90deg)",
+        transition: "transform 0.3s ease",
     },
     "& .MuiAccordionSummary-content": {
         margin: 0,
     },
 }));
 
-const fields = [
-    {
-        label: t`Targetted to`,
-        property: "people_targetr",
-        icon: <AccountBoxOutlinedIcon />,
-    },
-    {
-        label: t`Address`,
-        property: "address",
-        icon: <FmdGoodOutlinedIcon />,
-    },
-    {
-        label: t`Phone`,
-        property: "phone",
-        icon: <LocalPhoneOutlinedIcon />,
-    },
-    {
-        label: t`Web`,
-        property: "web",
-        icon: <PublicIcon />,
-    },
-];
-
-const PoiListItem = ({feature}) => {
+const PoiListItem = ({feature, isExpanded, onExpand}) => {
+    const {fields} = usePoiListItemFields();
     const properties = feature.properties;
-    const [isExpanded, setIsExpanded] = useState(false);
 
     const handleClick = (event, isExpanded) => {
-        console.log(event.target, isExpanded);
-        setIsExpanded(isExpanded);
+        onExpand(event, isExpanded);
     };
 
     return (
-        <Accordion expanded={isExpanded} disableGutters onChange={handleClick}>
+        <Accordion
+            expanded={isExpanded}
+            onChange={handleClick}
+            disableGutters
+            slots={{transition: Collapse}}
+            slotProps={{transition: {timeout: 400}}}
+        >
             <AccordionSummary
                 sx={{
                     margin: 0,
@@ -93,37 +73,57 @@ const PoiListItem = ({feature}) => {
                     </ListItemButton>
                 </ListItem>
             </AccordionSummary>
-            <AccordionDetails sx={{backgroundColor: "rgba(230, 217, 199, 0.8)"}}>
-                {fields.map((field, index) => {
-                    return (
-                        <Stack
-                            key={index}
-                            direction="row"
-                            spacing={2}
-                            color="grey.800"
-                            my={1}
-                        >
-                            <Tooltip title={field.label}>
-                                {field.icon
-                                    ? cloneElement(field.icon, {
-                                          fontSize: "small",
-                                          style: {marginRight: 12},
-                                      })
-                                    : null}
-                            </Tooltip>
-                            <Typography
-                                variant="body2"
-                                component="div"
-                                style={{marginTop: 1, marginLeft: 0}}
-                            >
-                                {field.formatFunction
-                                    ? field.formatFunction(properties)
-                                    : FieldUtil.getValue(properties[field.property])}
-                            </Typography>
-                        </Stack>
-                    );
-                })}
-            </AccordionDetails>
+            {isExpanded && (
+                <AccordionDetails
+                    sx={{
+                        backgroundColor: "rgba(230, 217, 199, 0.8)",
+                    }}
+                >
+                    {fields
+                        .map(field => ({
+                            ...field,
+                            value: field.formatFunction
+                                ? field.formatFunction(properties)
+                                : FieldUtil.getValue(properties[field.property]),
+                        }))
+                        .filter(field => field.value)
+                        .map((field, index) => {
+                            return (
+                                <Stack
+                                    key={index}
+                                    direction="row"
+                                    spacing={2}
+                                    color="grey.800"
+                                    my={1}
+                                >
+                                    <Tooltip title={field.label}>
+                                        {field.icon
+                                            ? cloneElement(field.icon, {
+                                                  fontSize: "small",
+                                                  style: {marginRight: 12},
+                                              })
+                                            : null}
+                                    </Tooltip>
+                                    <Typography
+                                        variant="body2"
+                                        component="div"
+                                        sx={{
+                                            marginTop: 1,
+                                            marginLeft: 0,
+                                            overflowWrap: "anywhere",
+                                        }}
+                                    >
+                                        {field.formatFunction
+                                            ? field.formatFunction(properties)
+                                            : FieldUtil.getValue(
+                                                  properties[field.property]
+                                              )}
+                                    </Typography>
+                                </Stack>
+                            );
+                        })}
+                </AccordionDetails>
+            )}
         </Accordion>
     );
 };
