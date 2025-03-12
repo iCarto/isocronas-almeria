@@ -5,20 +5,15 @@ import {useLinguiI18N} from "base/i18n/lingui";
 
 let DomainContext = createContext(null);
 
-export default function DomainProvider({dataSource = null, children}) {
+export default function DomainProvider({children}) {
     const {handleErrors} = useErrors();
 
     const {selectedLocale} = useLinguiI18N();
 
     const [domains, setDomains] = useState(null);
 
-    const service =
-        dataSource === "json"
-            ? DomainRepository.getDomainsFromJSON
-            : DomainRepository.getDomains;
-
     useEffect(() => {
-        service()
+        DomainRepository.getList()
             .then(domains => {
                 setDomains(domains);
             })

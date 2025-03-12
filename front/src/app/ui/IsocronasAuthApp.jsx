@@ -4,7 +4,7 @@ import {DomainProvider} from "base/domain/provider";
 
 export const IsocronasAuthApp = () => {
     return (
-        <DomainProvider dataSource="json">
+        <DomainProvider>
             <IsocronasUrlParamsProvider>
                 <IsocronasLayout />
             </IsocronasUrlParamsProvider>
