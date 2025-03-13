@@ -26,7 +26,7 @@ class ApiMapper {
     }
 }
 
-const createApiMapper = ({toPersistence, toDomain}) => {
+const createApiMapper = ({toPersistence = () => {}, toDomain = () => {}}) => {
     return new ApiMapper(toPersistence, toDomain);
 };
 

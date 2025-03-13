@@ -17,37 +17,45 @@ class EntityStore {
         return this.#mapper;
     }
 
+    getMappedToDomain(data) {
+        if (this.mapper) {
+            return this.mapper.mapToDomain(data);
+        }
+        return data;
+    }
+
+    getMappedToPersistence(data) {
+        if (this.mapper) {
+            return this.mapper.mapToPersistence(data);
+        }
+        return data;
+    }
+
     getList(filter, page, sort, order, format = null) {
         return this.adapter
             .getList(ServiceUtil.adaptRequestParams(filter, page, sort, order), format)
             .then(response => {
                 // TODO(egago): Move download data (excel, csv,...) to a new repository method downloadList()
-                if (
-                    ![ServiceRequestFormat.JSON, ServiceRequestFormat.JSON].includes(
-                        format
-                    )
-                ) {
+                if (format && ![ServiceRequestFormat.JSON].includes(format)) {
                     return response;
                 }
-                return this.mapper.mapToDomain(response);
+                return this.getMappedToDomain(response);
             });
     }
 
     get(id) {
         return this.adapter.get(id).then(object => {
-            return this.mapper.mapToDomain(object);
+            return this.getMappedToDomain(object);
         });
     }
 
     getBySearchText(searchText) {
         return this.adapter.getBySearchText(searchText).then(response => {
-            if (this.mapper.mapToDomain && response.results) {
-                response.results = this.mapper.mapToDomain(response.results);
+            if (response.results) {
+                response.results = this.getMappedToDomain(response.results);
                 return response;
             }
-            return this.mapper.mapToDomain
-                ? this.mapper.mapToDomain(response)
-                : response;
+            return this.getMappedToDomain(response);
         });
     }
 
@@ -65,9 +73,9 @@ class EntityStore {
 
     create(object) {
         return this.adapter
-            .create(this.mapper.mapToPersistence(object))
+            .create(this.getMappedToPersistence(object))
             .then(createdObject => {
-                return this.mapper.mapToDomain(createdObject);
+                return this.getMappedToDomain(createdObject);
             });
     }
 
@@ -81,9 +89,9 @@ class EntityStore {
 
     update(object) {
         return this.adapter
-            .update(this.mapper.mapToPersistence(object))
+            .update(this.getMappedToPersistence(object))
             .then(updatedObject => {
-                return this.mapper.mapToDomain(updatedObject);
+                return this.getMappedToDomain(updatedObject);
             });
     }
 
@@ -108,7 +116,7 @@ class EntityStore {
     }
 }
 
-const createEntityStore = ({adapter, mapper}) => {
+const createEntityStore = ({adapter, mapper = null}) => {
     // Based on https://www.js-data.io/docs/connecting-to-a-data-source
     return new EntityStore(adapter, mapper);
 };
