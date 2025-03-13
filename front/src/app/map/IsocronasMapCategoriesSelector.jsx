@@ -47,33 +47,21 @@ const IsocronasMapCategoriesSelector = ({}) => {
     const handleToggleCategory = category => {
         setSelectedCategories(prev => {
             const newState = {
+                ...prev,
                 [category.value]: !prev[category.value],
             };
-            // TO-DO: Implementar categorías múltiples en el filtrado
-            handleFilterChange(category.value);
+
+            handleFilterChange(newState);
             return newState;
         });
-
-        // setSelectedCategories(prev => {
-        //     const newState = {
-        //         ...prev,
-        //         [category.value]: !prev[category.value],
-        //     };
-
-        //     // Notificar al componente padre sobre el cambio
-        //     const activeCategories = domains?.poi_category_group
-        //         .filter(group => newState[group.value])
-        //         .map(group => ({value: group.value, label: group.label}));
-
-        //     handleFilterChange(activeCategories);
-
-        //     return newState;
-        // });
     };
 
-    const handleFilterChange = activeCategories => {
+    const handleFilterChange = newState => {
+        const activeCategories = Object.keys(newState)
+            .filter(key => newState[key])
+            .map(key => key);
+
         console.log("Categorías activas:", activeCategories);
-        // Implementar aquí el filtrado, ahora activeCategories no es un array sino un string
         updateMapFilter({category: activeCategories});
     };
 

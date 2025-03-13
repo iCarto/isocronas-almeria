@@ -18,13 +18,6 @@ const IsocronasMapTOC = () => {
     return (
         <MapTOCList>
             {layersConfig.map((layerConfig, index) => {
-                console.log(
-                    "CARTO >> Creating TOC entry",
-                    {index},
-                    {layerConfig},
-                    layerConfig.legend.label
-                );
-                console.log(layerConfig?.layer instanceof GeojsonLayer);
                 return (
                     <MapGeojsonLayerProvider key={index} layerConfig={layerConfig}>
                         <MapGeojsonLayerDiscriminatorProvider>
