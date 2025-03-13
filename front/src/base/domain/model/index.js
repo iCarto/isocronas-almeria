@@ -1,1 +1,1 @@
-export {default as createDomainEntries} from "./DomainEntry";
+export {default as createDomainOption} from "./DomainEntry";
