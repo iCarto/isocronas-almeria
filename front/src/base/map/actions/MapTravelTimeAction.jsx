@@ -15,7 +15,7 @@ const MapTravelTimeAction = () => {
     } = useMapContext();
 
     const handleOption = option => {
-        setSelectedOption(option);
+        setSelectedOption(option.value);
     };
 
     return (
@@ -23,10 +23,10 @@ const MapTravelTimeAction = () => {
             actionName="Tiempo de desplazamiento"
             icon={<AvTimerOutlinedIcon />}
             options={options}
-            selectedOption={selectedOption}
+            selectedOption={options.find(option => selectedOption === option.value)}
             onChange={handleOption}
             displayBadge
-            badgeContent={selectedOption ? `${selectedOption.value}'` : null}
+            badgeContent={selectedOption ? `${selectedOption}'` : null}
         />
     );
 };

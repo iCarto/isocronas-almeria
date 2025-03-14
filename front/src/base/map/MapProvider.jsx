@@ -24,8 +24,8 @@ export default function MapProvider({
     } = useMapConfig();
 
     const [selectedBaseLayer, setSelectedBaseLayer] = useState(null);
-    const [selectedTravelTime, setSelectedTravelTime] = useState(); // Isocronas
-    const [selectedTransport, setSelectedTransport] = useState(); // Isocronas
+    const [selectedTravelTime, setSelectedTravelTime] = useState(30); // Isocronas
+    const [selectedTransport, setSelectedTransport] = useState("walking"); // Isocronas
     const [boundingBox, setBoundingBox] = useState(null);
     const [buffer, setBuffer] = useState(null);
     const [showToc, setShowToc] = useState(true);
@@ -70,6 +70,14 @@ export default function MapProvider({
     const addBufferToFilter = () => {
         setFilterValue("buffer", buffer);
     };
+
+    useEffect(() => {
+        setFilterValue("travel_time", selectedTravelTime);
+    }, [selectedTravelTime]);
+
+    useEffect(() => {
+        setFilterValue("transport", selectedTransport);
+    }, [selectedTransport]);
 
     const updateMapFilter = filter => {
         if (!filter || !Object.keys(filter).length) {

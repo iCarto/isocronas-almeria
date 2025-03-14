@@ -7,14 +7,14 @@ import DirectionsBikeOutlinedIcon from "@mui/icons-material/DirectionsBikeOutlin
 import DirectionsWalkOutlinedIcon from "@mui/icons-material/DirectionsWalkOutlined";
 
 const options = [
-    {label: "A pie", value: "on_foot", icon: <DirectionsWalkOutlinedIcon />},
-    {label: "Bici", value: "bike", icon: <DirectionsBikeOutlinedIcon />},
+    {label: "A pie", value: "walking", icon: <DirectionsWalkOutlinedIcon />},
+    {label: "Bici", value: "cycling", icon: <DirectionsBikeOutlinedIcon />},
     {
         label: "Transporte público",
         value: "public_transport",
         icon: <DirectionsBusFilledOutlinedIcon />,
     },
-    {label: "Coche", value: "car", icon: <DirectionsCarFilledOutlinedIcon />},
+    {label: "Coche", value: "driving", icon: <DirectionsCarFilledOutlinedIcon />},
 ];
 
 const MapTransportAction = () => {
@@ -22,15 +22,19 @@ const MapTransportAction = () => {
         useMapContext();
 
     const handleOption = option => {
-        setSelectedOption(option);
+        setSelectedOption(option.value);
+    };
+
+    const getSelectedOption = () => {
+        return options.find(option => selectedOption === option.value);
     };
 
     return (
         <MapAction
             actionName="Medio de transporte"
-            icon={selectedOption?.icon || <DepartureBoardOutlinedIcon />}
+            icon={getSelectedOption()?.icon || <DepartureBoardOutlinedIcon />}
             options={options}
-            selectedOption={selectedOption}
+            selectedOption={getSelectedOption()}
             onChange={handleOption}
         />
     );

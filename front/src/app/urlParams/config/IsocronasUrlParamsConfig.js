@@ -11,6 +11,16 @@ const IsocronasUrlParamsConfig = {
             type: "filter",
             scope: ["map"],
         },
+        {
+            key: "travel_time",
+            type: "filter",
+            scope: ["map"],
+        },
+        {
+            key: "transport",
+            type: "filter",
+            scope: ["map"],
+        },
     ],
 };
 
