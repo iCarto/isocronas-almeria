@@ -1,20 +1,15 @@
-import {Storage} from "base/storage";
-import JsonFileService from "base/file/service/JsonFileService";
+import {createEntityStore, createPublicToolsApiAdapter} from "base/entity/repository";
 
-const municipalitiesJSONPath = "/bboxes";
-const storageKey = "municipalities";
+const store = createEntityStore({
+    adapter: createPublicToolsApiAdapter({
+        url: "/bboxes",
+        cacheKey: "municipalities",
+    }),
+});
 
 const MunicipalityRepository = {
-    getList() {
-        const storedMunicipalities = Storage.get(storageKey);
-        if (storedMunicipalities) {
-            return Promise.resolve(JSON.parse(storedMunicipalities));
-        }
-
-        return JsonFileService.get(municipalitiesJSONPath, "/tools").then(response => {
-            Storage.set(storageKey, JSON.stringify(response));
-            return response;
-        });
+    getList(filter, page, sort, order, format = null) {
+        return store.getList(filter, page, sort, order, format);
     },
 };
 
