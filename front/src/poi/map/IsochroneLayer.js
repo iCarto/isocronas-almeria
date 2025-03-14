@@ -4,7 +4,6 @@ import {useMapGeojsonLayerConfig} from "base/map/layer";
 import {useGeojsonLayer} from "base/map/leaflet/layer";
 import {createLayerLegend, createWMSLegendIcon} from "base/map/legend";
 import {IsochroneRepository} from "poi/repository";
-import MapboxParams from "poi/model/MapboxParams";
 
 function createIsochroneLayer({interactive = false, fitBounds = false}) {
     return useGeojsonLayer({
@@ -42,14 +41,7 @@ export function createIsochroneLayerConfig({
     const isochroneLegend = createIsochroneLegend();
 
     return useMapGeojsonLayerConfig({
-        load: filter => {
-            const params = new MapboxParams(
-                "mapbox/walking",
-                {latlng: {lng: -2.468799, lat: 36.972185}},
-                30
-            );
-            return IsochroneRepository.get(params);
-        },
+        load: IsochroneRepository,
         layer: isochroneLayer,
         legend: isochroneLegend,
         discriminators: [],
