@@ -69,6 +69,7 @@ export function useMapConfig() {
         coordinates: {show: true},
         scale: {show: true},
         resetview: {show: true},
+        setmarker: {show: true},
     };
 
     const tocOptions = {

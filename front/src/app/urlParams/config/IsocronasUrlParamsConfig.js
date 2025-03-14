@@ -21,6 +21,11 @@ const IsocronasUrlParamsConfig = {
             type: "filter",
             scope: ["map"],
         },
+        {
+            key: "selected_point",
+            type: "filter",
+            scope: ["map"],
+        },
     ],
 };
 

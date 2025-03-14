@@ -9,6 +9,7 @@ import {
     useCoordinatesMapControl,
     useScaleMapControl,
     useResetViewMapControl,
+    useSetMarkerMapControl,
 } from "./controls";
 import {useMapContext} from "../MapProvider";
 
@@ -17,8 +18,14 @@ export const mapOverlayPanes = [...Array(10).keys()].map(i => "overlayPane" + i)
 export function useLeafletMap() {
     let baseLayerRef = useRef(null);
 
-    const {mapDOMRef, mapObjectRef, mapCRS, mapOptions, controlOptions} =
-        useMapContext();
+    const {
+        mapDOMRef,
+        mapObjectRef,
+        mapCRS,
+        mapOptions,
+        controlOptions,
+        setSelectedPoint,
+    } = useMapContext();
 
     const {addCoordinatesMapControl} = useCoordinatesMapControl();
     const {addScaleMapControl} = useScaleMapControl();
@@ -26,6 +33,7 @@ export function useLeafletMap() {
         mapOptions.center,
         mapOptions.zoom
     );
+    const {addSetMarkerMapControl} = useSetMarkerMapControl(setSelectedPoint);
 
     if (mapCRS) {
         mapOptions["crs"] = new L.Proj.CRS(mapCRS.code, mapCRS.proj4, {
@@ -56,6 +64,9 @@ export function useLeafletMap() {
         }
         if (controlOptions.resetview?.show) {
             addResetViewMapControl(map);
+        }
+        if (controlOptions.setmarker.show) {
+            addSetMarkerMapControl(map);
         }
 
         // Add a series of custom panes for overlay layers
