@@ -36,7 +36,7 @@ const PoiRepository = {
         }
 
         const features = data?.features || [];
-        const filteredFeatures = applyFilters(features, filters);
+        const filteredFeatures = filterFeatures(features, filters);
 
         return {
             type: "FeatureCollection",
@@ -48,16 +48,19 @@ const PoiRepository = {
 
 export default PoiRepository;
 
-const applyFilters = (data, filters) => {
+const filterFeatures = (data, filters) => {
     if (!filters || Object.keys(filters).length === 0) return data;
 
     return data.filter(feature => {
         return Object.entries(filters).every(([key, value]) => {
-            const filterValues =
-                typeof value === "string" && value.includes(",")
-                    ? value.split(",").map(v => v.trim())
-                    : [value];
-
+            let filterValues;
+            if (Array.isArray(value)) {
+                filterValues = value;
+            } else if (typeof value === "string" && value.includes(",")) {
+                filterValues = value.split(",").map(v => v.trim());
+            } else {
+                filterValues = [value];
+            }
             return filterValues.some(
                 filterValue => feature.properties[key] === filterValue
             );

@@ -29,40 +29,37 @@ const CategoryButton = styled(IconButton)(({theme, selected}) => ({
 }));
 
 const IsocronasMapCategoriesSelector = ({}) => {
-    const [selectedCategories, setSelectedCategories] = useState({});
+    const [selectedCategories, setSelectedCategories] = useState([]);
     const {mapFilter, updateMapFilter} = useMapContext();
 
     const {domains} = useDomainContext();
 
     useEffect(() => {
-        const initialSelection = {};
+        if (mapFilter?.category) {
+            const categories = Array.isArray(mapFilter.category)
+                ? mapFilter.category
+                : mapFilter.category.split(",").map(cat => cat.trim());
 
-        Object.values(mapFilter).forEach(filter => {
-            initialSelection[filter] = true;
-        });
-
-        setSelectedCategories(initialSelection);
+            setSelectedCategories(categories);
+        }
     }, [domains]);
 
     const handleToggleCategory = category => {
         setSelectedCategories(prev => {
-            const newState = {
-                ...prev,
-                [category.value]: !prev[category.value],
-            };
-
+            let newState;
+            if (prev.includes(category)) {
+                newState = prev.filter(cat => cat !== category);
+            } else {
+                newState = [...prev, category];
+            }
             handleFilterChange(newState);
             return newState;
         });
     };
 
-    const handleFilterChange = newState => {
-        const activeCategories = Object.keys(newState)
-            .filter(key => newState[key])
-            .map(key => key);
-
-        console.log("Categorías activas:", activeCategories);
-        updateMapFilter({category: activeCategories});
+    const handleFilterChange = newSelection => {
+        console.log("Categorías activas:", newSelection);
+        updateMapFilter({category: newSelection});
     };
 
     return (
@@ -79,14 +76,14 @@ const IsocronasMapCategoriesSelector = ({}) => {
             }}
         >
             {domains?.poi_category_group.map(category => {
-                const isSelected = selectedCategories[category.value] || false;
+                const isSelected = selectedCategories.includes(category.value);
                 const IconComponent = CATEGORY_ICONS[category.value] || FilterListIcon;
 
                 return (
                     <Grid item xs={4} xl={3} key={category.value}>
                         <CategoryButton
                             selected={isSelected}
-                            onClick={() => handleToggleCategory(category)}
+                            onClick={() => handleToggleCategory(category.value)}
                             key={category.value}
                         >
                             <Box
