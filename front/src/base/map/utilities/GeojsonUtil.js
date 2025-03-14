@@ -1,5 +1,8 @@
 const GeojsonUtil = {
     hasValidCoordinates(geojson) {
+        if (!geojson) {
+            return false;
+        }
         // Helper function to check if coordinates are empty
         const isEmptyCoordinates = coords => {
             if (Array.isArray(coords)) {

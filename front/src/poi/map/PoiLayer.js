@@ -67,11 +67,7 @@ export function createPoiLayerConfig({label = t`POI`, fitBounds = false} = {}) {
     });
 
     return useMapGeojsonLayerConfig({
-        load: filter => {
-            return PoiRepository.getFeatures({
-                ...filter,
-            });
-        },
+        load: PoiRepository,
         layer: poisLayer,
         legend: poisLegend,
         discriminators: [],

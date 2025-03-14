@@ -16,18 +16,7 @@ const WfsServiceUtil = {
         return params;
     },
 
-    buildFeatureParams(filters = {}) {
-        const params = {};
-
-        const cqlFilters = this._buildCqlFilter(filters);
-        if (cqlFilters) {
-            params.cql_filter = cqlFilters;
-        }
-
-        return params;
-    },
-
-    _buildCqlFilter(filters = {}) {
+    buildCqlFilter(filters = {}) {
         const validFilters = Object.entries(filters).filter(
             ([_, value]) => value != null && value !== "undefined"
         );
