@@ -1,5 +1,5 @@
+import {usePoisIsochroneContext} from "poi/map";
 import {MapAction} from ".";
-import {useMapContext} from "..";
 import AvTimerOutlinedIcon from "@mui/icons-material/AvTimerOutlined";
 
 const options = [
@@ -12,7 +12,7 @@ const MapTravelTimeAction = () => {
     const {
         selectedTravelTime: selectedOption,
         setSelectedTravelTime: setSelectedOption,
-    } = useMapContext();
+    } = usePoisIsochroneContext();
 
     const handleOption = option => {
         setSelectedOption(option.value);

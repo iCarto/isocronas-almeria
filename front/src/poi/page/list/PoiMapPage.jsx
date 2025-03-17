@@ -1,4 +1,4 @@
-import {PoisMapProvider} from "poi/map";
+import {PoisIsochroneProvider, PoisMapProvider} from "poi/map";
 
 import {EntityMapPage} from "base/entity/components/container";
 import {IsocronasMapControlPanel} from "app/map";
@@ -11,12 +11,14 @@ const PoiMapPage = ({}) => {
         <Box sx={{display: "flex"}} role="main">
             <Box sx={{flexGrow: 1}} role="module">
                 <DrawerHeader role="drawer-header" />
-                <EntityMapPage
-                    mapOptions={{
-                        provider: <PoisMapProvider />,
-                        rightBarOptions: {component: <IsocronasMapControlPanel />},
-                    }}
-                />
+                <PoisIsochroneProvider>
+                    <EntityMapPage
+                        mapOptions={{
+                            provider: <PoisMapProvider />,
+                            rightBarOptions: {component: <IsocronasMapControlPanel />},
+                        }}
+                    />
+                </PoisIsochroneProvider>
             </Box>
         </Box>
     );

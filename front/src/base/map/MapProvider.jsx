@@ -24,8 +24,7 @@ export default function MapProvider({
     } = useMapConfig();
 
     const [selectedBaseLayer, setSelectedBaseLayer] = useState(null);
-    const [selectedTravelTime, setSelectedTravelTime] = useState(null); // Isocronas
-    const [selectedTransport, setSelectedTransport] = useState(null); // Isocronas
+
     const [selectedPoint, setSelectedPoint] = useState(null);
 
     const [boundingBox, setBoundingBox] = useState(null);
@@ -74,14 +73,6 @@ export default function MapProvider({
     };
 
     useEffect(() => {
-        setFilterValue("travel_time", selectedTravelTime);
-    }, [selectedTravelTime]);
-
-    useEffect(() => {
-        setFilterValue("transport", selectedTransport);
-    }, [selectedTransport]);
-
-    useEffect(() => {
         console.log({selectedPoint});
         setFilterValue("selected_point", selectedPoint);
     }, [selectedPoint]);
@@ -124,10 +115,6 @@ export default function MapProvider({
                 setShowToc,
                 boundingBox,
                 setBoundingBox,
-                selectedTravelTime,
-                setSelectedTravelTime,
-                selectedTransport,
-                setSelectedTransport,
                 selectedPoint,
                 setSelectedPoint,
             }}

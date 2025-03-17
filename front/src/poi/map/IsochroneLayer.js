@@ -4,6 +4,8 @@ import {useMapGeojsonLayerConfig} from "base/map/layer";
 import {useGeojsonLayer} from "base/map/leaflet/layer";
 import {createLayerLegend, createWMSLegendIcon} from "base/map/legend";
 import {IsochroneRepository} from "poi/repository";
+import {usePoisIsochroneContext} from ".";
+import {useTurfUtil} from "base/geo/turf";
 
 function createIsochroneLayer({interactive = false, fitBounds = false}) {
     return useGeojsonLayer({
@@ -34,6 +36,9 @@ export function createIsochroneLayerConfig({
     label = t`Isocrona`,
     fitBounds = false,
 } = {}) {
+    const {setIsochrone} = usePoisIsochroneContext();
+    const {getPolygon, getDifference} = useTurfUtil();
+
     const isochroneLayer = createIsochroneLayer({
         interactive: true,
         fitBounds,
@@ -41,7 +46,23 @@ export function createIsochroneLayerConfig({
     const isochroneLegend = createIsochroneLegend();
 
     return useMapGeojsonLayerConfig({
-        load: IsochroneRepository,
+        load: filter => {
+            return IsochroneRepository.getFeatures(filter).then(isochrone => {
+                setIsochrone(isochrone);
+
+                const envelope = getPolygon([
+                    [
+                        [-7.0, 33.0],
+                        [-7.0, 40.0],
+                        [2.0, 40.0],
+                        [2.0, 33.0],
+                        [-7.0, 33.0],
+                    ],
+                ]);
+
+                return getDifference([envelope, isochrone.features[0]]);
+            });
+        },
         layer: isochroneLayer,
         legend: isochroneLegend,
         discriminators: [],

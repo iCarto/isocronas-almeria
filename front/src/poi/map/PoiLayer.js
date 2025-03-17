@@ -4,6 +4,8 @@ import {useMapGeojsonLayerConfig} from "base/map/layer";
 import {useGeojsonLayer} from "base/map/leaflet/layer";
 import {createLayerLegend, createWMSLegendIcon} from "base/map/legend";
 import {PoiRepository} from "poi/repository";
+import {usePoisIsochroneContext} from ".";
+import {useTurfUtil} from "base/geo/turf";
 
 const popup = feature => {
     let data = feature.properties;
@@ -150,6 +152,8 @@ export function createPoiLegend() {
 }
 
 export function createPoiLayerConfig({label = t`POI`, fitBounds = false} = {}) {
+    const {getFilteredFeatures} = useTurfUtil();
+
     const poisLayer = createPoiLayer({
         interactive: true,
         cluster: false,
@@ -164,7 +168,11 @@ export function createPoiLayerConfig({label = t`POI`, fitBounds = false} = {}) {
     });
 
     return useMapGeojsonLayerConfig({
-        load: PoiRepository,
+        load: filter => {
+            return PoiRepository.getFeatures(filter).then(features => {
+                return getFilteredFeatures(features, filter.isochrone);
+            });
+        },
         layer: poisLayer,
         legend: poisLegend,
         discriminators: [],

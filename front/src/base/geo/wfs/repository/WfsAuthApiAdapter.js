@@ -24,6 +24,7 @@ class WfsAuthApiAdapter {
     }
 
     getFeatures(filter) {
+        console.log({filter});
         const config = createWfsConfig({
             typeNames: this.#typeNames,
             outputFormat: this.#outputFormat,

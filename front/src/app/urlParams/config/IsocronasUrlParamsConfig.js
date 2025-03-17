@@ -26,6 +26,11 @@ const IsocronasUrlParamsConfig = {
             type: "filter",
             scope: ["map"],
         },
+        {
+            key: "isochrone",
+            type: "filter",
+            scope: ["map"],
+        },
     ],
 };
 

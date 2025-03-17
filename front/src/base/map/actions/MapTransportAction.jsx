@@ -1,10 +1,10 @@
-import {useMapContext} from "../MapProvider";
 import {MapAction} from ".";
 import DepartureBoardOutlinedIcon from "@mui/icons-material/DepartureBoardOutlined";
 import DirectionsBusFilledOutlinedIcon from "@mui/icons-material/DirectionsBusFilledOutlined";
 import DirectionsCarFilledOutlinedIcon from "@mui/icons-material/DirectionsCarFilledOutlined";
 import DirectionsBikeOutlinedIcon from "@mui/icons-material/DirectionsBikeOutlined";
 import DirectionsWalkOutlinedIcon from "@mui/icons-material/DirectionsWalkOutlined";
+import {usePoisIsochroneContext} from "poi/map";
 
 const options = [
     {label: "A pie", value: "walking", icon: <DirectionsWalkOutlinedIcon />},
@@ -19,7 +19,7 @@ const options = [
 
 const MapTransportAction = () => {
     const {selectedTransport: selectedOption, setSelectedTransport: setSelectedOption} =
-        useMapContext();
+        usePoisIsochroneContext();
 
     const handleOption = option => {
         setSelectedOption(option.value);
