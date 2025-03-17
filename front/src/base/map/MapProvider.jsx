@@ -24,8 +24,8 @@ export default function MapProvider({
     } = useMapConfig();
 
     const [selectedBaseLayer, setSelectedBaseLayer] = useState(null);
-    const [selectedTravelTime, setSelectedTravelTime] = useState(30); // Isocronas
-    const [selectedTransport, setSelectedTransport] = useState("walking"); // Isocronas
+    const [selectedTravelTime, setSelectedTravelTime] = useState(null); // Isocronas
+    const [selectedTransport, setSelectedTransport] = useState(null); // Isocronas
     const [selectedPoint, setSelectedPoint] = useState(null);
 
     const [boundingBox, setBoundingBox] = useState(null);

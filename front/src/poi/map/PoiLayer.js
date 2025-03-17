@@ -18,23 +18,120 @@ const popup = feature => {
     return popupContent;
 };
 
+const defaultStyle = {
+    color: "#28a745",
+    fillColor: "#28a745cc",
+    weight: 1,
+    radius: 2,
+};
+
+const getStyleForCategory = category => {
+    switch (category) {
+        case "Finanzas":
+            return {
+                color: "#FFD700",
+                icon: "",
+            };
+        case "Salud y bienestar":
+            return {
+                color: "#FF6347",
+                icon: "",
+            };
+        case "Alimentación y bebidas":
+            return {
+                color: "#FF8C00",
+                icon: "",
+            };
+        case "Compras":
+            return {
+                color: "#32CD32",
+                icon: "",
+            };
+        case "Entretenimiento y ocio":
+            return {
+                color: "#8A2BE2",
+                icon: "",
+            };
+        case "Cultura y educación":
+            return {
+                color: "#1E90FF",
+                icon: "",
+            };
+        case "Gobierno e instituciones":
+            return {
+                color: "#2F4F4F",
+                icon: "",
+            };
+        case "Transporte":
+            return {
+                color: "#4682B4",
+                icon: "",
+            };
+        case "Alojamiento":
+            return {
+                color: "#DA70D6",
+                icon: "",
+            };
+        case "Lugares de culto":
+            return {
+                color: "#A52A2A",
+                icon: "",
+            };
+        case "Espacios naturales":
+            return {
+                color: "#228B22",
+                icon: "",
+            };
+        case "Automoción":
+            return {
+                color: "#B22222",
+                icon: "",
+            };
+        case "Servicios":
+            return {
+                color: "#FF4500",
+                icon: "",
+            };
+        case "Deportes":
+            return {
+                color: "#20B2AA",
+                icon: "",
+            };
+        case "Turismo":
+            return {
+                color: "#4169E1",
+                icon: "",
+            };
+        default:
+            return {
+                color: "#333333",
+                icon: "",
+            };
+    }
+};
+
+const getStyle = feature => {
+    const color = getStyleForCategory(feature.properties.category).color;
+    return {
+        ...defaultStyle,
+        color: color,
+        fillColor: color,
+    };
+};
+
 export function createPoiLayer({
     interactive = true,
     cluster = true,
     fitBounds = false,
 }) {
     return useGeojsonLayer({
-        type: "polygon",
+        type: "point",
         cluster: cluster
             ? {
                   zoomStop: 11,
               }
             : null,
-        style: {
-            color: "#28a745",
-            fillColor: "#28a745cc",
-            weight: 2,
-        },
+        style: getStyle,
         popup: popup,
         pane: 7,
         interactive,

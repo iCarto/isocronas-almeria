@@ -98,6 +98,10 @@ export class GeojsonLayer {
         this.#fitBounds = fitBounds;
     }
 
+    styleApplied(feature) {
+        return typeof this.style === "function" ? this.style(feature) : this.style;
+    }
+
     create(mapRef) {
         this.#mapRef = mapRef;
         this.mapRef.current.removeLayer(this.layerRef.current);
@@ -109,19 +113,21 @@ export class GeojsonLayer {
         if (GeojsonUtil.hasValidCoordinates(geojson)) {
             this.#geojsonRef = L.Proj.geoJson(geojson, {
                 interactive: this.interactive,
-                style: () => {
+                style: feature => {
                     const style = {
                         ...defaultPolygonStyle,
-                        ...this.style,
+                        ...this.styleApplied(feature),
                         pane: mapOverlayPanes[this.pane],
                     };
                     return style;
                 },
                 pointToLayer: (feature, latlng) => {
-                    return new L.CircleMarker(latlng, {
-                        ...defaultPointStyle,
-                        ...this.style,
-                    });
+                    const style = {
+                        ...defaultPolygonStyle,
+                        ...this.styleApplied(feature),
+                        pane: mapOverlayPanes[this.pane],
+                    };
+                    return new L.CircleMarker(latlng, style);
                 },
                 onEachFeature: (feature, layer) => {
                     if (this.popup) {
@@ -142,8 +148,6 @@ export class GeojsonLayer {
                     padding: [60, 60],
                 });
             }
-
-            this.reload();
         }
     }
 
@@ -208,7 +212,7 @@ export class GeojsonLayer {
                 } else {
                     layer.setStyle({
                         ...defaultPolygonStyle,
-                        ...this.style,
+                        ...this.styleApplied(layer.feature),
                     });
                 }
             });
