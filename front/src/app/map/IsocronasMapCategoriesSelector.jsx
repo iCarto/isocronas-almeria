@@ -1,4 +1,4 @@
-import {useState, useEffect, cloneElement, createElement} from "react";
+import {useEffect, createElement} from "react";
 import {theme} from "Theme";
 
 import {useDomainContext} from "base/domain/provider";
@@ -30,10 +30,10 @@ const CategoryButton = styled(IconButton)(({theme, selected, categoryColor}) => 
 }));
 
 const IsocronasMapCategoriesSelector = ({}) => {
-    const [selectedCategories, setSelectedCategories] = useState([]);
     const {mapFilter, updateMapFilter} = useMapContext();
 
-    const {elements} = usePoisIsochroneContext();
+    const {selectedCategories, setSelectedCategories, elements} =
+        usePoisIsochroneContext();
 
     const {domains} = useDomainContext();
 

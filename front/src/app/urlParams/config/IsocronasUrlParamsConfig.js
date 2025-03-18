@@ -7,11 +7,6 @@ const IsocronasUrlParamsConfig = {
             scope: ["map"],
         },
         {
-            key: "category",
-            type: "filter",
-            scope: ["map"],
-        },
-        {
             key: "travel_time",
             type: "filter",
             scope: ["map"],
