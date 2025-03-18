@@ -14,7 +14,7 @@ function createIsochroneLayer({interactive = false, fitBounds = false}) {
             color: "#fff",
             fillColor: "#999",
             fillOpacity: 0.5,
-            weight: 0,
+            weight: 2,
         },
         pane: 6,
         interactive,

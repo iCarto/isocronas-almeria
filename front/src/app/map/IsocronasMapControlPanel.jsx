@@ -3,11 +3,7 @@ import {t} from "@lingui/macro";
 
 import {theme} from "Theme";
 import {useMapContext} from "base/map";
-import {
-    IsocronasMapActionsToolbar,
-    IsocronasMapCategoriesSelector,
-    IsocronasMapTOC,
-} from ".";
+import {IsocronasMapActionsToolbar, IsocronasMapCategoriesSelector} from ".";
 
 import styled from "@mui/material/styles/styled";
 import Box from "@mui/material/Box";
@@ -17,6 +13,9 @@ import IconButton from "@mui/material/IconButton";
 
 import KeyboardDoubleArrowRightIcon from "@mui/icons-material/KeyboardDoubleArrowRight";
 import KeyboardDoubleArrowLeftIcon from "@mui/icons-material/KeyboardDoubleArrowLeft";
+import {MapGeojsonLayerFeatureListProvider} from "base/map/layer/geojson";
+import {MapTOC} from "base/map/toc";
+import {PoisMapFeatureList} from "poi/map";
 
 const TRANSITION_TIME = 200;
 
@@ -107,11 +106,14 @@ const IsocronasMapControlPanel = ({show = true}) => {
                 pl: 1,
             }}
         >
-            <SideBarContainer open={show && showToc}>
-                <IsocronasMapActionsToolbar />
-                <IsocronasMapCategoriesSelector />
-                <IsocronasMapTOC />
-            </SideBarContainer>
+            <MapGeojsonLayerFeatureListProvider>
+                <SideBarContainer open={show && showToc}>
+                    <IsocronasMapActionsToolbar />
+                    <MapTOC visible={false} />
+                    <IsocronasMapCategoriesSelector />
+                    <PoisMapFeatureList />
+                </SideBarContainer>
+            </MapGeojsonLayerFeatureListProvider>
             {show && (
                 <ToggleSideBarButton
                     showToc={showToc}

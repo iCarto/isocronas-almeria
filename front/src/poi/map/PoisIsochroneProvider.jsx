@@ -6,6 +6,7 @@ export default function PoisIsochroneProvider({children}) {
     const [selectedTravelTime, setSelectedTravelTime] = useState(null);
     const [selectedTransport, setSelectedTransport] = useState(null);
     const [isochrone, setIsochrone] = useState(null);
+    const [elements, setElements] = useState(null);
 
     return (
         <PoisIsochroneContext.Provider
@@ -16,6 +17,8 @@ export default function PoisIsochroneProvider({children}) {
                 setSelectedTransport,
                 isochrone,
                 setIsochrone,
+                elements,
+                setElements,
             }}
         >
             {children}

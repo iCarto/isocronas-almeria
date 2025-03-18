@@ -1,7 +1,6 @@
 import {useCallback, useState, useRef, useEffect, useMemo} from "react";
 import {VariableSizeList as List} from "react-window";
 
-import {useMapGeojsonLayerDataContext} from "base/map/layer/geojson";
 import {useContainerHeight} from "base/ui/hooks";
 import {useMapContext} from "base/map";
 
@@ -12,6 +11,7 @@ import {ErrorAlertList} from "base/error/components";
 import Stack from "@mui/material/Stack";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
+import {usePoisIsochroneContext} from ".";
 
 const NoResultsMessage = () => {
     return (
@@ -31,11 +31,7 @@ const DEFAULT_HEIGHT_COLLAPSED = 60;
 const DEFAULT_HEIGHT_EXPANDED = 200;
 
 const PoisMapFeatureList = () => {
-    const {
-        loading,
-        error,
-        elements: featureCollection,
-    } = useMapGeojsonLayerDataContext();
+    const {loading, error, elements: featureCollection} = usePoisIsochroneContext();
     const {showToc} = useMapContext();
 
     const [expandedItem, setExpandedItem] = useState({

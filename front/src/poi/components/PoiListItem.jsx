@@ -1,7 +1,6 @@
-import {cloneElement} from "react";
+import {cloneElement, createElement} from "react";
 import styled from "@mui/material/styles/styled";
 
-import {theme} from "Theme";
 import {FieldUtil} from "base/ui/section/utilities";
 import {usePoiListItemFields} from "poi/shared/map";
 
@@ -19,6 +18,7 @@ import Collapse from "@mui/material/Collapse";
 
 import CircleIcon from "@mui/icons-material/Circle";
 import ArrowForwardIosSharpIcon from "@mui/icons-material/ArrowForwardIosSharp";
+import {usePoiCategoryUtil} from "poi/utils";
 
 const AccordionSummary = styled(props => (
     <MuiAccordionSummary
@@ -43,6 +43,12 @@ const PoiListItem = ({feature, isExpanded, onExpand}) => {
         onExpand(event, isExpanded);
     };
 
+    const {getStyleForCategory} = usePoiCategoryUtil();
+
+    const categoryStyle = getStyleForCategory(feature.properties.category);
+    const categoryIcon = categoryStyle.icon;
+    const categoryColor = categoryStyle.color;
+
     return (
         <Accordion
             expanded={isExpanded}
@@ -56,15 +62,15 @@ const PoiListItem = ({feature, isExpanded, onExpand}) => {
                     margin: 0,
                     p: 0,
                     pr: 1,
-                    backgroundColor: isExpanded
-                        ? theme.palette.secondary.light
-                        : theme.palette.secondary.lighter,
                 }}
             >
                 <ListItem disablePadding className="LayerMenuListItem">
                     <ListItemButton sx={{pl: 2}}>
                         <ListItemIcon sx={{p: 0, minWidth: 32}}>
-                            <CircleIcon fontSize="small" />
+                            {createElement(categoryIcon, {
+                                fontSize: "small",
+                                sx: {color: categoryColor},
+                            })}
                         </ListItemIcon>
                         <ListItemText
                             primary={properties.name}

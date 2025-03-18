@@ -1,19 +1,20 @@
-import {useState, useEffect} from "react";
+import {useState, useEffect, cloneElement, createElement} from "react";
 import {theme} from "Theme";
 
 import {useDomainContext} from "base/domain/provider";
 import {useMapContext} from "base/map";
 import styled from "@mui/material/styles/styled";
 
-import {CATEGORY_ICONS} from "poi/utils";
+import {usePoiCategoryUtil} from "poi/utils";
 
 import Grid from "@mui/material/Grid";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import IconButton from "@mui/material/IconButton";
-import FilterListIcon from "@mui/icons-material/FilterList";
+import Badge from "@mui/material/Badge";
+import {usePoisIsochroneContext} from "poi/map";
 
-const CategoryButton = styled(IconButton)(({theme, selected}) => ({
+const CategoryButton = styled(IconButton)(({theme, selected, categoryColor}) => ({
     display: "flex",
     flexDirection: "column",
     alignItems: "center",
@@ -21,7 +22,7 @@ const CategoryButton = styled(IconButton)(({theme, selected}) => ({
     borderRadius: theme.shape.borderRadius,
     width: "100%",
     height: "100%",
-    color: selected ? theme.palette.primary.main : theme.palette.action.disabled,
+    color: selected ? categoryColor : theme.palette.action.disabled,
     "&:hover": {
         backgroundColor: theme.palette.action.hover,
     },
@@ -32,7 +33,11 @@ const IsocronasMapCategoriesSelector = ({}) => {
     const [selectedCategories, setSelectedCategories] = useState([]);
     const {mapFilter, updateMapFilter} = useMapContext();
 
+    const {elements} = usePoisIsochroneContext();
+
     const {domains} = useDomainContext();
+
+    const {getStyleForCategory} = usePoiCategoryUtil();
 
     useEffect(() => {
         if (mapFilter?.category) {
@@ -62,6 +67,15 @@ const IsocronasMapCategoriesSelector = ({}) => {
         updateMapFilter({category: newSelection});
     };
 
+    const getElementsNumberForCategory = category => {
+        if (!elements) {
+            return 0;
+        }
+        return elements.features.filter(
+            feature => feature.properties.category === category
+        ).length;
+    };
+
     return (
         <Grid
             container
@@ -77,26 +91,40 @@ const IsocronasMapCategoriesSelector = ({}) => {
         >
             {domains?.poi_category_group.map(category => {
                 const isSelected = selectedCategories.includes(category.value);
-                const IconComponent = CATEGORY_ICONS[category.value] || FilterListIcon;
+                const categoryIcon = getStyleForCategory(category.value).icon;
+                const categoryColor = getStyleForCategory(category.value).color;
 
                 return (
                     <Grid item xs={4} xl={3} key={category.value}>
                         <CategoryButton
                             selected={isSelected}
+                            categoryColor={categoryColor}
                             onClick={() => handleToggleCategory(category.value)}
                             key={category.value}
                         >
-                            <Box
+                            <Badge
+                                badgeContent={
+                                    getElementsNumberForCategory(category.value) || 0
+                                }
                                 sx={{
-                                    mb: 1,
-                                    p: 1,
-                                    pb: 0.5,
-                                    border: `1px solid ${isSelected ? theme.palette.secondary.main : theme.palette.secondary.light}`,
-                                    borderRadius: 2,
+                                    "& .MuiBadge-badge": {
+                                        color: "white",
+                                        backgroundColor: categoryColor,
+                                    },
                                 }}
                             >
-                                <IconComponent />
-                            </Box>
+                                <Box
+                                    sx={{
+                                        mb: 1,
+                                        p: 1,
+                                        pb: 0.5,
+                                        border: `1px solid ${isSelected ? categoryColor : theme.palette.secondary.light}`,
+                                        borderRadius: 2,
+                                    }}
+                                >
+                                    {createElement(categoryIcon)}
+                                </Box>
+                            </Badge>
                             <Typography
                                 variant="caption"
                                 align="center"

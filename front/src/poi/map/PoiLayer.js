@@ -6,6 +6,7 @@ import {createLayerLegend, createWMSLegendIcon} from "base/map/legend";
 import {PoiRepository} from "poi/repository";
 import {usePoisIsochroneContext} from ".";
 import {useTurfUtil} from "base/geo/turf";
+import {usePoiCategoryUtil} from "poi/utils";
 
 const popup = feature => {
     let data = feature.properties;
@@ -27,105 +28,22 @@ const defaultStyle = {
     radius: 2,
 };
 
-const getStyleForCategory = category => {
-    switch (category) {
-        case "Finanzas":
-            return {
-                color: "#FFD700",
-                icon: "",
-            };
-        case "Salud y bienestar":
-            return {
-                color: "#FF6347",
-                icon: "",
-            };
-        case "Alimentación y bebidas":
-            return {
-                color: "#FF8C00",
-                icon: "",
-            };
-        case "Compras":
-            return {
-                color: "#32CD32",
-                icon: "",
-            };
-        case "Entretenimiento y ocio":
-            return {
-                color: "#8A2BE2",
-                icon: "",
-            };
-        case "Cultura y educación":
-            return {
-                color: "#1E90FF",
-                icon: "",
-            };
-        case "Gobierno e instituciones":
-            return {
-                color: "#2F4F4F",
-                icon: "",
-            };
-        case "Transporte":
-            return {
-                color: "#4682B4",
-                icon: "",
-            };
-        case "Alojamiento":
-            return {
-                color: "#DA70D6",
-                icon: "",
-            };
-        case "Lugares de culto":
-            return {
-                color: "#A52A2A",
-                icon: "",
-            };
-        case "Espacios naturales":
-            return {
-                color: "#228B22",
-                icon: "",
-            };
-        case "Automoción":
-            return {
-                color: "#B22222",
-                icon: "",
-            };
-        case "Servicios":
-            return {
-                color: "#FF4500",
-                icon: "",
-            };
-        case "Deportes":
-            return {
-                color: "#20B2AA",
-                icon: "",
-            };
-        case "Turismo":
-            return {
-                color: "#4169E1",
-                icon: "",
-            };
-        default:
-            return {
-                color: "#333333",
-                icon: "",
-            };
-    }
-};
-
-const getStyle = feature => {
-    const color = getStyleForCategory(feature.properties.category).color;
-    return {
-        ...defaultStyle,
-        color: color,
-        fillColor: color,
-    };
-};
-
 export function createPoiLayer({
     interactive = true,
     cluster = true,
     fitBounds = false,
 }) {
+    const {getStyleForCategory} = usePoiCategoryUtil();
+
+    const getStyle = feature => {
+        const color = getStyleForCategory(feature.properties.category).color;
+        return {
+            ...defaultStyle,
+            color: color,
+            fillColor: color,
+        };
+    };
+
     return useGeojsonLayer({
         type: "point",
         cluster: cluster
@@ -153,6 +71,7 @@ export function createPoiLegend() {
 
 export function createPoiLayerConfig({label = t`POI`, fitBounds = false} = {}) {
     const {getFilteredFeatures} = useTurfUtil();
+    const {setElements} = usePoisIsochroneContext();
 
     const poisLayer = createPoiLayer({
         interactive: true,
@@ -170,7 +89,9 @@ export function createPoiLayerConfig({label = t`POI`, fitBounds = false} = {}) {
     return useMapGeojsonLayerConfig({
         load: filter => {
             return PoiRepository.getFeatures(filter).then(features => {
-                return getFilteredFeatures(features, filter.isochrone);
+                const elements = getFilteredFeatures(features, filter.isochrone);
+                setElements(elements);
+                return elements;
             });
         },
         layer: poisLayer,

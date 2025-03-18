@@ -8,7 +8,7 @@ import {MapTOCList} from ".";
 import Divider from "@mui/material/Divider";
 import {MapWMSLayer} from "../layer/wms";
 
-const MapTOC = () => {
+const MapTOC = ({visible}) => {
     const {layers: layersConfig, auxLayers: auxLayersConfig} =
         useMapBaseLayersContext();
 
@@ -28,7 +28,7 @@ const MapTOC = () => {
     };
 
     return (
-        <MapTOCList>
+        <MapTOCList visible={visible}>
             {layersConfig.map((layerConfig, index) => {
                 return getLayerListItem(layerConfig, index);
             })}

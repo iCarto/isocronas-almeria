@@ -2,7 +2,8 @@ import Box from "@mui/material/Box";
 import List from "@mui/material/List";
 import styled from "@mui/material/styles/styled";
 
-const MapTOCBox = styled(Box)(({theme}) => ({
+const MapTOCBox = styled(Box)(({theme, hidden}) => ({
+    display: hidden ? "none" : "inherit",
     width: "100%",
     height: "100%",
     overflowY: "hidden",
@@ -107,9 +108,9 @@ const MapTOCBox = styled(Box)(({theme}) => ({
     },
 }));
 
-const MapTOCList = ({children}) => {
+const MapTOCList = ({children, visible = true}) => {
     return (
-        <MapTOCBox>
+        <MapTOCBox hidden={!visible}>
             <List className="MapMenuList">{children}</List>
         </MapTOCBox>
     );

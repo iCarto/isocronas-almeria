@@ -167,6 +167,7 @@ export default function MapGeojsonLayerFeatureListProvider({children}) {
         <MapGeojsonLayerFeatureListContext.Provider
             value={{
                 layerConfig,
+                setLayerConfig,
                 featureCollection,
                 setFeatureCollection,
                 selectedItem,
