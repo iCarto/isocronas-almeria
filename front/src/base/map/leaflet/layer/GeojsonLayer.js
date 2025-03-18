@@ -34,6 +34,7 @@ export class GeojsonLayer {
     #discriminatorItems;
     #onClick;
     #selectedId;
+    #highligtedIds;
     #fitBounds;
 
     get type() {
@@ -82,6 +83,10 @@ export class GeojsonLayer {
 
     get selectedId() {
         return this.#selectedId;
+    }
+
+    get highligtedIds() {
+        return this.#highligtedIds;
     }
 
     get fitBounds() {
@@ -191,6 +196,12 @@ export class GeojsonLayer {
         this.reload();
     }
 
+    setHighligtedIds(highligtedIds) {
+        console.log({highligtedIds});
+        this.#highligtedIds = highligtedIds;
+        this.reload();
+    }
+
     reload() {
         if (this.geojsonRef) {
             this.geojsonRef.eachLayer(layer => {
@@ -208,6 +219,15 @@ export class GeojsonLayer {
                         ...layer.options,
                         weight: 3,
                         color: "orange",
+                    });
+                } else if (
+                    this.highligtedIds &&
+                    this.highligtedIds.includes(layer.feature.id)
+                ) {
+                    layer.setStyle({
+                        ...defaultPolygonStyle,
+                        ...this.styleApplied(layer.feature),
+                        weight: 15,
                     });
                 } else {
                     layer.setStyle({

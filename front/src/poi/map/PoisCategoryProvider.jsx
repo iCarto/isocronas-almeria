@@ -11,14 +11,14 @@ export default function PoisCategoryProvider({}) {
 
     useEffect(() => {
         if (elements) {
+            let filteredElements = [];
             if (selectedCategories.length) {
-                const filteredElements = elements.filter(feature =>
+                filteredElements = elements.filter(feature =>
                     selectedCategories.includes(feature.properties.category)
                 );
-                setListElements(filteredElements);
-            } else {
-                setListElements([]);
             }
+            setListElements(filteredElements);
+            layer.setHighligtedIds(filteredElements.map(element => element.id));
             layer.reload();
         }
     }, [elements, selectedCategories]);
