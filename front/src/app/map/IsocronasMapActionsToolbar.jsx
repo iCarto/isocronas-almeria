@@ -41,10 +41,6 @@ const IsocronasMapActionsToolbar = ({}) => {
                 <Trans>Layers</Trans>
             </Typography>
             <ButtonGroup variant="outlined" aria-label="map button group">
-                <Divider orientation="vertical" flexItem />
-                <MapTravelTimeAction />
-                <Divider orientation="vertical" flexItem />
-                <MapTransportAction />
                 {showBaseLayer && (
                     <>
                         <Divider orientation="vertical" flexItem />

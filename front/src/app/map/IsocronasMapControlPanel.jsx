@@ -16,6 +16,7 @@ import KeyboardDoubleArrowLeftIcon from "@mui/icons-material/KeyboardDoubleArrow
 import {MapGeojsonLayerFeatureListProvider} from "base/map/layer/geojson";
 import {MapTOC} from "base/map/toc";
 import {PoisMapFeatureList} from "poi/map";
+import IsocronasFilterSelector from "./IsocronasFilterSelector";
 
 const TRANSITION_TIME = 200;
 
@@ -110,6 +111,7 @@ const IsocronasMapControlPanel = ({show = true}) => {
                 <SideBarContainer open={show && showToc}>
                     <IsocronasMapActionsToolbar />
                     <MapTOC visible={false} />
+                    <IsocronasFilterSelector />
                     <IsocronasMapCategoriesSelector />
                     <PoisMapFeatureList />
                 </SideBarContainer>
