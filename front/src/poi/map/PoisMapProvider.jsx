@@ -3,6 +3,7 @@ import {MapBaseLayersProvider} from "base/map/layer";
 import {
     createIsochroneLayerConfig,
     createPoiLayerConfig,
+    PoiGeojsonLayer,
     PoisMapParamsProvider,
 } from "poi/map";
 import {useIsocronasMapConfig} from "app/map";
@@ -12,7 +13,7 @@ const PoisMapProvider = ({children = null}) => {
     const {crs, crsType, tocOptions, mapOptions, baseLayers} = useIsocronasMapConfig();
 
     const poiLayerConfig = createPoiLayerConfig({
-        fitBounds: false,
+        tocComponent: PoiGeojsonLayer,
     });
 
     // end map config

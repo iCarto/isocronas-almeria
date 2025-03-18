@@ -7,6 +7,7 @@ import {ImageOverlayLayer, TileLayer, WMSLayer} from "../leaflet/layer";
 import {MapTOCList} from ".";
 import Divider from "@mui/material/Divider";
 import {MapWMSLayer} from "../layer/wms";
+import {createElement} from "react";
 
 const MapTOC = ({visible}) => {
     const {layers: layersConfig, auxLayers: auxLayersConfig} =
@@ -16,6 +17,9 @@ const MapTOC = ({visible}) => {
 
     const getLayerListItem = (layerConfig, index) => {
         console.log("CARTO >> Creating TOC entry", {index}, {layerConfig});
+        if (layerConfig.tocComponent) {
+            return createElement(layerConfig.tocComponent, {key: index, layerConfig});
+        }
         if (
             layerConfig.layer instanceof TileLayer ||
             layerConfig.layer instanceof ImageOverlayLayer

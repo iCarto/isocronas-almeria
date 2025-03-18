@@ -71,9 +71,8 @@ const IsocronasMapCategoriesSelector = ({}) => {
         if (!elements) {
             return 0;
         }
-        return elements.features.filter(
-            feature => feature.properties.category === category
-        ).length;
+        return elements.filter(feature => feature.properties.category === category)
+            .length;
     };
 
     return (

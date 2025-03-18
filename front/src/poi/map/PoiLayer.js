@@ -37,6 +37,7 @@ export function createPoiLayer({
 
     const getStyle = feature => {
         const color = getStyleForCategory(feature.properties.category).color;
+        console.log({color});
         return {
             ...defaultStyle,
             color: color,
@@ -69,18 +70,18 @@ export function createPoiLegend() {
     });
 }
 
-export function createPoiLayerConfig({label = t`POI`, fitBounds = false} = {}) {
+export function createPoiLayerConfig({tocComponent = null} = {}) {
     const {getFilteredFeatures} = useTurfUtil();
     const {setElements} = usePoisIsochroneContext();
 
     const poisLayer = createPoiLayer({
         interactive: true,
         cluster: false,
-        fitBounds,
+        fitBounds: false,
     });
     const poisLegend = createLayerLegend({
         code: "pois",
-        label,
+        label: t`POI`,
         icon: createWMSLegendIcon({
             type: "square",
         }),
@@ -90,12 +91,13 @@ export function createPoiLayerConfig({label = t`POI`, fitBounds = false} = {}) {
         load: filter => {
             return PoiRepository.getFeatures(filter).then(features => {
                 const elements = getFilteredFeatures(features, filter.isochrone);
-                setElements(elements);
+                setElements(elements.features.map(feature => feature));
                 return elements;
             });
         },
         layer: poisLayer,
         legend: poisLegend,
         discriminators: [],
+        tocComponent,
     });
 }

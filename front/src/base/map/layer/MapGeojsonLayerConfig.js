@@ -7,6 +7,7 @@ export function useMapGeojsonLayerConfig({
     discriminators = [],
     onSelectedItem = null,
     options = null,
+    tocComponent = null,
 }) {
     console.log("CARTO >> Creating layer config", {layer});
 
@@ -19,5 +20,6 @@ export function useMapGeojsonLayerConfig({
         discriminators,
         onSelectedItem,
         options,
+        tocComponent,
     };
 }

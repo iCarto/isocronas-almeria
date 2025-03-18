@@ -7,3 +7,4 @@ export {
     default as PoisIsochroneProvider,
     usePoisIsochroneContext,
 } from "./PoisIsochroneProvider";
+export {default as PoiGeojsonLayer} from "./PoiGeojsonLayer";

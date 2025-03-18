@@ -9,20 +9,7 @@ export default function PoisIsochroneProvider({children}) {
     const [selectedCategories, setSelectedCategories] = useState([]);
 
     const [elements, setElements] = useState(null);
-    const [filteredElements, setFilteredElements] = useState(null);
-
-    useEffect(() => {
-        if (elements) {
-            if (selectedCategories.length) {
-                const filteredElements = elements.features.filter(feature =>
-                    selectedCategories.includes(feature.properties.category)
-                );
-                setFilteredElements(filteredElements);
-            } else {
-                setFilteredElements([]);
-            }
-        }
-    }, [selectedCategories]);
+    const [listElements, setListElements] = useState(null);
 
     return (
         <PoisIsochroneContext.Provider
@@ -37,7 +24,8 @@ export default function PoisIsochroneProvider({children}) {
                 setSelectedCategories,
                 elements,
                 setElements,
-                filteredElements,
+                listElements,
+                setListElements,
             }}
         >
             {children}

@@ -31,8 +31,7 @@ const DEFAULT_HEIGHT_COLLAPSED = 60;
 const DEFAULT_HEIGHT_EXPANDED = 200;
 
 const PoisMapFeatureList = () => {
-    const {loading, error, filteredElements: pois} = usePoisIsochroneContext();
-    console.log({pois});
+    const {loading, error, listElements} = usePoisIsochroneContext();
     const {showToc} = useMapContext();
 
     const [expandedItem, setExpandedItem] = useState({
@@ -46,12 +45,12 @@ const PoisMapFeatureList = () => {
 
     useEffect(() => {
         if (listRef.current && expandedItem.featureId) {
-            const index = pois.findIndex(f => f.id === expandedItem.featureId);
+            const index = listElements.findIndex(f => f.id === expandedItem.featureId);
             if (index >= 0) {
                 listRef.current.resetAfterIndex(index);
             }
         }
-    }, [expandedItem, pois]);
+    }, [expandedItem, listElements]);
 
     useEffect(() => {
         if (listRef.current) {
@@ -67,15 +66,15 @@ const PoisMapFeatureList = () => {
             if (itemHeightsRef.current[key] !== height) {
                 itemHeightsRef.current[key] = height;
 
-                if (listRef.current && pois) {
-                    const index = pois.findIndex(feature => feature.id === id);
+                if (listRef.current && listElements) {
+                    const index = listElements.findIndex(feature => feature.id === id);
                     if (index >= 0) {
                         listRef.current.resetAfterIndex(index);
                     }
                 }
             }
         },
-        [pois]
+        [listElements]
     );
 
     const getIsItemExpanded = (features, expandedItem, index) => {
@@ -87,7 +86,11 @@ const PoisMapFeatureList = () => {
 
     const getItemHeight = useCallback(
         index => {
-            const {feature, isExpanded} = getIsItemExpanded(pois, expandedItem, index);
+            const {feature, isExpanded} = getIsItemExpanded(
+                listElements,
+                expandedItem,
+                index
+            );
 
             const key = `${feature.id}-${isExpanded ? "expanded" : "collapsed"}`;
             return (
@@ -95,11 +98,15 @@ const PoisMapFeatureList = () => {
                 (isExpanded ? DEFAULT_HEIGHT_EXPANDED : DEFAULT_HEIGHT_COLLAPSED)
             );
         },
-        [pois, expandedItem]
+        [listElements, expandedItem]
     );
 
     const Row = ({index, style}) => {
-        const {feature, isExpanded} = getIsItemExpanded(pois, expandedItem, index);
+        const {feature, isExpanded} = getIsItemExpanded(
+            listElements,
+            expandedItem,
+            index
+        );
 
         return (
             <Box sx={{...style}} key={feature.id} role="listitem">
@@ -123,7 +130,7 @@ const PoisMapFeatureList = () => {
 
     if (error) return <ErrorAlertList errors={[error]} />;
 
-    if (!pois?.length) return <NoResultsMessage />;
+    if (!listElements?.length) return <NoResultsMessage />;
 
     return (
         <Box
@@ -135,8 +142,8 @@ const PoisMapFeatureList = () => {
                 overflowX: "auto",
             }}
         >
-            {pois.length <= MAX_ITEMS_WITHOUT_VIRTUALIZATION ? (
-                pois.map(feature => (
+            {listElements.length <= MAX_ITEMS_WITHOUT_VIRTUALIZATION ? (
+                listElements.map(feature => (
                     <PoiListItem
                         key={feature.id}
                         feature={feature}
@@ -155,7 +162,7 @@ const PoisMapFeatureList = () => {
                     ref={listRef}
                     height={containerHeight}
                     width="100%"
-                    itemCount={pois}
+                    itemCount={listElements}
                     overscanCount={3}
                 >
                     {Row}
