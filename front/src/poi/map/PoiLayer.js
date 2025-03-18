@@ -1,12 +1,15 @@
 import {msg, t} from "@lingui/macro";
 import {i18n} from "@lingui/core";
 import {useMapGeojsonLayerConfig} from "base/map/layer";
-import {useGeojsonLayer} from "base/map/leaflet/layer";
+import {createMUIIcon, useGeojsonLayer} from "base/map/leaflet/layer";
 import {createLayerLegend, createWMSLegendIcon} from "base/map/legend";
 import {PoiRepository} from "poi/repository";
 import {usePoisIsochroneContext} from ".";
 import {useTurfUtil} from "base/geo/turf";
 import {usePoiCategoryUtil} from "poi/utils";
+
+import SchoolIcon from "@mui/icons-material/School";
+import {createElement} from "react";
 
 const popup = feature => {
     let data = feature.properties;
@@ -36,12 +39,18 @@ export function createPoiLayer({
     const {getStyleForCategory} = usePoiCategoryUtil();
 
     const getStyle = feature => {
-        const color = getStyleForCategory(feature.properties.category).color;
-        console.log({color});
+        const categoryConfig = getStyleForCategory(feature.properties.category);
         return {
-            ...defaultStyle,
-            color: color,
-            fillColor: color,
+            icon: {
+                normal: createMUIIcon(
+                    createElement(categoryConfig.icon, {sx: {fontSize: 12}}),
+                    {color: categoryConfig.color, size: 16}
+                ),
+                highlighted: createMUIIcon(
+                    createElement(categoryConfig.icon, {sx: {fontSize: 24}}),
+                    {color: "white", backgroundColor: categoryConfig.color, size: 32}
+                ),
+            },
         };
     };
 

@@ -3,6 +3,7 @@ import L from "leaflet";
 import {mapOverlayPanes} from "..";
 import {GeojsonClusterLayer, GeojsonDiscriminatorUtil} from ".";
 import {GeojsonUtil} from "base/map/utilities";
+import {createRoot} from "react-dom/client";
 
 const defaultPolygonStyle = {
     color: "#333",
@@ -21,6 +22,35 @@ const defaultPointStyle = {
     opacity: 1,
 };
 
+export function createMUIIcon(
+    icon,
+    {color = "grey", backgroundColor = "white", size = 24}
+) {
+    const div = document.createElement("div");
+    div.style.fontSize = "10px";
+    div.style.color = color;
+    div.style.display = "flex";
+    div.style.alignItems = "center";
+    div.style.justifyContent = "center";
+    div.style.width = `${size}px`;
+    div.style.height = `${size}px`;
+    div.style.backgroundColor = backgroundColor;
+    div.style.borderRadius = "50%";
+    div.style.boxShadow = "0px 0px 5px rgba(0,0,0,0.5)";
+
+    // Renderizamos el icono de MUI dentro del div
+    const root = createRoot(div);
+    root.render(icon);
+
+    return L.divIcon({
+        html: div,
+        className: "",
+        iconSize: [size, size],
+        iconAnchor: [size / 2, size / 2],
+        popupAnchor: [0, -size / 2],
+    });
+}
+
 export class GeojsonLayer {
     #type;
     #layerRef;
@@ -34,7 +64,7 @@ export class GeojsonLayer {
     #discriminatorItems;
     #onClick;
     #selectedId;
-    #highligtedIds;
+    #highlightedIds;
     #fitBounds;
 
     get type() {
@@ -85,8 +115,8 @@ export class GeojsonLayer {
         return this.#selectedId;
     }
 
-    get highligtedIds() {
-        return this.#highligtedIds;
+    get highlightedIds() {
+        return this.#highlightedIds;
     }
 
     get fitBounds() {
@@ -127,12 +157,20 @@ export class GeojsonLayer {
                     return style;
                 },
                 pointToLayer: (feature, latlng) => {
-                    const style = {
-                        ...defaultPolygonStyle,
-                        ...this.styleApplied(feature),
-                        pane: mapOverlayPanes[this.pane],
-                    };
-                    return new L.CircleMarker(latlng, style);
+                    // Only for point features
+                    // This can have a circle marker style or an icon style
+                    const layerStyle = this.styleApplied(feature);
+                    if (layerStyle?.icon) {
+                        return L.marker(latlng, {
+                            icon: layerStyle.icon.normal,
+                            pane: mapOverlayPanes[this.pane],
+                        });
+                    } else {
+                        return new L.CircleMarker(latlng, {
+                            ...defaultPointStyle,
+                            ...layerStyle,
+                        });
+                    }
                 },
                 onEachFeature: (feature, layer) => {
                     if (this.popup) {
@@ -196,9 +234,8 @@ export class GeojsonLayer {
         this.reload();
     }
 
-    setHighligtedIds(highligtedIds) {
-        console.log({highligtedIds});
-        this.#highligtedIds = highligtedIds;
+    setHighlightedIds(highlightedIds) {
+        this.#highlightedIds = highlightedIds;
         this.reload();
     }
 
@@ -213,27 +250,73 @@ export class GeojsonLayer {
                         {...defaultPolygonStyle, ...this.style}
                     );
                 }
-                // highlight selected option
-                if (this.selectedId && this.selectedId === layer.feature.id) {
-                    layer.setStyle({
-                        ...layer.options,
-                        weight: 3,
-                        color: "orange",
-                    });
-                } else if (
-                    this.highligtedIds &&
-                    this.highligtedIds.includes(layer.feature.id)
-                ) {
-                    layer.setStyle({
-                        ...defaultPolygonStyle,
-                        ...this.styleApplied(layer.feature),
-                        weight: 15,
-                    });
+                const layerStyle = this.styleApplied(layer.feature);
+                // TODO (egago): refactor to separate paint logic for every type
+                if (layer instanceof L.Polygon) {
+                    if (this.selectedId && this.selectedId === layer.feature.id) {
+                        layer.setStyle({
+                            ...layer.options,
+                            weight: 3,
+                            color: "orange",
+                        });
+                    } else if (
+                        this.highlightedIds &&
+                        this.highlightedIds.includes(layer.feature.id)
+                    ) {
+                        layer.setStyle({
+                            ...defaultPolygonStyle,
+                            ...this.styleApplied(layer.feature),
+                        });
+                    } else {
+                        layer.setStyle({
+                            ...defaultPolygonStyle,
+                            ...this.styleApplied(layer.feature),
+                        });
+                    }
+                } else if (layer instanceof L.CircleMarker) {
+                    if (this.selectedId && this.selectedId === layer.feature.id) {
+                        layer.setStyle({
+                            ...layer.options,
+                            weight: 3,
+                            color: "orange",
+                        });
+                    } else if (
+                        this.highlightedIds &&
+                        this.highlightedIds.includes(layer.feature.id)
+                    ) {
+                        layer.setStyle({
+                            ...defaultPointStyle,
+                            ...this.styleApplied(layer.feature),
+                            weight: 6,
+                            color: "red",
+                        });
+                    } else {
+                        layer.setStyle({
+                            ...defaultPointStyle,
+                            ...this.styleApplied(layer.feature),
+                        });
+                    }
                 } else {
-                    layer.setStyle({
-                        ...defaultPolygonStyle,
-                        ...this.styleApplied(layer.feature),
-                    });
+                    const latlng = layer.getLatLng();
+                    this.geojsonRef.removeLayer(layer);
+                    let newLayer;
+                    if (
+                        this.highlightedIds &&
+                        this.highlightedIds.includes(layer.feature.id)
+                    ) {
+                        newLayer = L.marker(latlng, {
+                            icon: layerStyle.icon.highlighted,
+                            pane: mapOverlayPanes[this.pane + 1],
+                        });
+                    } else {
+                        newLayer = L.marker(layer.getLatLng(), {
+                            icon: layerStyle.icon.normal,
+                            pane: mapOverlayPanes[this.pane],
+                        });
+                    }
+                    newLayer.feature = layer.feature;
+
+                    this.geojsonRef.addLayer(newLayer);
                 }
             });
         }

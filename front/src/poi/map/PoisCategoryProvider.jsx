@@ -18,7 +18,7 @@ export default function PoisCategoryProvider({}) {
                 );
             }
             setListElements(filteredElements);
-            layer.setHighligtedIds(filteredElements.map(element => element.id));
+            layer.setHighlightedIds(filteredElements.map(element => element.id));
             layer.reload();
         }
     }, [elements, selectedCategories]);
