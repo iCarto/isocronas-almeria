@@ -26,7 +26,9 @@ const PoiListItem = ({feature}) => {
             disablePadding
             sx={{borderBottom: `1px solid ${theme.palette.grey[300]}`}}
             onClick={() => {
-                setSelectedElement(feature.id);
+                selectedElement === feature.id
+                    ? setSelectedElement(null)
+                    : setSelectedElement(feature.id);
             }}
         >
             <ListItemButton

@@ -1,17 +1,12 @@
-import {useCallback, useState, useRef, useEffect, useMemo} from "react";
-import {VariableSizeList as List} from "react-window";
-
-import {useContainerHeight} from "base/ui/hooks";
-import {useMapContext} from "base/map";
-
-import {PoiListItem, PoiListItemWithMeasure} from "poi/components";
+import {PoiListItem} from "poi/components";
 import {Spinner} from "base/shared/components";
 import {ErrorAlertList} from "base/error/components";
 
 import Stack from "@mui/material/Stack";
-import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import {usePoisIsochroneContext} from ".";
+import List from "@mui/material/List";
+import Box from "@mui/material/Box";
 
 const NoResultsMessage = () => {
     return (
@@ -26,138 +21,54 @@ const NoResultsMessage = () => {
     );
 };
 
-const MAX_ITEMS_WITHOUT_VIRTUALIZATION = 1000;
-const DEFAULT_HEIGHT_COLLAPSED = 60;
-const DEFAULT_HEIGHT_EXPANDED = 200;
+const BoxContainer = ({children}) => (
+    <Box
+        sx={{
+            height: "100%",
+            width: "100%",
+            overflowX: "auto",
+        }}
+    >
+        {children}
+    </Box>
+);
 
 const PoisMapFeatureList = () => {
     const {loading, error, listElements} = usePoisIsochroneContext();
-    const {showToc} = useMapContext();
 
-    const [expandedItem, setExpandedItem] = useState({
-        featureId: null,
-        isExpanded: false,
-    });
-    const listRef = useRef(null);
-    const itemHeightsRef = useRef({});
-
-    const {containerRef, containerHeight} = useContainerHeight();
-
-    useEffect(() => {
-        if (listRef.current && expandedItem.featureId) {
-            const index = listElements.findIndex(f => f.id === expandedItem.featureId);
-            if (index >= 0) {
-                listRef.current.resetAfterIndex(index);
-            }
-        }
-    }, [expandedItem, listElements]);
-
-    useEffect(() => {
-        if (listRef.current) {
-            itemHeightsRef.current = {};
-            const visibleItems = Math.ceil(containerHeight / DEFAULT_HEIGHT_COLLAPSED);
-            listRef.current.resetAfterIndex(visibleItems);
-        }
-    }, [showToc, containerHeight]);
-
-    const updateItemHeight = useCallback(
-        (id, expanded, height) => {
-            const key = `${id}-${expanded ? "expanded" : "collapsed"}`;
-            if (itemHeightsRef.current[key] !== height) {
-                itemHeightsRef.current[key] = height;
-
-                if (listRef.current && listElements) {
-                    const index = listElements.findIndex(feature => feature.id === id);
-                    if (index >= 0) {
-                        listRef.current.resetAfterIndex(index);
-                    }
-                }
-            }
-        },
-        [listElements]
-    );
-
-    const getIsItemExpanded = (features, expandedItem, index) => {
-        const feature = features[index];
-        const isExpanded =
-            expandedItem.featureId === feature.id && expandedItem.isExpanded;
-        return {feature, isExpanded};
-    };
-
-    const getItemHeight = useCallback(
-        index => {
-            const {feature, isExpanded} = getIsItemExpanded(
-                listElements,
-                expandedItem,
-                index
-            );
-
-            const key = `${feature.id}-${isExpanded ? "expanded" : "collapsed"}`;
-            return (
-                itemHeightsRef.current[key] ||
-                (isExpanded ? DEFAULT_HEIGHT_EXPANDED : DEFAULT_HEIGHT_COLLAPSED)
-            );
-        },
-        [listElements, expandedItem]
-    );
-
-    const Row = ({index, style}) => {
-        const {feature, isExpanded} = getIsItemExpanded(
-            listElements,
-            expandedItem,
-            index
-        );
-
+    if (loading)
         return (
-            <Box sx={{...style}} key={feature.id} role="listitem">
-                <PoiListItemWithMeasure
-                    feature={feature}
-                    isExpanded={isExpanded}
-                    onExpand={(event, isExpanded) =>
-                        handleExpand(feature.id, isExpanded)
-                    }
-                    onHeightChange={updateItemHeight}
-                />
-            </Box>
+            <BoxContainer>
+                <Spinner />
+            </BoxContainer>
         );
-    };
 
-    const handleExpand = useCallback((featureId, isExpanded) => {
-        setExpandedItem({featureId, isExpanded});
-    }, []);
+    if (error)
+        return (
+            <BoxContainer>
+                <ErrorAlertList errors={[error]} />
+            </BoxContainer>
+        );
 
-    if (loading) return <Spinner />;
-
-    if (error) return <ErrorAlertList errors={[error]} />;
-
-    if (!listElements?.length) return <NoResultsMessage />;
+    if (!listElements?.length)
+        return (
+            <BoxContainer>
+                <NoResultsMessage />
+            </BoxContainer>
+        );
 
     return (
-        <Box
-            ref={containerRef}
-            role="list"
+        <List
             sx={{
                 height: "100%",
                 width: "100%",
                 overflowX: "auto",
             }}
         >
-            {listElements.length <= MAX_ITEMS_WITHOUT_VIRTUALIZATION ? (
-                listElements.map(feature => (
-                    <PoiListItem key={feature.id} feature={feature} />
-                ))
-            ) : (
-                <List
-                    ref={listRef}
-                    height={containerHeight}
-                    width="100%"
-                    itemCount={listElements}
-                    overscanCount={3}
-                >
-                    {Row}
-                </List>
-            )}
-        </Box>
+            {listElements.map(feature => (
+                <PoiListItem key={feature.id} feature={feature} />
+            ))}
+        </List>
     );
 };
 
