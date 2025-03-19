@@ -65,8 +65,8 @@ const PoisMapFeatureList = () => {
                 overflowX: "auto",
             }}
         >
-            {listElements.map(feature => (
-                <PoiListItem key={feature.id} feature={feature} />
+            {listElements.map(element => (
+                <PoiListItem key={element.id} element={element} />
             ))}
         </List>
     );

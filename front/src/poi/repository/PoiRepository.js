@@ -1,5 +1,6 @@
 import {createEntityStore} from "base/entity/repository";
 import {createWfsAuthApiAdapter} from "base/geo/wfs/repository";
+import {createPoi} from "poi/model";
 
 const store = createEntityStore({
     adapter: createWfsAuthApiAdapter({
@@ -7,6 +8,12 @@ const store = createEntityStore({
         outputFormat: "json",
     }),
 });
+
+export const features_to_poi = features => {
+    return features
+        .map(feature => createPoi({id: feature.id, ...feature.properties}))
+        .sort((a, b) => (a.name < b.name ? -1 : 1));
+};
 
 const PoiRepository = {
     get(id) {

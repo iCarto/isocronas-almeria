@@ -3,7 +3,7 @@ import {useMapContext} from "base/map";
 import {ErrorUtil} from "base/error/utilities";
 import {useMapGeojsonLayerContext} from "base/map/layer/geojson";
 import {usePoisIsochroneContext} from ".";
-import {PoiRepository} from "poi/repository";
+import {features_to_poi, PoiRepository} from "poi/repository";
 import {useTurfUtil} from "base/geo/turf";
 
 let PoiGeojsonLayerDataContext = createContext(null);
@@ -53,11 +53,10 @@ export default function PoiGeojsonLayerDataProvider({children}) {
         return PoiRepository.getFeatures()
             .then(features => {
                 const elements = getFilteredFeatures(features, isochrone);
-                setElements(elements.features.map(feature => feature));
+                setElements(features_to_poi(elements.features));
                 return elements;
             })
             .then(response => {
-                console.log({response});
                 setFeatureCollection(response);
             })
             .catch(error => {

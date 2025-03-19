@@ -8,27 +8,25 @@ import Stack from "@mui/material/Stack";
 import {theme} from "Theme";
 import {usePoisIsochroneContext} from "poi/map";
 
-const PoiListItem = ({feature}) => {
-    const properties = feature.properties;
-
+const PoiListItem = ({element}) => {
     const {selectedElement, setSelectedElement} = usePoisIsochroneContext();
 
     const {getStyleForCategory} = usePoiCategoryUtil();
 
-    const categoryStyle = getStyleForCategory(feature.properties.category);
+    const categoryStyle = getStyleForCategory(element.category);
     const categoryIcon = categoryStyle.icon;
     const categoryColor = categoryStyle.color;
 
-    const selected = selectedElement === feature.id;
+    const selected = selectedElement === element.id;
 
     return (
         <ListItem
             disablePadding
             sx={{borderBottom: `1px solid ${theme.palette.grey[300]}`}}
             onClick={() => {
-                selectedElement === feature.id
+                selectedElement === element.id
                     ? setSelectedElement(null)
-                    : setSelectedElement(feature.id);
+                    : setSelectedElement(element.id);
             }}
         >
             <ListItemButton
@@ -53,21 +51,21 @@ const PoiListItem = ({feature}) => {
                                 fontSize={13}
                                 color={selected ? "#2e85cb" : theme.palette.grey[700]}
                             >
-                                {properties.name}
+                                {element.name}
                             </Typography>
                             <Typography
                                 variant="caption"
                                 fontSize={11}
                                 color={theme.palette.grey[600]}
                             >
-                                {properties.poi_type}
+                                {element.poi_type}
                             </Typography>
                             <Typography
                                 variant="caption"
                                 fontSize={10}
                                 color={theme.palette.grey[500]}
                             >
-                                {properties.address}
+                                {element.address}
                             </Typography>
                         </Stack>
                     </Grid>

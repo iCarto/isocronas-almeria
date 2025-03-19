@@ -14,8 +14,8 @@ export default function PoisCategoryProvider({}) {
         if (elements) {
             let filteredElements = [];
             if (selectedCategories.length) {
-                filteredElements = elements.filter(feature =>
-                    selectedCategories.includes(feature.properties.category)
+                filteredElements = elements.filter(element =>
+                    selectedCategories.includes(element.category)
                 );
             }
             setListElements(filteredElements);
