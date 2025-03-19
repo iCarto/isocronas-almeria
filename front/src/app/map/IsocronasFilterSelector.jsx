@@ -11,18 +11,16 @@ const IsocronasFilterSelector = () => {
         <>
             <Grid container spacing={1} sx={{p: 1}}>
                 <Grid item xs={12}>
-                    <IsocronasFilterHelper />
-                </Grid>
-                <Grid item xs={4}>
-                    <Stack alignItems="center" justifyContent="center">
+                    <Stack direction="row" justifyContent="space-between" spacing={1}>
                         <IsocronasMapSelectPointAction />
-                    </Stack>
-                </Grid>
-                <Grid item xs={8}>
-                    <Stack spacing={1}>
+                        <Divider orientation="vertical" flexItem />
                         <IsocronasMapTransportAction />
+                        <Divider orientation="vertical" flexItem />
                         <IsocronasMapTravelTimeAction />
                     </Stack>
+                </Grid>
+                <Grid item xs={12}>
+                    <IsocronasFilterHelper />
                 </Grid>
             </Grid>
             <Divider />

@@ -20,7 +20,7 @@ const IsocronasFilterHelper = () => {
     };
 
     return (
-        <Typography fontSize={10} textAlign="center" color={theme.palette.warning.dark}>
+        <Typography fontSize={10} textAlign="center" color={theme.palette.warning.main}>
             {getHelperText()}
         </Typography>
     );

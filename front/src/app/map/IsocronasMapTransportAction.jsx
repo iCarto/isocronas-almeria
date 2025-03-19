@@ -10,6 +10,7 @@ import DirectionsBikeOutlinedIcon from "@mui/icons-material/DirectionsBikeOutlin
 import DirectionsWalkOutlinedIcon from "@mui/icons-material/DirectionsWalkOutlined";
 import {createElement} from "react";
 import {useMapContext} from "base/map";
+import Typography from "@mui/material/Typography";
 
 const options = [
     {label: "A pie", value: "walking", icon: DirectionsWalkOutlinedIcon},
@@ -32,36 +33,38 @@ const IsocronasMapTransportAction = () => {
         setSelectedOption(value);
     };
 
-    const selected = options.find(option => option.value === selectedOption);
-
     return (
-        <Stack direction="row" alignItems="center" spacing={1}>
-            {selected ? (
-                createElement(selected.icon, {sx: {color: "#2e85cb"}})
-            ) : (
-                <DirectionsWalkOutlinedIcon
-                    sx={{
-                        color:
-                            selectedPoint && !selectedOption
-                                ? theme.palette.warning.light
-                                : "inherit",
-                    }}
-                />
-            )}
-
+        <Stack alignItems="center">
+            <Typography variant="caption">Medio de transporte</Typography>
             <ToggleButtonGroup
                 value={selectedOption}
                 exclusive
                 onChange={handleOption}
                 aria-label="selector de transporte"
+                size="small"
             >
                 {options.map(option => (
                     <ToggleButton
                         key={option.value}
                         value={option.value}
                         aria-label={`${option.label}`}
+                        sx={{
+                            color:
+                                selectedPoint && !selectedOption
+                                    ? theme.palette.warning.light
+                                    : "inherit",
+                            "&.Mui-selected": {
+                                backgroundColor: "#2e85cb",
+                                color: "white",
+                                "&:hover": {
+                                    backgroundColor: "#2e85ee",
+                                },
+                            },
+                        }}
                     >
-                        {createElement(option.icon, {fontSize: "small"})}
+                        {createElement(option.icon, {
+                            fontSize: "small",
+                        })}
                     </ToggleButton>
                 ))}
             </ToggleButtonGroup>

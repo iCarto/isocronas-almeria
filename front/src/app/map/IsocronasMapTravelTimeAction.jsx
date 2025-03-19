@@ -27,42 +27,48 @@ const IsocronasMapTravelTimeAction = () => {
         setSelectedOption(parseInt(value));
     };
 
-    const selected = options.find(option => option.value === selectedOption);
-
     return (
-        <Stack direction="row" alignItems="center" spacing={1}>
-            <Badge
-                badgeContent={selected?.value}
-                sx={{
-                    "& .MuiBadge-badge": {
-                        color: "white",
-                        backgroundColor: "#2e85cb",
-                    },
-                }}
-            >
-                <AccessTimeIcon
-                    sx={{
-                        color: selectedOption
-                            ? "#2e85cb"
-                            : selectedPoint && selectedTransport && !selectedOption
-                              ? theme.palette.warning.light
-                              : "inherit",
-                    }}
-                />
-            </Badge>
+        <Stack alignItems="center">
+            <Typography variant="caption">Tiempo</Typography>
             <ToggleButtonGroup
                 value={selectedOption}
                 exclusive
                 onChange={handleOption}
                 aria-label="selector de tiempo"
+                size="small"
             >
                 {options.map(option => (
                     <ToggleButton
                         key={option.value}
                         value={option.value}
                         aria-label={`${option.value} minutos`}
+                        sx={{
+                            color:
+                                selectedPoint && selectedTransport && !selectedOption
+                                    ? theme.palette.warning.light
+                                    : "inherit",
+                            "&.Mui-selected": {
+                                backgroundColor: "#2e85cb",
+                                color: "white",
+                                "&:hover": {
+                                    backgroundColor: "#2e85ee",
+                                },
+                            },
+                        }}
                     >
-                        <Typography variant="caption">{option.value}</Typography>
+                        <Stack>
+                            <Typography fontSize={12} lineHeight={1}>
+                                {option.value}
+                            </Typography>
+                            <Typography
+                                variant="body1"
+                                fontSize={8}
+                                textTransform="lowercase"
+                                lineHeight={1}
+                            >
+                                mins
+                            </Typography>
+                        </Stack>
                     </ToggleButton>
                 ))}
             </ToggleButtonGroup>
