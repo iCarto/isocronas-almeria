@@ -3,32 +3,10 @@ import {createElement} from "react";
 import {createRoot} from "react-dom/client";
 import {renderToString} from "react-dom/server";
 
-import SchoolIcon from "@mui/icons-material/School";
-
-function getIconAsBase64(icon) {
-    // Renderiza el icono de MUI a un string SVG
-    const svgString = renderToString(createElement(icon));
-
-    // Limpia el SVG eliminando atributos innecesarios
-    const cleanedSvg = svgString
-        .replace(/fill=".*?"/, 'fill="red"') // Cambia el color si quieres
-        .replace(/width=".*?"/, 'width="30"') // Ajusta tamaño
-        .replace(/height=".*?"/, 'height="30"');
-
-    // Convierte el SVG en Base64
-    const base64Svg = btoa(cleanedSvg);
-    return `data:image/svg+xml;base64,${base64Svg}`;
-}
-
 export function createMUIIcon(
     icon,
     {color = "grey", backgroundColor = "white", size = 24}
 ) {
-    /* console.log({icon}, {SchoolIcon});
-    const school = SchoolIcon;
-    const svgString = renderToString(createElement(icon));
-    console.log({svgString}); */
-
     const div = document.createElement("div");
     div.style.fontSize = "10px";
     div.style.color = color;
@@ -54,12 +32,65 @@ export function createMUIIcon(
     });
 }
 
+function convertColorToRGB(color) {
+    if (!color.startsWith("#")) {
+        return color;
+    }
+    color = color.replace(/^#/, "");
+    let r = parseInt(color.substring(0, 2), 16);
+    let g = parseInt(color.substring(2, 4), 16);
+    let b = parseInt(color.substring(4, 6), 16);
+    return `rgb(${r}, ${g}, ${b})`;
+}
+
+function getIconAsBase64(
+    IconComponent,
+    color = "grey",
+    backgroundColor = "white",
+    size = 16,
+    paddingFactor = 0.8
+) {
+    let svgString = renderToString(createElement(IconComponent));
+
+    if (!svgString.includes("xmlns=")) {
+        svgString = svgString.replace(
+            "<svg",
+            '<svg xmlns="http://www.w3.org/2000/svg"'
+        );
+    }
+
+    // Extraer los <path> y asegurarse de que todos están cerrados correctamente
+    let paths = svgString.match(/<path[^>]*\/?>/g)?.join("") || "";
+    paths = paths.replace(/fill="[^"]*"/g, ""); // Eliminar cualquier atributo fill existente
+    paths = paths.replace(/<path/g, `<path fill="${convertColorToRGB(color)}"`);
+
+    // Asegurar que los <path> estén cerrados correctamente
+    paths = paths.replace(/<path([^>]*)>/g, "<path$1/>");
+
+    // Ajuste del padding y centrado
+    const scale = (size / 24) * paddingFactor; // Reducir tamaño del icono dentro del círculo
+    const translate = (size * (1 - paddingFactor)) / 2; // Centrar el icono con padding
+
+    const finalSvg =
+        `<svg xmlns="http://www.w3.org/2000/svg" width="${size}" height="${size}" viewBox="0 0 ${size} ${size}">
+        <circle cx="${size / 2}" cy="${size / 2}" r="${size / 2}" fill="${convertColorToRGB(backgroundColor)}"/>
+        <g transform="translate(${translate}, ${translate}) scale(${scale})">
+        ${paths}
+        </g>
+    </svg>`.replace(/\s{2,}/g, ""); // Eliminar espacios extra
+
+    const base64Svg = btoa(unescape(encodeURIComponent(finalSvg)));
+    return `data:image/svg+xml;base64,${base64Svg}`;
+}
+
 export function createIcon(
     icon,
     {color = "grey", backgroundColor = "white", size = 24}
 ) {
+    const iconUrl = getIconAsBase64(icon, color, backgroundColor, size);
+
     return L.icon({
-        iconUrl: icon,
+        iconUrl,
         className: "",
         iconSize: [size, size],
         iconAnchor: [size / 2, size / 2],

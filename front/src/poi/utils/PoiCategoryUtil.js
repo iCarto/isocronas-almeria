@@ -14,13 +14,12 @@ import MiscellaneousServicesIcon from "@mui/icons-material/MiscellaneousServices
 import SportsSoccerIcon from "@mui/icons-material/SportsSoccer";
 import TourIcon from "@mui/icons-material/Tour";
 import RoomIcon from "@mui/icons-material/Room";
-import {createMUIIcon} from "base/map/leaflet/layer/GeojsonIcon";
-import {createElement} from "react";
+import {createIcon} from "base/map/leaflet/layer/GeojsonIcon";
 
 const CATEGORIES = {
     Finanzas: {
-        color: "#FF6347",
-        icon: LocalHospitalIcon,
+        color: "#FFD700",
+        icon: AccountBalanceIcon,
     },
     "Salud y bienestar": {
         color: "#FF6347",
@@ -94,22 +93,15 @@ function usePoiCategoryUtil() {
             color: CATEGORIES[getCategoryName(category)].color,
             icon: CATEGORIES[getCategoryName(category)].icon,
             mapIcon: {
-                normal: createMUIIcon(
-                    createElement(CATEGORIES[getCategoryName(category)].icon, {
-                        sx: {fontSize: 12},
-                    }),
-                    {color: CATEGORIES[getCategoryName(category)].color, size: 16}
-                ),
-                highlighted: createMUIIcon(
-                    createElement(CATEGORIES[getCategoryName(category)].icon, {
-                        sx: {fontSize: 24},
-                    }),
-                    {
-                        color: "white",
-                        backgroundColor: CATEGORIES[getCategoryName(category)].color,
-                        size: 32,
-                    }
-                ),
+                normal: createIcon(CATEGORIES[getCategoryName(category)].icon, {
+                    color: CATEGORIES[getCategoryName(category)].color,
+                    size: 20,
+                }),
+                highlighted: createIcon(CATEGORIES[getCategoryName(category)].icon, {
+                    color: "white",
+                    backgroundColor: CATEGORIES[getCategoryName(category)].color,
+                    size: 32,
+                }),
             },
         };
     };

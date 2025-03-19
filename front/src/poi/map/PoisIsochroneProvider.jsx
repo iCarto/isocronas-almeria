@@ -1,4 +1,4 @@
-import {createContext, useContext, useEffect, useState} from "react";
+import {createContext, useContext, useState} from "react";
 
 let PoisIsochroneContext = createContext(null);
 
@@ -10,10 +10,6 @@ export default function PoisIsochroneProvider({children}) {
 
     const [elements, setElements] = useState(null);
     const [listElements, setListElements] = useState(null);
-
-    useEffect(() => {
-        console.log("ISOCHRONE UPDATED", {isochrone});
-    }, [isochrone]);
 
     return (
         <PoisIsochroneContext.Provider
