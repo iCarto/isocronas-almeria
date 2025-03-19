@@ -13,6 +13,7 @@ import Typography from "@mui/material/Typography";
 import IconButton from "@mui/material/IconButton";
 import Badge from "@mui/material/Badge";
 import {usePoisIsochroneContext} from "poi/map";
+import Stack from "@mui/material/Stack";
 
 const CategoryButton = styled(IconButton)(({theme, selected, categoryColor}) => ({
     display: "flex",
@@ -76,69 +77,75 @@ const IsocronasMapCategoriesSelector = ({}) => {
     };
 
     return (
-        <Grid
-            container
-            alignItems="flex-start"
-            columnSpacing={1}
-            px={2}
-            py={0.5}
-            sx={{
-                maxHeight: "35%",
-                overflowY: "auto",
-                borderBottom: `1px solid ${theme.palette.secondary.light}`,
-            }}
-        >
-            {domains?.poi_category_group.map(category => {
-                const isSelected = selectedCategories.includes(category.value);
-                const categoryIcon = getStyleForCategory(category.value).icon;
-                const categoryColor = getStyleForCategory(category.value).color;
+        <Stack height="100%">
+            <Typography variant="caption" sx={{pl: 1, pt: 1}}>
+                Categorías
+            </Typography>
+            <Grid
+                container
+                alignItems="flex-start"
+                columnSpacing={1}
+                px={2}
+                py={0.5}
+                sx={{
+                    maxHeight: 275,
+                    overflowY: "auto",
+                    borderBottom: `1px solid ${theme.palette.secondary.light}`,
+                }}
+            >
+                {domains?.poi_category_group.map(category => {
+                    const isSelected = selectedCategories.includes(category.value);
+                    const categoryIcon = getStyleForCategory(category.value).icon;
+                    const categoryColor = getStyleForCategory(category.value).color;
 
-                return (
-                    <Grid item xs={4} xl={3} key={category.value}>
-                        <CategoryButton
-                            selected={isSelected}
-                            categoryColor={categoryColor}
-                            onClick={() => handleToggleCategory(category.value)}
-                            key={category.value}
-                        >
-                            <Badge
-                                badgeContent={
-                                    getElementsNumberForCategory(category.value) || 0
-                                }
-                                sx={{
-                                    "& .MuiBadge-badge": {
-                                        color: "white",
-                                        backgroundColor: categoryColor,
-                                    },
-                                }}
+                    return (
+                        <Grid item xs={4} xl={3} key={category.value}>
+                            <CategoryButton
+                                selected={isSelected}
+                                categoryColor={categoryColor}
+                                onClick={() => handleToggleCategory(category.value)}
+                                key={category.value}
                             >
-                                <Box
+                                <Badge
+                                    badgeContent={
+                                        getElementsNumberForCategory(category.value) ||
+                                        0
+                                    }
                                     sx={{
-                                        mb: 1,
-                                        p: 1,
-                                        pb: 0.5,
-                                        border: `1px solid ${isSelected ? categoryColor : theme.palette.secondary.light}`,
-                                        borderRadius: 2,
+                                        "& .MuiBadge-badge": {
+                                            color: "white",
+                                            backgroundColor: categoryColor,
+                                        },
                                     }}
                                 >
-                                    {createElement(categoryIcon)}
-                                </Box>
-                            </Badge>
-                            <Typography
-                                variant="caption"
-                                align="center"
-                                lineHeight={1}
-                                sx={{
-                                    fontWeight: isSelected ? "medium" : "normal",
-                                }}
-                            >
-                                {category.label}
-                            </Typography>
-                        </CategoryButton>
-                    </Grid>
-                );
-            })}
-        </Grid>
+                                    <Box
+                                        sx={{
+                                            mb: 1,
+                                            p: 1,
+                                            pb: 0.5,
+                                            border: `1px solid ${isSelected ? categoryColor : theme.palette.secondary.light}`,
+                                            borderRadius: 2,
+                                        }}
+                                    >
+                                        {createElement(categoryIcon)}
+                                    </Box>
+                                </Badge>
+                                <Typography
+                                    variant="caption"
+                                    align="center"
+                                    lineHeight={1}
+                                    sx={{
+                                        fontWeight: isSelected ? "medium" : "normal",
+                                    }}
+                                >
+                                    {category.label}
+                                </Typography>
+                            </CategoryButton>
+                        </Grid>
+                    );
+                })}
+            </Grid>
+        </Stack>
     );
 };
 
