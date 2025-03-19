@@ -1,4 +1,4 @@
-import {createContext, useContext, useState} from "react";
+import {createContext, useContext, useEffect, useState} from "react";
 
 let PoisIsochroneContext = createContext(null);
 
@@ -12,6 +12,10 @@ export default function PoisIsochroneProvider({children}) {
     const [listElements, setListElements] = useState(null);
 
     const [selectedElement, setSelectedElement] = useState(null);
+
+    useEffect(() => {
+        setSelectedElement(null);
+    }, [selectedCategories]);
 
     return (
         <PoisIsochroneContext.Provider

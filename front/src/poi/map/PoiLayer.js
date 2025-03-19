@@ -9,8 +9,10 @@ const popup = feature => {
     let data = feature.properties;
     let popupContent = `<b>${data["name"] ? data["name"] : "---"}</b>`;
     popupContent += "<ul class='attributes'>";
-    popupContent += `<li><i>${i18n._(msg`Category`)}</i>: ${data["category"] || "-"}</li>`;
-    popupContent += `<li><i>${i18n._(msg`Municipality`)}</i>: ${data["municipality"] || "-"}</li>`;
+    popupContent += `<li><i>${i18n._(msg`Municipio`)}</i>: ${data["municipality"] || "-"}</li>`;
+    popupContent += `<li><i>${i18n._(msg`Categoría`)}</i>: ${data["category"] || "-"}</li>`;
+    popupContent += `<li><i>${i18n._(msg`Tipo`)}</i>: ${data["poi_type"] || "-"}</li>`;
+    popupContent += `<li><i>${i18n._(msg`Dirección`)}</i>: ${data["address"] || "-"}</li>`;
     popupContent += "</ul>";
     // popupContent += `<div style="width: 100%; text-align: center;"><a href='/poi/all/list/${
     //     feature.id

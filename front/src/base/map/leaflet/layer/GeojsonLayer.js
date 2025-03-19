@@ -290,9 +290,26 @@ export class GeojsonLayer {
                             pane: mapOverlayPanes[this.pane],
                         });
                     }
+                    if (this.popup) {
+                        newLayer.bindPopup(this.popup(layer.feature));
+                    }
+                    if (this.#onClick) {
+                        newLayer.on("click", () => {
+                            console.log("CARTO >> Click: ", layer.feature.id);
+                            this.onClick(layer.feature.id);
+                        });
+                    }
                     newLayer.feature = layer.feature;
 
                     this.geojsonRef.addLayer(newLayer);
+
+                    if (
+                        this.selectedId &&
+                        this.selectedId === layer.feature.id &&
+                        this.popup
+                    ) {
+                        newLayer.openPopup();
+                    }
                 }
             });
         }
