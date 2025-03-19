@@ -1,12 +1,17 @@
 import {createElement} from "react";
 import ListItem from "@mui/material/ListItem";
 import ListItemButton from "@mui/material/ListItemButton";
-import ListItemIcon from "@mui/material/ListItemIcon";
-import ListItemText from "@mui/material/ListItemText";
 import {usePoiCategoryUtil} from "poi/utils";
+import Grid from "@mui/material/Grid";
+import Typography from "@mui/material/Typography";
+import Stack from "@mui/material/Stack";
+import {theme} from "Theme";
+import {usePoisIsochroneContext} from "poi/map";
 
 const PoiListItem = ({feature}) => {
     const properties = feature.properties;
+
+    const {selectedElement, setSelectedElement} = usePoisIsochroneContext();
 
     const {getStyleForCategory} = usePoiCategoryUtil();
 
@@ -14,19 +19,57 @@ const PoiListItem = ({feature}) => {
     const categoryIcon = categoryStyle.icon;
     const categoryColor = categoryStyle.color;
 
+    const selected = selectedElement === feature.id;
+
     return (
-        <ListItem disablePadding className="LayerMenuListItem">
-            <ListItemButton sx={{pl: 2}}>
-                <ListItemIcon sx={{p: 0, minWidth: 32}}>
+        <ListItem
+            disablePadding
+            sx={{borderBottom: `1px solid ${theme.palette.grey[300]}`}}
+            onClick={() => {
+                setSelectedElement(feature.id);
+            }}
+        >
+            <ListItemButton
+                selected={selected}
+                sx={{
+                    pl: 1,
+                    "&.Mui-selected": {
+                        backgroundColor: "white",
+                    },
+                }}
+            >
+                <Stack direction="row" spacing={1}>
                     {createElement(categoryIcon, {
                         fontSize: "small",
                         sx: {color: categoryColor},
                     })}
-                </ListItemIcon>
-                <ListItemText
-                    primary={properties.name}
-                    secondary={`${properties.category} - ${properties.municipality}`}
-                />
+                    <Grid item xs={11}>
+                        <Stack>
+                            <Typography
+                                variant="body2"
+                                fontWeight="bold"
+                                fontSize={13}
+                                color={selected ? "#2e85cb" : theme.palette.grey[700]}
+                            >
+                                {properties.name}
+                            </Typography>
+                            <Typography
+                                variant="caption"
+                                fontSize={11}
+                                color={theme.palette.grey[600]}
+                            >
+                                {properties.poi_type}
+                            </Typography>
+                            <Typography
+                                variant="caption"
+                                fontSize={10}
+                                color={theme.palette.grey[500]}
+                            >
+                                {properties.address}
+                            </Typography>
+                        </Stack>
+                    </Grid>
+                </Stack>
             </ListItemButton>
         </ListItem>
     );

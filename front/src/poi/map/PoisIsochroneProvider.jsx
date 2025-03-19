@@ -11,6 +11,8 @@ export default function PoisIsochroneProvider({children}) {
     const [elements, setElements] = useState(null);
     const [listElements, setListElements] = useState(null);
 
+    const [selectedElement, setSelectedElement] = useState(null);
+
     return (
         <PoisIsochroneContext.Provider
             value={{
@@ -26,6 +28,8 @@ export default function PoisIsochroneProvider({children}) {
                 setElements,
                 listElements,
                 setListElements,
+                selectedElement,
+                setSelectedElement,
             }}
         >
             {children}

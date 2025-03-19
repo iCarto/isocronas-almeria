@@ -24,6 +24,8 @@ const CategoryButton = styled(IconButton)(({theme, selected, categoryColor}) => 
     width: "100%",
     height: "100%",
     color: selected ? categoryColor : theme.palette.action.disabled,
+    backgroundColor: selected ? "white" : "inherit",
+    border: selected ? `1px solid #2e85cb` : "inherit",
     "&:hover": {
         backgroundColor: theme.palette.action.hover,
     },
