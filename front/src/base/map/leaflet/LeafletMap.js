@@ -18,14 +18,8 @@ export const mapOverlayPanes = [...Array(10).keys()].map(i => "overlayPane" + i)
 export function useLeafletMap() {
     let baseLayerRef = useRef(null);
 
-    const {
-        mapDOMRef,
-        mapObjectRef,
-        mapCRS,
-        mapOptions,
-        controlOptions,
-        setSelectedPoint,
-    } = useMapContext();
+    const {mapDOMRef, mapObjectRef, mapCRS, mapOptions, controlOptions} =
+        useMapContext();
 
     const {addCoordinatesMapControl} = useCoordinatesMapControl();
     const {addScaleMapControl} = useScaleMapControl();
@@ -33,7 +27,7 @@ export function useLeafletMap() {
         mapOptions.center,
         mapOptions.zoom
     );
-    const {addSetMarkerMapControl} = useSetMarkerMapControl(setSelectedPoint);
+    const {addSetMarkerMapControl} = useSetMarkerMapControl();
 
     if (mapCRS) {
         mapOptions["crs"] = new L.Proj.CRS(mapCRS.code, mapCRS.proj4, {

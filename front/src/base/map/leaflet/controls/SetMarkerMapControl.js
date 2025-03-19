@@ -1,4 +1,6 @@
+import {useMapContext} from "base/map";
 import L from "leaflet";
+import {useEffect, useRef} from "react";
 
 L.SingleMarkerHandler = function (map, options) {
     options = options || {};
@@ -8,27 +10,25 @@ L.SingleMarkerHandler = function (map, options) {
     // Disable the default double-click zoom
     map.doubleClickZoom.disable();
 
-    // Add double-click handler
-    function handleDoubleClick(e) {
-        console.log("Double click detected");
-
-        // Remove existing marker
+    const createMarker = latlng => {
         if (currentMarker) {
-            console.log("Removing existing marker");
             map.removeLayer(currentMarker);
             currentMarker = null;
         }
 
-        // Create new marker
-        console.log("Creating new marker");
-        currentMarker = L.marker(e.latlng, options.markerOptions);
+        currentMarker = L.marker(latlng, options.markerOptions);
         currentMarker.addTo(map);
+    };
+
+    // Add double-click handler
+    const handleDoubleClick = event => {
+        createMarker(event.latlng);
 
         const setSelectedPoint = options.setSelectedPoint;
         if (setSelectedPoint) {
-            setSelectedPoint(`${e.latlng.lat},${e.latlng.lng}`);
+            setSelectedPoint(`${event.latlng.lat},${event.latlng.lng}`);
         }
-    }
+    };
 
     // Add the event listener
     map.on("dblclick", handleDoubleClick);
@@ -37,6 +37,11 @@ L.SingleMarkerHandler = function (map, options) {
     return {
         getMarker: function () {
             return currentMarker;
+        },
+
+        createMarker: function (selectedPoint) {
+            const coordinates = selectedPoint.split(",");
+            createMarker({lat: coordinates[0], lng: coordinates[1]});
         },
 
         getPosition: function () {
@@ -60,14 +65,25 @@ L.SingleMarkerHandler = function (map, options) {
     };
 };
 
-export function useSetMarkerMapControl(setSelectedPoint) {
+export function useSetMarkerMapControl() {
+    const {setSelectedPoint, selectedPoint} = useMapContext();
+
+    let markerControlRef = useRef(null);
+
+    useEffect(() => {
+        if (selectedPoint) {
+            markerControlRef.current.createMarker(selectedPoint);
+        }
+    }, [selectedPoint]);
+
     const addSetMarkerMapControl = map => {
         // Initialize the handler
-        L.SingleMarkerHandler(map, {
+        markerControlRef.current = L.SingleMarkerHandler(map, {
             markerOptions: {
                 // Custom marker options here
             },
             setSelectedPoint,
+            selectedPoint,
         });
     };
 

@@ -72,11 +72,6 @@ export default function MapProvider({
         setFilterValue("buffer", buffer);
     };
 
-    useEffect(() => {
-        console.log({selectedPoint});
-        setFilterValue("selected_point", selectedPoint);
-    }, [selectedPoint]);
-
     const updateMapFilter = filter => {
         if (!filter || !Object.keys(filter).length) {
             addBufferToFilter();
