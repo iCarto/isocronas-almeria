@@ -7,7 +7,8 @@ export default function PoisCategoryProvider({}) {
         layerConfig: {layer},
     } = useMapGeojsonLayerContext();
 
-    const {selectedCategories, elements, setListElements} = usePoisIsochroneContext();
+    const {selectedCategories, elements, setListElements, selectedElement} =
+        usePoisIsochroneContext();
 
     useEffect(() => {
         if (elements) {
@@ -22,6 +23,11 @@ export default function PoisCategoryProvider({}) {
             layer.reload();
         }
     }, [elements, selectedCategories]);
+
+    useEffect(() => {
+        layer.setSelectedId(selectedElement);
+        layer.reload();
+    }, [selectedElement]);
 
     return null;
 }

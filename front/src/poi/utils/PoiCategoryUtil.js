@@ -102,6 +102,11 @@ function usePoiCategoryUtil() {
                     backgroundColor: CATEGORIES[getCategoryName(category)].color,
                     size: 32,
                 }),
+                selected: createIcon(CATEGORIES[getCategoryName(category)].icon, {
+                    color: "white",
+                    backgroundColor: CATEGORIES[getCategoryName(category)].color,
+                    size: 40,
+                }),
             },
         };
     };

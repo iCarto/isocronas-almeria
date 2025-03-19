@@ -38,6 +38,7 @@ export function createPoiLayer({
             icon: {
                 normal: categoryConfig.mapIcon.normal,
                 highlighted: categoryConfig.mapIcon.highlighted,
+                selected: categoryConfig.mapIcon.selected,
             },
         };
     };

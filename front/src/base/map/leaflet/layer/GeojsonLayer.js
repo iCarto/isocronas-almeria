@@ -271,7 +271,12 @@ export class GeojsonLayer {
                     const latlng = layer.getLatLng();
                     this.geojsonRef.removeLayer(layer);
                     let newLayer;
-                    if (
+                    if (this.selectedId && this.selectedId === layer.feature.id) {
+                        newLayer = L.marker(latlng, {
+                            icon: layerStyle.icon.selected,
+                            pane: mapOverlayPanes[this.pane + 1],
+                        });
+                    } else if (
                         this.highlightedIds &&
                         this.highlightedIds.includes(layer.feature.id)
                     ) {
