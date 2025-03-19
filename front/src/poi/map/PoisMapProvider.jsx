@@ -1,8 +1,8 @@
 import {MapProvider} from "base/map";
 import {MapBaseLayersProvider} from "base/map/layer";
 import {
-    createIsochroneLayerConfig,
-    createPoiLayerConfig,
+    useIsochroneLayerConfig,
+    usePoiLayerConfig,
     PoiGeojsonLayer,
     PoisMapParamsProvider,
 } from "poi/map";
@@ -12,7 +12,7 @@ const PoisMapProvider = ({children = null}) => {
     // map config
     const {crs, crsType, tocOptions, mapOptions, baseLayers} = useIsocronasMapConfig();
 
-    const poiLayerConfig = createPoiLayerConfig({
+    const poiLayerConfig = usePoiLayerConfig({
         tocComponent: PoiGeojsonLayer,
     });
 
@@ -28,7 +28,7 @@ const PoisMapProvider = ({children = null}) => {
         >
             <PoisMapParamsProvider>
                 <MapBaseLayersProvider
-                    layers={[poiLayerConfig, createIsochroneLayerConfig()]}
+                    layers={[poiLayerConfig, useIsochroneLayerConfig()]}
                 >
                     {children}
                 </MapBaseLayersProvider>

@@ -14,91 +14,104 @@ import MiscellaneousServicesIcon from "@mui/icons-material/MiscellaneousServices
 import SportsSoccerIcon from "@mui/icons-material/SportsSoccer";
 import TourIcon from "@mui/icons-material/Tour";
 import RoomIcon from "@mui/icons-material/Room";
+import {createMUIIcon} from "base/map/leaflet/layer/GeojsonIcon";
+import {createElement} from "react";
+
+const CATEGORIES = {
+    Finanzas: {
+        color: "#FF6347",
+        icon: LocalHospitalIcon,
+    },
+    "Salud y bienestar": {
+        color: "#FF6347",
+        icon: LocalHospitalIcon,
+    },
+    "Alimentación y bebidas": {
+        color: "#FF8C00",
+        icon: RestaurantIcon,
+    },
+    Compras: {
+        color: "#32CD32",
+        icon: ShoppingBagIcon,
+    },
+    "Entretenimiento y ocio": {
+        color: "#8A2BE2",
+        icon: LocalActivityIcon,
+    },
+    "Cultura y educación": {
+        color: "#1E90FF",
+        icon: SchoolIcon,
+    },
+    "Gobierno e instituciones": {
+        color: "#2F4F4F",
+        icon: AccountBalanceWalletIcon,
+    },
+    Transporte: {
+        color: "#4682B4",
+        icon: DirectionsTransitIcon,
+    },
+    Alojamiento: {
+        color: "#DA70D6",
+        icon: HotelIcon,
+    },
+    "Lugares de culto": {
+        color: "#A52A2A",
+        icon: ChurchIcon,
+    },
+    "Espacios naturales": {
+        color: "#228B22",
+        icon: ParkIcon,
+    },
+    Automoción: {
+        color: "#B22222",
+        icon: DirectionsCarIcon,
+    },
+    Servicios: {
+        color: "#FF4500",
+        icon: MiscellaneousServicesIcon,
+    },
+    Deportes: {
+        color: "#20B2AA",
+        icon: SportsSoccerIcon,
+    },
+    Turismo: {
+        color: "#4169E1",
+        icon: TourIcon,
+    },
+    default: {
+        color: "#333333",
+        icon: RoomIcon,
+    },
+};
 
 function usePoiCategoryUtil() {
+    const getCategoryName = category => {
+        return CATEGORIES[category] ? category : "default";
+    };
+
     const getStyleForCategory = category => {
-        switch (category) {
-            case "Finanzas":
-                return {
-                    color: "#FFD700",
-                    icon: AccountBalanceIcon,
-                };
-            case "Salud y bienestar":
-                return {
-                    color: "#FF6347",
-                    icon: LocalHospitalIcon,
-                };
-            case "Alimentación y bebidas":
-                return {
-                    color: "#FF8C00",
-                    icon: RestaurantIcon,
-                };
-            case "Compras":
-                return {
-                    color: "#32CD32",
-                    icon: ShoppingBagIcon,
-                };
-            case "Entretenimiento y ocio":
-                return {
-                    color: "#8A2BE2",
-                    icon: LocalActivityIcon,
-                };
-            case "Cultura y educación":
-                return {
-                    color: "#1E90FF",
-                    icon: SchoolIcon,
-                };
-            case "Gobierno e instituciones":
-                return {
-                    color: "#2F4F4F",
-                    icon: AccountBalanceWalletIcon,
-                };
-            case "Transporte":
-                return {
-                    color: "#4682B4",
-                    icon: DirectionsTransitIcon,
-                };
-            case "Alojamiento":
-                return {
-                    color: "#DA70D6",
-                    icon: HotelIcon,
-                };
-            case "Lugares de culto":
-                return {
-                    color: "#A52A2A",
-                    icon: ChurchIcon,
-                };
-            case "Espacios naturales":
-                return {
-                    color: "#228B22",
-                    icon: ParkIcon,
-                };
-            case "Automoción":
-                return {
-                    color: "#B22222",
-                    icon: DirectionsCarIcon,
-                };
-            case "Servicios":
-                return {
-                    color: "#FF4500",
-                    icon: MiscellaneousServicesIcon,
-                };
-            case "Deportes":
-                return {
-                    color: "#20B2AA",
-                    icon: SportsSoccerIcon,
-                };
-            case "Turismo":
-                return {
-                    color: "#4169E1",
-                    icon: TourIcon,
-                };
-            default:
-                return {
-                    color: "#333333",
-                    icon: RoomIcon,
-                };
-        }
+        return {
+            color: CATEGORIES[getCategoryName(category)].color,
+            icon: CATEGORIES[getCategoryName(category)].icon,
+            mapIcon: {
+                normal: createMUIIcon(
+                    createElement(CATEGORIES[getCategoryName(category)].icon, {
+                        sx: {fontSize: 12},
+                    }),
+                    {color: CATEGORIES[getCategoryName(category)].color, size: 16}
+                ),
+                highlighted: createMUIIcon(
+                    createElement(CATEGORIES[getCategoryName(category)].icon, {
+                        sx: {fontSize: 24},
+                    }),
+                    {
+                        color: "white",
+                        backgroundColor: CATEGORIES[getCategoryName(category)].color,
+                        size: 32,
+                    }
+                ),
+            },
+        };
     };
 
     return {

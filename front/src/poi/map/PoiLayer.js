@@ -1,15 +1,9 @@
 import {msg, t} from "@lingui/macro";
 import {i18n} from "@lingui/core";
 import {useMapGeojsonLayerConfig} from "base/map/layer";
-import {createMUIIcon, useGeojsonLayer} from "base/map/leaflet/layer";
+import {useGeojsonLayer} from "base/map/leaflet/layer";
 import {createLayerLegend, createWMSLegendIcon} from "base/map/legend";
-import {PoiRepository} from "poi/repository";
-import {usePoisIsochroneContext} from ".";
-import {useTurfUtil} from "base/geo/turf";
 import {usePoiCategoryUtil} from "poi/utils";
-
-import SchoolIcon from "@mui/icons-material/School";
-import {createElement} from "react";
 
 const popup = feature => {
     let data = feature.properties;
@@ -42,14 +36,8 @@ export function createPoiLayer({
         const categoryConfig = getStyleForCategory(feature.properties.category);
         return {
             icon: {
-                normal: createMUIIcon(
-                    createElement(categoryConfig.icon, {sx: {fontSize: 12}}),
-                    {color: categoryConfig.color, size: 16}
-                ),
-                highlighted: createMUIIcon(
-                    createElement(categoryConfig.icon, {sx: {fontSize: 24}}),
-                    {color: "white", backgroundColor: categoryConfig.color, size: 32}
-                ),
+                normal: categoryConfig.mapIcon.normal,
+                highlighted: categoryConfig.mapIcon.highlighted,
             },
         };
     };
@@ -79,10 +67,7 @@ export function createPoiLegend() {
     });
 }
 
-export function createPoiLayerConfig({tocComponent = null} = {}) {
-    const {getFilteredFeatures} = useTurfUtil();
-    const {setElements} = usePoisIsochroneContext();
-
+export function usePoiLayerConfig({tocComponent = null} = {}) {
     const poisLayer = createPoiLayer({
         interactive: true,
         cluster: false,
@@ -97,16 +82,8 @@ export function createPoiLayerConfig({tocComponent = null} = {}) {
     });
 
     return useMapGeojsonLayerConfig({
-        load: filter => {
-            return PoiRepository.getFeatures(filter).then(features => {
-                const elements = getFilteredFeatures(features, filter.isochrone);
-                setElements(elements.features.map(feature => feature));
-                return elements;
-            });
-        },
         layer: poisLayer,
         legend: poisLegend,
-        discriminators: [],
         tocComponent,
     });
 }

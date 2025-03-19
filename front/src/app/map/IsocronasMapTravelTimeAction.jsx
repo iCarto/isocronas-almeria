@@ -9,9 +9,9 @@ import {theme} from "Theme";
 import {useMapContext} from "base/map";
 
 const options = [
-    {label: "15 min", value: 15},
-    {label: "30 min", value: 30},
-    {label: "1 h", value: 60},
+    {label: "15 min", value: "15"}, // values present in urls should be strings
+    {label: "30 min", value: "30"},
+    {label: "1 h", value: "60"},
 ];
 
 const IsocronasMapTravelTimeAction = () => {
@@ -23,8 +23,7 @@ const IsocronasMapTravelTimeAction = () => {
     const {selectedPoint} = useMapContext();
 
     const handleOption = (event, value) => {
-        console.log({value});
-        setSelectedOption(parseInt(value));
+        setSelectedOption(value);
     };
 
     return (

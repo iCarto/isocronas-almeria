@@ -11,7 +11,7 @@ function createIsochroneLayer({interactive = false, fitBounds = false}) {
     return useGeojsonLayer({
         type: "polygon",
         style: {
-            color: "#fff",
+            color: "#2e85cb",
             fillColor: "#999",
             fillOpacity: 0.5,
             weight: 2,
@@ -32,10 +32,7 @@ function createIsochroneLegend() {
     });
 }
 
-export function createIsochroneLayerConfig({
-    label = t`Isocrona`,
-    fitBounds = false,
-} = {}) {
+export function useIsochroneLayerConfig({label = t`Isocrona`, fitBounds = false} = {}) {
     const {setIsochrone} = usePoisIsochroneContext();
     const {getPolygon, getDifference} = useTurfUtil();
 
@@ -47,7 +44,11 @@ export function createIsochroneLayerConfig({
 
     return useMapGeojsonLayerConfig({
         load: filter => {
+            if (!filter.selected_point || !filter.transport || !filter.travel_time) {
+                return Promise.resolve({});
+            }
             return IsochroneRepository.getFeatures(filter).then(isochrone => {
+                console.log("CALLING TO UPDATE ISOCHRONE", {isochrone});
                 setIsochrone(isochrone);
 
                 const envelope = getPolygon([

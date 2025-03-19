@@ -22,35 +22,6 @@ const defaultPointStyle = {
     opacity: 1,
 };
 
-export function createMUIIcon(
-    icon,
-    {color = "grey", backgroundColor = "white", size = 24}
-) {
-    const div = document.createElement("div");
-    div.style.fontSize = "10px";
-    div.style.color = color;
-    div.style.display = "flex";
-    div.style.alignItems = "center";
-    div.style.justifyContent = "center";
-    div.style.width = `${size}px`;
-    div.style.height = `${size}px`;
-    div.style.backgroundColor = backgroundColor;
-    div.style.borderRadius = "50%";
-    div.style.boxShadow = "0px 0px 5px rgba(0,0,0,0.5)";
-
-    // Renderizamos el icono de MUI dentro del div
-    const root = createRoot(div);
-    root.render(icon);
-
-    return L.divIcon({
-        html: div,
-        className: "",
-        iconSize: [size, size],
-        iconAnchor: [size / 2, size / 2],
-        popupAnchor: [0, -size / 2],
-    });
-}
-
 export class GeojsonLayer {
     #type;
     #layerRef;
@@ -236,7 +207,7 @@ export class GeojsonLayer {
 
     setHighlightedIds(highlightedIds) {
         this.#highlightedIds = highlightedIds;
-        this.reload();
+        //this.reload();
     }
 
     reload() {

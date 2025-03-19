@@ -26,7 +26,7 @@ const NoResultsMessage = () => {
     );
 };
 
-const MAX_ITEMS_WITHOUT_VIRTUALIZATION = 100;
+const MAX_ITEMS_WITHOUT_VIRTUALIZATION = 1000;
 const DEFAULT_HEIGHT_COLLAPSED = 60;
 const DEFAULT_HEIGHT_EXPANDED = 200;
 
@@ -144,18 +144,7 @@ const PoisMapFeatureList = () => {
         >
             {listElements.length <= MAX_ITEMS_WITHOUT_VIRTUALIZATION ? (
                 listElements.map(feature => (
-                    <PoiListItem
-                        key={feature.id}
-                        feature={feature}
-                        isExpanded={
-                            expandedItem.featureId === feature.id
-                                ? expandedItem.isExpanded
-                                : false
-                        }
-                        onExpand={(event, isExpanded) =>
-                            handleExpand(feature.id, isExpanded)
-                        }
-                    />
+                    <PoiListItem key={feature.id} feature={feature} />
                 ))
             ) : (
                 <List

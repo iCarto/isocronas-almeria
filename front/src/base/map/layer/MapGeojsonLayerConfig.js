@@ -1,5 +1,5 @@
 export function useMapGeojsonLayerConfig({
-    load,
+    load = null,
     update = null,
     layer,
     legend,

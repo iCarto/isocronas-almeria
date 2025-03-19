@@ -11,6 +11,10 @@ export default function PoisIsochroneProvider({children}) {
     const [elements, setElements] = useState(null);
     const [listElements, setListElements] = useState(null);
 
+    useEffect(() => {
+        console.log("ISOCHRONE UPDATED", {isochrone});
+    }, [isochrone]);
+
     return (
         <PoisIsochroneContext.Provider
             value={{

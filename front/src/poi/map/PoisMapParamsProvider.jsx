@@ -6,10 +6,10 @@ import {usePoisIsochroneContext} from ".";
 
 const PoisMapParamsProvider = ({children = null}) => {
     const {municipalities} = useMunicipalities();
-    const {selectedTravelTime, selectedTransport, isochrone} =
+    const {selectedTravelTime, selectedTransport, setIsochrone} =
         usePoisIsochroneContext();
     const {searchParams} = useUrlParams();
-    const {setBoundingBox, mapFilter, updateMapFilter} = useMapContext();
+    const {setBoundingBox, mapFilter, updateMapFilter, selectedPoint} = useMapContext();
 
     const findMunicipalityByCode = code =>
         municipalities.find(municipality => municipality.code === code);
@@ -25,17 +25,18 @@ const PoisMapParamsProvider = ({children = null}) => {
     }, [municipalities]);
 
     useEffect(() => {
+        setIsochrone(null);
         updateMapFilter({...mapFilter, travel_time: selectedTravelTime});
     }, [selectedTravelTime]);
 
     useEffect(() => {
+        setIsochrone(null);
         updateMapFilter({...mapFilter, transport: selectedTransport});
     }, [selectedTransport]);
 
     useEffect(() => {
-        console.log("ISOCHRONE UPDATED", {isochrone});
-        updateMapFilter({...mapFilter, isochrone: isochrone});
-    }, [isochrone]);
+        setIsochrone(null);
+    }, [selectedPoint]);
 
     return <>{children}</>;
 };
