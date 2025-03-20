@@ -11,8 +11,18 @@ function useTurfUtil() {
         return difference(featureCollection(features));
     };
 
-    const getFilteredFeatures = (features, geometry) => {
-        return pointsWithinPolygon(features, geometry);
+    const getFilteredFeatures = (featureCollection, featurePolygon) => {
+        const validFeatures = {
+            type: "FeatureCollection",
+            features: featureCollection.features.filter(
+                feature =>
+                    feature &&
+                    feature.geometry !== null &&
+                    feature.geometry !== undefined &&
+                    feature.geometry.type === "Point"
+            ),
+        };
+        return pointsWithinPolygon(validFeatures, featurePolygon);
     };
 
     return {
