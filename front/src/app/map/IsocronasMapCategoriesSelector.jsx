@@ -15,7 +15,9 @@ import Badge from "@mui/material/Badge";
 import {usePoisIsochroneContext} from "poi/map";
 import Stack from "@mui/material/Stack";
 
-const CategoryButton = styled(IconButton)(({theme, selected, categoryColor}) => ({
+const CategoryButton = styled(IconButton, {
+    shouldForwardProp: prop => prop !== "selected" && prop !== "categoryColor",
+})(({theme, selected, categoryColor}) => ({
     display: "flex",
     flexDirection: "column",
     alignItems: "center",
