@@ -1,8 +1,10 @@
 import sys
 from pathlib import Path
 
+import google_places
+
 # import geopandas as gpd
-import mygeocode
+import mygeocode as google_geocoding
 import pandas as pd
 import prepare_columns
 
@@ -14,12 +16,14 @@ def build_data(
     df = prepare_columns.prepare_columns(df, matchtable_path)
     df = prepare_columns.create_category_column(df)
     df = prepare_columns.create_extra_column(df)
-    gdf = mygeocode.geocode_df(df, geopackage_path, layername)
-    gdf.to_excel("/tmp/google_raw.xlsx")
+    df = google_geocoding.geocode_df(df)
+    df.to_excel("/tmp/google_raw.xlsx")
+    df = google_places.geocode_df(df)
+    df.to_excel(".cache/fixtures/google_raw_places.xlsx")
 
     # Path(output_path).unlink(missing_ok=True)
     # gdf.to_file(output_path, driver="GPKG")
-    return gdf
+    return df
 
 
 if __name__ == "__main__":

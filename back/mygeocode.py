@@ -1,27 +1,36 @@
+import json
+
 import pandas as pd
 from mysecrets import GM_API_KEY
 from prepare_geocode import prepare_geocode
 
 
-def google_raw(df, geocode):
+def get_raw_data_as_json_str(geocode, query):
+    result = geocode(query=query)
+    if not result:
+        return None
+    return json.dumps(result.raw, ensure_ascii=False)
+
+
+def google_raw(df: pd.DataFrame) -> pd.DataFrame:
+    geocode = google_raw_geocoder_function()
+
     def do_geocoding(row):
         if not row["processed_address2"]:
-            return row
+            return None
         query = f'{row["processed_address2"]}. {row["municipality"]}'
-        location = geocode(query=query)
-        row["google_raw"] = location.raw
-        print(location.raw)
+        raw_location_response = get_raw_data_as_json_str(geocode, query)
+        row["google_raw"] = raw_location_response
+        # print(raw_location_response)
         return row
 
     return df.apply(do_geocoding, axis=1)
 
 
-def geocode_df(df: pd.DataFrame, geopackage_path, layername) -> pd.DataFrame:
+def geocode_df(df: pd.DataFrame) -> pd.DataFrame:
     df = prepare_geocode(df)
     df["google_raw"] = None
-    geocoder = google_raw_geocoder_function()
-
-    df = google_raw(df, geocoder)
+    df = google_raw(df)
 
     return df
 
@@ -79,7 +88,6 @@ def geocode(geocoder, query):
     # print(location.address)
     # print(location.latitude, location.longitude)
     # print(location.raw)
-    # print(location.altitude)
     return location.raw
 
 
