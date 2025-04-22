@@ -33,10 +33,17 @@ export function useIsocronasMapConfig() {
     ];
 
     const mapOptions = {
-        minZoom: 5,
+        minZoom: 9,
         maxZoom: 18,
-        center: [37.203228, -2.293171],
+        center: [37.25, -0.9],
         zoom: 9,
+        zoomSnap: 0,
+        maxBoundsViscosity: 0.0,
+        //nortEasth, south
+        maxBounds: [
+            [38.5, -0.2],
+            [36.0, -5],
+        ],
     };
 
     const tocOptions = {
