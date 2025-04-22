@@ -6,10 +6,24 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: @lingui/cli\n"
 "Language: es-ES\n"
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: \n"
+"PO-Revision-Date: \n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Plural-Forms: \n"
+
+#: src/base/error/model/Alerts.js:31
+msgid "[Status: {status}]"
+msgstr ""
 
 #: src/base/file/components/UploadingFileItem.jsx:33
 msgid "{0}"
 msgstr ""
+
+#: src/app/map/IsocronasMapControlPanel.jsx:64
+msgid "{0} legend"
+msgstr "menú"
 
 #: src/base/entity/components/presentational/EntityCounter.jsx:37
 msgid "{size, plural, one {{0}} other {{1}}}"
@@ -21,9 +35,8 @@ msgstr ""
 
 #: src/base/ui/menu/ActionsMenu.jsx:57
 msgid "Actions"
-msgstr ""
+msgstr "Acciones"
 
-#: src/base/entity/components/presentational/EntityAddButtonGroup.jsx:38
 #: src/base/table/components/EditableTable.jsx:85
 msgid "Add"
 msgstr ""
@@ -42,34 +55,36 @@ msgstr ""
 msgid "Add new"
 msgstr ""
 
-#: src/base/location/components/LocationSection.jsx:53
+#: src/poi/page/list/PoiCard.jsx:48
+#: src/poi/shared/map/PoiListItemFields.jsx:17
+#: src/poi/shared/table/PoiColumns.jsx:23
 msgid "Address"
 msgstr ""
 
 #: src/base/location/components/FormLocationCombo.jsx:247
 #: src/base/location/components/LocationSection.jsx:10
-msgid "Admin level 1"
-msgstr ""
+#~ msgid "Admin level 1"
+#~ msgstr ""
 
 #: src/base/location/components/FormLocationCombo.jsx:262
 #: src/base/location/components/LocationSection.jsx:18
-msgid "Admin level 2"
-msgstr ""
+#~ msgid "Admin level 2"
+#~ msgstr ""
 
 #: src/base/location/components/FormLocationCombo.jsx:279
 #: src/base/location/components/LocationSection.jsx:26
-msgid "Admin level 3"
-msgstr ""
+#~ msgid "Admin level 3"
+#~ msgstr ""
 
 #: src/base/location/components/FormLocationCombo.jsx:296
 #: src/base/location/components/LocationSection.jsx:34
-msgid "Admin level 4"
-msgstr ""
+#~ msgid "Admin level 4"
+#~ msgstr ""
 
 #: src/base/location/components/FormLocationCombo.jsx:313
 #: src/base/location/components/LocationSection.jsx:42
-msgid "Admin level 5"
-msgstr ""
+#~ msgid "Admin level 5"
+#~ msgstr ""
 
 #: src/base/file/components/DeleteDocumentDialog.jsx:39
 msgid "Are you sure you want to permanently delete this file?"
@@ -80,39 +95,50 @@ msgid "Are you sure you want to permanently delete this item?"
 msgstr ""
 
 #: src/base/stepper/components/CancelProcessDialog.jsx:20
-msgid "Are you sure you wish to cancel the process?"
-msgstr ""
+#~ msgid "Are you sure you wish to cancel the process?"
+#~ msgstr ""
 
 #: src/base/stepper/components/CompleteProcessDialog.jsx:19
-msgid "Are you sure you wish to complete the process?"
-msgstr ""
+#~ msgid "Are you sure you wish to complete the process?"
+#~ msgstr ""
 
 #: src/base/file/components/ViewOrUpdateFilesDataContent.jsx:10
 msgid "Attached files"
 msgstr ""
 
 #: src/base/entity/components/presentational/sections/EntityAuditSection.jsx:15
-msgid "Audit details"
-msgstr ""
+#~ msgid "Audit details"
+#~ msgstr ""
 
 #: src/base/stepper/components/StepperButtons.jsx:35
-msgid "Back"
-msgstr ""
+#~ msgid "Back"
+#~ msgstr ""
 
 #: src/base/map/actions/MapBaseLayerAction.jsx:40
 #: src/base/map/actions/MapBaseLayerAction.jsx:72
 msgid "Base layer"
-msgstr ""
+msgstr "Capa base"
 
 #: src/base/dialog/components/DialogLayout.jsx:24
-#: src/base/entity/components/form/EntityFormHorizontal.jsx:31
 #: src/base/file/components/SelectFileSection.jsx:142
 #: src/base/table/components/EditableTableRow.jsx:64
 msgid "Cancel"
 msgstr ""
 
 #: src/base/stepper/components/StepperButtons.jsx:50
-msgid "Cancel process"
+#~ msgid "Cancel process"
+#~ msgstr ""
+
+#: src/poi/map/PoiLayer.js:14
+msgid "Categoría"
+msgstr ""
+
+#: src/poi/shared/filter/PoiFilterFormFields.jsx:18
+msgid "Categorías"
+msgstr ""
+
+#: src/poi/shared/table/PoiColumns.jsx:11
+msgid "Category"
 msgstr ""
 
 #: src/base/form/components/FormCheckboxGroup.jsx:46
@@ -124,18 +150,20 @@ msgstr ""
 msgid "Clear"
 msgstr ""
 
-#: src/base/entity/components/container/EntityManageDialog.jsx:19
 #: src/base/ui/sidebar/SidebarPanelLayout.jsx:72
 msgid "Close"
 msgstr ""
 
-#: src/base/entity/components/presentational/sections/EntityCommentsSection.jsx:9
 #: src/base/form/components/FormCommentsField.jsx:11
 msgid "Comments"
 msgstr ""
 
 #: src/base/stepper/components/StepperButtons.jsx:65
-msgid "Complete process"
+#~ msgid "Complete process"
+#~ msgstr ""
+
+#: src/poi/map/PoiLayer.js:17
+msgid "Coordenadas"
 msgstr ""
 
 #: src/base/file/components/FolderTableRowMenu.jsx:85
@@ -143,7 +171,6 @@ msgstr ""
 msgid "Copy link"
 msgstr ""
 
-#: src/base/entity/components/presentational/EntityCreateButton.jsx:21
 #: src/base/map/layer/geojson/MapGeojsonLayerFeatureListItem.jsx:110
 msgid "Create"
 msgstr ""
@@ -152,18 +179,17 @@ msgstr ""
 msgid "Create {0}"
 msgstr ""
 
-#: src/base/entity/components/presentational/EntityAddButtonGroup.jsx:59
 #: src/base/shared/components/ListSelector.jsx:89
 msgid "Create new"
 msgstr ""
 
 #: src/base/entity/components/presentational/sections/EntityAuditSection.jsx:18
-msgid "Created at"
-msgstr ""
+#~ msgid "Created at"
+#~ msgstr ""
 
 #: src/base/entity/components/presentational/sections/EntityAuditSection.jsx:21
-msgid "Created by"
-msgstr ""
+#~ msgid "Created by"
+#~ msgstr ""
 
 #: src/base/entity/components/presentational/EntityTableDownloadButton.jsx:106
 #: src/base/table/components/TableDownloadButton.jsx:85
@@ -195,6 +221,10 @@ msgstr ""
 
 #: src/base/ui/menu/MenuListDetailButton.jsx:10
 msgid "Detail"
+msgstr ""
+
+#: src/poi/map/PoiLayer.js:16
+msgid "Dirección"
 msgstr ""
 
 #: src/base/delete/components/RemoveItemDialog.jsx:20
@@ -238,9 +268,6 @@ msgstr ""
 msgid "Drop your files"
 msgstr ""
 
-#: src/base/entity/components/presentational/EntityContentSection.jsx:74
-#: src/base/entity/components/presentational/EntityNestedContentSection.jsx:96
-#: src/base/entity/components/presentational/sections/EntityGeneralDataSection.jsx:52
 #: src/base/map/layer/geojson/MapGeojsonLayerFeatureListItem.jsx:77
 #: src/base/table/components/EditableTableRow.jsx:76
 #: src/base/ui/menu/hooks/EditActionHook.jsx:43
@@ -276,6 +303,10 @@ msgstr ""
 msgid "Error"
 msgstr ""
 
+#: src/base/error/utilities/ErrorUtil.js:18
+msgid "Error when fetching data"
+msgstr ""
+
 #: src/base/entity/components/presentational/EntityTableDownloadButton.jsx:98
 #: src/base/table/components/TableDownloadButton.jsx:77
 msgid "Excel"
@@ -299,8 +330,8 @@ msgid "Files"
 msgstr ""
 
 #: src/base/entity/components/presentational/sections/EntityLocationSection.jsx:30
-msgid "Go to Location Page"
-msgstr ""
+#~ msgid "Go to Location Page"
+#~ msgstr ""
 
 #: src/base/file/components/UploadingFileItem.jsx:78
 msgid "has been uploaded successfully."
@@ -310,9 +341,13 @@ msgstr ""
 msgid "Hide"
 msgstr ""
 
-#: src/base/entity/components/presentational/EntityListPageHeader.jsx:57
+#: src/base/entity/components/presentational/EntityListPageHeader.jsx:56
 msgid "Hide filters"
 msgstr ""
+
+#: src/app/ui/IsocronasHeaderHero.jsx:18
+msgid "Home"
+msgstr "Inicio"
 
 #: src/base/file/components/DeleteDocumentDialog.jsx:40
 msgid "If you click Delete, the file cannot be recovered."
@@ -342,11 +377,16 @@ msgstr ""
 msgid "Invalid date"
 msgstr ""
 
-#: src/base/map/actions/MapActionsToolbar.jsx:37
-msgid "Layers"
+#: src/poi/map/IsochroneLayer.js:28
+#: src/poi/map/IsochroneLayer.js:35
+msgid "Isocrona"
 msgstr ""
 
-#: src/base/entity/components/presentational/sections/EntityLocationSection.jsx:55
+#: src/app/map/IsocronasMapActionsToolbar.jsx:41
+#: src/base/map/actions/MapActionsToolbar.jsx:37
+msgid "Layers"
+msgstr "Capas"
+
 #: src/base/ui/menu/MenuListLocationButton.jsx:10
 msgid "Location"
 msgstr ""
@@ -355,21 +395,32 @@ msgstr ""
 msgid "Log out"
 msgstr ""
 
+#: src/app/ui/IsocronasHeaderHero.jsx:30
+msgid "Logo"
+msgstr ""
+
 #: src/base/map/layout/MapDialog.jsx:31
 msgid "Map"
 msgstr ""
 
+#: src/poi/shared/table/PoiColumns.jsx:19
+msgid "Municipality"
+msgstr ""
+
+#: src/poi/map/PoiLayer.js:13
+msgid "Municipio"
+msgstr ""
+
 #: src/base/file/components/FolderTable.jsx:26
+#: src/poi/page/panel/PoiPanel.jsx:14
+#: src/poi/shared/table/PoiColumns.jsx:7
 msgid "Name"
 msgstr ""
 
 #: src/base/form/components/FormStepper.jsx:75
-#: src/base/stepper/components/StepperButtons.jsx:67
 msgid "Next"
 msgstr ""
 
-#: src/base/stepper/components/CancelProcessDialog.jsx:27
-#: src/base/stepper/components/CompleteProcessDialog.jsx:21
 #: src/base/ui/section/components/SectionField.jsx:89
 msgid "No"
 msgstr ""
@@ -379,8 +430,8 @@ msgid "No item found."
 msgstr ""
 
 #: src/base/entity/components/presentational/LinkedEntitySection.jsx:40
-msgid "No linked items."
-msgstr ""
+#~ msgid "No linked items."
+#~ msgstr ""
 
 #: src/base/form/components/FormAutocomplete.jsx:51
 #: src/base/form/components/FormComboBox.jsx:85
@@ -407,9 +458,20 @@ msgstr ""
 msgid "Password"
 msgstr ""
 
-#: src/base/stepper/components/StepperButtons.jsx:14
-msgid "Process completed."
+#: src/poi/page/list/PoiCard.jsx:53
+#: src/poi/shared/map/PoiListItemFields.jsx:22
+msgid "Phone"
 msgstr ""
+
+#: src/poi/map/PoiLayer.js:68
+#: src/poi/map/PoiLayer.js:83
+#: src/poi/page/panel/PoiPanel.jsx:23
+msgid "POI"
+msgstr ""
+
+#: src/base/stepper/components/StepperButtons.jsx:14
+#~ msgid "Process completed."
+#~ msgstr ""
 
 #: src/base/delete/components/RemoveItemDialog.jsx:23
 #: src/base/file/components/ViewDocumentPanel.jsx:155
@@ -424,15 +486,13 @@ msgid "Remove item"
 msgstr ""
 
 #: src/base/error/components/ErrorFallback.jsx:35
-#: src/base/stepper/components/StepperButtons.jsx:20
 msgid "Reset"
 msgstr ""
 
 #: src/base/location/components/WaterLocationSection.jsx:52
-msgid "River"
-msgstr ""
+#~ msgid "River"
+#~ msgstr ""
 
-#: src/base/entity/components/form/EntityFormSubmitButton.jsx:20
 #: src/base/form/components/FormStepper.jsx:66
 #: src/base/map/layer/geojson/MapGeojsonLayerFeatureListItem.jsx:131
 #: src/base/table/components/EditableTableRow.jsx:52
@@ -463,8 +523,8 @@ msgid "Select an option from the list"
 msgstr ""
 
 #: src/base/entity/components/presentational/EntityAddButtonGroup.jsx:72
-msgid "Select existing"
-msgstr ""
+#~ msgid "Select existing"
+#~ msgstr ""
 
 #: src/base/file/components/FileSelectButton.jsx:10
 msgid "Select files on the disk"
@@ -483,10 +543,10 @@ msgid "Set as featured image"
 msgstr ""
 
 #: src/base/location/components/LocationSection.jsx:49
-msgid "Settlement"
-msgstr ""
+#~ msgid "Settlement"
+#~ msgstr ""
 
-#: src/base/entity/components/presentational/EntityListPageHeader.jsx:55
+#: src/base/entity/components/presentational/EntityListPageHeader.jsx:54
 msgid "Show filters"
 msgstr ""
 
@@ -504,6 +564,15 @@ msgstr ""
 
 #: src/base/ui/menu/MenuListStatsButton.jsx:10
 msgid "Stats"
+msgstr ""
+
+#: src/poi/shared/table/PoiColumns.jsx:15
+msgid "Target"
+msgstr ""
+
+#: src/poi/page/list/PoiCard.jsx:43
+#: src/poi/shared/map/PoiListItemFields.jsx:12
+msgid "Targetted to"
 msgstr ""
 
 #: src/base/form/components/FormDatePicker.jsx:68
@@ -539,8 +608,8 @@ msgid "The selected file is not valid."
 msgstr ""
 
 #: src/base/stepper/components/CancelProcessDialog.jsx:21
-msgid "This action cannot be undone."
-msgstr ""
+#~ msgid "This action cannot be undone."
+#~ msgstr ""
 
 #: src/base/form/validation/index.js:4
 msgid "This field is required."
@@ -554,9 +623,13 @@ msgstr ""
 msgid "This image could not be uploaded"
 msgstr ""
 
-#: src/base/table/components/NestedEntityTable.jsx:172
-msgid "Total"
+#: src/poi/map/PoiLayer.js:15
+msgid "Tipo"
 msgstr ""
+
+#: src/base/table/components/NestedEntityTable.jsx:172
+#~ msgid "Total"
+#~ msgstr ""
 
 #: src/base/error/components/PageNotFoundAlert.jsx:20
 msgid "Try clearing the active filters or navigating to a different page."
@@ -571,12 +644,12 @@ msgid "Type to search"
 msgstr ""
 
 #: src/base/entity/components/presentational/sections/EntityAuditSection.jsx:23
-msgid "Updated at"
-msgstr ""
+#~ msgid "Updated at"
+#~ msgstr ""
 
 #: src/base/entity/components/presentational/sections/EntityAuditSection.jsx:26
-msgid "Updated by"
-msgstr ""
+#~ msgid "Updated by"
+#~ msgstr ""
 
 #: src/base/file/components/DocumentSection.jsx:35
 msgid "Upload date"
@@ -612,8 +685,8 @@ msgid "User profile"
 msgstr ""
 
 #: src/base/entity/components/presentational/sections/EntityLocationSection.jsx:44
-msgid "UTM Coordinates"
-msgstr ""
+#~ msgid "UTM Coordinates"
+#~ msgstr ""
 
 #: src/base/entity/components/container/EntitySummaryPanel.jsx:25
 #: src/base/ui/menu/hooks/MenuGenericViewActionHook.jsx:19
@@ -622,31 +695,34 @@ msgstr ""
 
 #: src/base/location/components/FormLocationCombo.jsx:246
 #: src/base/location/components/WaterLocationSection.jsx:13
-msgid "Water level 1"
-msgstr ""
+#~ msgid "Water level 1"
+#~ msgstr ""
 
 #: src/base/location/components/FormLocationCombo.jsx:261
 #: src/base/location/components/WaterLocationSection.jsx:21
-msgid "Water level 2"
-msgstr ""
+#~ msgid "Water level 2"
+#~ msgstr ""
 
 #: src/base/location/components/FormLocationCombo.jsx:278
 #: src/base/location/components/WaterLocationSection.jsx:29
-msgid "Water level 3"
-msgstr ""
+#~ msgid "Water level 3"
+#~ msgstr ""
 
 #: src/base/location/components/FormLocationCombo.jsx:295
 #: src/base/location/components/WaterLocationSection.jsx:37
-msgid "Water level 4"
-msgstr ""
+#~ msgid "Water level 4"
+#~ msgstr ""
 
 #: src/base/location/components/FormLocationCombo.jsx:312
 #: src/base/location/components/WaterLocationSection.jsx:45
-msgid "Water level 5"
+#~ msgid "Water level 5"
+#~ msgstr ""
+
+#: src/poi/page/list/PoiCard.jsx:58
+#: src/poi/shared/map/PoiListItemFields.jsx:38
+msgid "Web"
 msgstr ""
 
-#: src/base/stepper/components/CancelProcessDialog.jsx:23
-#: src/base/stepper/components/CompleteProcessDialog.jsx:20
 #: src/base/ui/section/components/SectionField.jsx:88
 msgid "Yes"
 msgstr ""

@@ -61,7 +61,7 @@ const ToggleSideBarButton = ({showToc, onClick}) => {
                 ml: 1,
             }}
         >
-            <Tooltip title={t`${showToc ? "Show" : "Hide"} legend`}>
+            <Tooltip title={t`${showToc ? "Ocultar" : "Mostrar"} menú`}>
                 <IconButton
                     onClick={onClick}
                     color="primary"
