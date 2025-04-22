@@ -4,7 +4,6 @@ import ToggleButton from "@mui/material/ToggleButton";
 import Stack from "@mui/material/Stack";
 import {theme} from "Theme";
 
-import DirectionsBusFilledOutlinedIcon from "@mui/icons-material/DirectionsBusFilledOutlined";
 import DirectionsCarFilledOutlinedIcon from "@mui/icons-material/DirectionsCarFilledOutlined";
 import DirectionsBikeOutlinedIcon from "@mui/icons-material/DirectionsBikeOutlined";
 import DirectionsWalkOutlinedIcon from "@mui/icons-material/DirectionsWalkOutlined";
@@ -15,11 +14,6 @@ import Typography from "@mui/material/Typography";
 const options = [
     {label: "A pie", value: "walking", icon: DirectionsWalkOutlinedIcon},
     {label: "Bici", value: "cycling", icon: DirectionsBikeOutlinedIcon},
-    {
-        label: "Transporte público",
-        value: "public_transport",
-        icon: DirectionsBusFilledOutlinedIcon,
-    },
     {label: "Coche", value: "driving", icon: DirectionsCarFilledOutlinedIcon},
 ];
 

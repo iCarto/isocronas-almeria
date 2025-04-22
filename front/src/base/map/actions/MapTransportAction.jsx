@@ -1,6 +1,5 @@
 import {MapAction} from ".";
 import DepartureBoardOutlinedIcon from "@mui/icons-material/DepartureBoardOutlined";
-import DirectionsBusFilledOutlinedIcon from "@mui/icons-material/DirectionsBusFilledOutlined";
 import DirectionsCarFilledOutlinedIcon from "@mui/icons-material/DirectionsCarFilledOutlined";
 import DirectionsBikeOutlinedIcon from "@mui/icons-material/DirectionsBikeOutlined";
 import DirectionsWalkOutlinedIcon from "@mui/icons-material/DirectionsWalkOutlined";
@@ -9,11 +8,6 @@ import {usePoisIsochroneContext} from "poi/map";
 const options = [
     {label: "A pie", value: "walking", icon: <DirectionsWalkOutlinedIcon />},
     {label: "Bici", value: "cycling", icon: <DirectionsBikeOutlinedIcon />},
-    {
-        label: "Transporte público",
-        value: "public_transport",
-        icon: <DirectionsBusFilledOutlinedIcon />,
-    },
     {label: "Coche", value: "driving", icon: <DirectionsCarFilledOutlinedIcon />},
 ];
 
