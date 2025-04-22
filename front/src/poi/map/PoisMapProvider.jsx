@@ -6,7 +6,7 @@ import {
     PoiGeojsonLayer,
     PoisMapParamsProvider,
 } from "poi/map";
-import {useIsocronasMapConfig} from "app/map";
+import {useIsocronasMapConfig, createMunicipalitiesLayerConfig} from "app/map";
 
 const PoisMapProvider = ({children = null}) => {
     // map config
@@ -31,6 +31,7 @@ const PoisMapProvider = ({children = null}) => {
             <PoisMapParamsProvider>
                 <MapBaseLayersProvider
                     layers={[poiLayerConfig, useIsochroneLayerConfig()]}
+                    auxLayers={[createMunicipalitiesLayerConfig()]}
                 >
                     {children}
                 </MapBaseLayersProvider>
