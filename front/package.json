@@ -29,7 +29,6 @@
         "chartjs-plugin-datalabels": "^2.2.0",
         "date-fns": "^2.25.0",
         "dom-to-image": "^2.6.0",
-        "ga-4-react": "0.1.281",
         "leaflet": "^1.8.0",
         "leaflet-arrowheads": "^1.4.0",
         "leaflet-coord-projection": "1.0.2",
