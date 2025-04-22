@@ -6,13 +6,15 @@ import {createLayerLegend, createWMSLegendIcon} from "base/map/legend";
 import {usePoiCategoryUtil} from "poi/utils";
 
 const popup = feature => {
-    let data = feature.properties;
+    const data = feature.properties;
+    const coordinates = feature.geometry.coordinates.map(x => x.toFixed(5));
     let popupContent = `<b>${data["name"] ? data["name"] : "---"}</b>`;
     popupContent += "<ul class='attributes'>";
     popupContent += `<li><i>${i18n._(msg`Municipio`)}</i>: ${data["municipality"] || "-"}</li>`;
     popupContent += `<li><i>${i18n._(msg`Categoría`)}</i>: ${data["category"] || "-"}</li>`;
     popupContent += `<li><i>${i18n._(msg`Tipo`)}</i>: ${data["poi_type"] || "-"}</li>`;
     popupContent += `<li><i>${i18n._(msg`Dirección`)}</i>: ${data["address"] || "-"}</li>`;
+    popupContent += `<li><i>${i18n._(msg`Coordenadas`)}</i>: ${coordinates[1]},${coordinates[0]} </li>`;
     popupContent += "</ul>";
     // popupContent += `<div style="width: 100%; text-align: center;"><a href='/poi/all/list/${
     //     feature.id
