@@ -44,5 +44,11 @@ export function useIsocronasMapConfig() {
         image: {show: false},
     };
 
-    return {crs, crsType, baseLayers, mapOptions, tocOptions};
+    const controlOptions = {
+        coordinates: {show: false},
+        scale: {show: false},
+        resetview: {show: false},
+    };
+
+    return {crs, crsType, baseLayers, mapOptions, controlOptions, tocOptions};
 }
