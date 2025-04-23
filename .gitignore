@@ -31,6 +31,7 @@ ubuntu-*-cloudimg-console.log
 
 # Project
 .env
+.env.production
 private
 tools/fixtures
 .cache
