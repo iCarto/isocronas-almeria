@@ -9,7 +9,7 @@ const AppLayout = ({hero = null, menu = null, footer = null}) => {
             role="wrapper"
             sx={{display: "flex", flexDirection: "column", minHeight: "100vh"}}
         >
-            <Header hero={hero} menu={menu} />
+            {hero && <Header hero={hero} menu={menu} />}
             <Outlet />
             {footer}
         </Box>
