@@ -1,7 +1,6 @@
 import {useEffect, createElement} from "react";
 import {theme} from "Theme";
 
-import {useDomainContext} from "base/domain/provider";
 import {useMapContext} from "base/map";
 import styled from "@mui/material/styles/styled";
 
@@ -40,9 +39,7 @@ const IsocronasMapCategoriesSelector = ({}) => {
     const {selectedCategories, setSelectedCategories, elements} =
         usePoisIsochroneContext();
 
-    const {domains} = useDomainContext();
-
-    const {getStyleForCategory} = usePoiCategoryUtil();
+    const {getStyleForCategory, getCategoryNames} = usePoiCategoryUtil();
 
     useEffect(() => {
         if (mapFilter?.category) {
@@ -52,7 +49,7 @@ const IsocronasMapCategoriesSelector = ({}) => {
 
             setSelectedCategories(categories);
         }
-    }, [domains]);
+    }, []);
 
     const handleToggleCategory = category => {
         setSelectedCategories(prev => {
@@ -96,23 +93,22 @@ const IsocronasMapCategoriesSelector = ({}) => {
                     borderBottom: `1px solid ${theme.palette.secondary.light}`,
                 }}
             >
-                {domains?.poi_category_group.map(category => {
-                    const isSelected = selectedCategories.includes(category.value);
-                    const categoryIcon = getStyleForCategory(category.value).icon;
-                    const categoryColor = getStyleForCategory(category.value).color;
+                {getCategoryNames().map(category => {
+                    const isSelected = selectedCategories.includes(category);
+                    const categoryIcon = getStyleForCategory(category).icon;
+                    const categoryColor = getStyleForCategory(category).color;
 
                     return (
-                        <Grid item xs={4} xl={3} key={category.value}>
+                        <Grid item xs={4} xl={4} key={category}>
                             <CategoryButton
                                 selected={isSelected}
                                 categoryColor={categoryColor}
-                                onClick={() => handleToggleCategory(category.value)}
-                                key={category.value}
+                                onClick={() => handleToggleCategory(category)}
+                                key={category}
                             >
                                 <Badge
                                     badgeContent={
-                                        getElementsNumberForCategory(category.value) ||
-                                        0
+                                        getElementsNumberForCategory(category) || 0
                                     }
                                     sx={{
                                         "& .MuiBadge-badge": {
@@ -141,7 +137,7 @@ const IsocronasMapCategoriesSelector = ({}) => {
                                         fontWeight: isSelected ? "medium" : "normal",
                                     }}
                                 >
-                                    {category.label}
+                                    {category}
                                 </Typography>
                             </CategoryButton>
                         </Grid>
