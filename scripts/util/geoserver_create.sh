@@ -31,13 +31,17 @@ geoserver_create_postgis_datastore() {
 }
 
 geoserver_create_layer() {
+    local GEOSERVER_LAYER_NAME="${1:-poi}"
+    local PG_TABLE_NAME="${2:-poi}"
     geoserver_create_resource \
         "${GEOSERVER_URL}/rest/workspaces/${GEOSERVER_WORKSPACE_NAME}/datastores/${GEOSERVER_DATASTORE_NAME}/featuretypes" \
-        "<featureType><name>${GEOSERVER_LAYER_NAME}</name></featureType>"
+        "<featureType>
+            <name>${GEOSERVER_LAYER_NAME}</name>
+            <nativeName>${PG_TABLE_NAME}</nativeName>
+        </featureType>"
 
     # "<featureType>
     #     <name>${GEOSERVER_LAYER_NAME}</name>
-    #     <nativeName>${PG_TABLE_NAME}</nativeName>
     #     <srs>EPSG:4326</srs>
     # </featureType>"
 }

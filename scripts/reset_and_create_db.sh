@@ -14,7 +14,8 @@ bash "${this_dir}"/fixtures.sh
 geoserver_delete_workspace
 geoserver_create_workspace
 geoserver_create_postgis_datastore
-geoserver_create_layer
+geoserver_create_layer poi poi
+geoserver_create_layer fake_poi fake_poi
 
 echo ""
 green "DONE"

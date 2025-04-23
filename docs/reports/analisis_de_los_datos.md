@@ -108,7 +108,7 @@ Además de los casos concretos que se especifican a continuación se observa que
 -   LUBRIN. Tiene unos datos sobre alojamientos al final. Los ignoramos.
 -   GÁDOR. Tiene unos textos al principio sobre correcciones a realizar que ignoramos. En la propia tabla uno de los nombres pone "PLAZA DE TOROS (EN DESUSO) SE REPITE ELIMINAR". Incluímos todos los puntos tal cual aparecen.
 -   TABERNAS. Tiene comentarios de posibles lugares en el medio del documento que se ignoran.
--   VELEZ BLANCO. Tiene un comentario "En el texto del estudio poneis el restaurante La PIza que no está en Vélez-Blanco sino en María." al final del documento que se ignora. Incluímos todos los puntos tal cual aparecen.
+-   VELEZ BLANCO. Tiene un comentario "En el texto del estudio ponéis el restaurante La PIza que no está en Vélez-Blanco sino en María." al final del documento que se ignora. Incluímos todos los puntos tal cual aparecen.
 -   FONDÓN. Tiene comentarios al final del documento sobre posibles lugares. En la propia tabla hay comentarios cómo "La mujer existe pero no está claro que siga siendo un negocio". Incluímos todos los puntos tal cual aparecen.
 -   Varias tablas tienen una columna EMAIL que el resto no tienen. Esta información está siendo ignorada. ALICÚN, BAYARCAL, SUFLÍ.
 
