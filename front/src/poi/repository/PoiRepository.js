@@ -4,8 +4,8 @@ import {createPoi} from "poi/model";
 
 const store = createEntityStore({
     adapter: createWfsAuthApiAdapter({
+        url: "http://localhost:3000/geoserver/wfs",
         typeNames: "isocronas:poi",
-        outputFormat: "json",
     }),
 });
 

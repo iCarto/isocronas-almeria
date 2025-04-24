@@ -5,46 +5,51 @@ const defaultParams = {
     outputFormat: "json",
 };
 
+const defaultHeaders = {};
+
+const isObjectEmptyOrNullOrUndefined = objectName => {
+    if (objectName === null || objectName === undefined) {
+        return true;
+    }
+    if (Object.keys(objectName).length === 0) {
+        // empty object
+        return true;
+    }
+    return false;
+};
+
 class WfsConfig {
-    #typeNames;
-    #outputFormat;
-    #filter;
+    url;
+    typeNames;
+    outputFormat;
+    headers;
 
-    get typeNames() {
-        return this.#typeNames;
+    constructor(url, typeNames, outputFormat, headers) {
+        this.url = url;
+        this.typeNames = typeNames;
+        this.outputFormat = outputFormat;
+        this.headers = {...defaultHeaders, ...headers};
     }
 
-    get outputFormat() {
-        return this.#outputFormat;
-    }
-
-    get filter() {
-        return this.#filter;
-    }
-
-    constructor(typeNames, outputFormat, filter) {
-        this.#typeNames = typeNames;
-        this.#outputFormat = outputFormat;
-        this.#filter = filter;
-    }
-
-    getURL() {
+    getURL(filter = null) {
         const params = new URLSearchParams({
             ...defaultParams,
             typeNames: this.typeNames,
             outputFormat: this.outputFormat,
         });
-        const filterParams = this.filter.getCqlFilter();
-        if (filterParams) {
-            params.append("cql_filter", filterParams);
+        if (isObjectEmptyOrNullOrUndefined(filter)) {
+            const filterParams = filter.getCqlFilter();
+            if (filterParams) {
+                params.append("cql_filter", filterParams);
+            }
         }
 
-        return `${params.toString()}`;
+        return `${this.url}?${params.toString()}`;
     }
 }
 
-const createWfsConfig = ({typeNames, outputFormat, filter}) => {
-    return new WfsConfig(typeNames, outputFormat, filter);
+const createWfsConfig = ({url, typeNames, outputFormat, headers}) => {
+    return new WfsConfig(url, typeNames, outputFormat, headers);
 };
 
 export default createWfsConfig;
