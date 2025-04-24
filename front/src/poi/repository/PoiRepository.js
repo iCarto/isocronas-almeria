@@ -2,10 +2,13 @@ import {createEntityStore} from "base/entity/repository";
 import {createWfsAuthApiAdapter} from "base/geo/wfs/repository";
 import {createPoi} from "poi/model";
 
+const POI_WFS_URL = process.env.REACT_APP_POI_WFS_URL;
+const POI_WFS_TYPENAMES = process.env.REACT_APP_POI_WFS_TYPENAMES;
+
 const store = createEntityStore({
     adapter: createWfsAuthApiAdapter({
-        url: "http://localhost:3000/geoserver/wfs",
-        typeNames: "isocronas:poi",
+        url: POI_WFS_URL,
+        typeNames: POI_WFS_TYPENAMES,
     }),
 });
 
