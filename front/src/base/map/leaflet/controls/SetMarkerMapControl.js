@@ -22,11 +22,23 @@ L.SingleMarkerHandler = function (map, options) {
 
     // Add double-click handler
     const handleDoubleClick = event => {
-        createMarker(event.latlng);
+        // TODO (fpuga): If the event needs some kind of pre-processing should be configurable
+        // or the handle itself should be injected.
+        // const round = (value, step = 0.0005) => {
+        //     var inv = 1.0 / step;
+        //     return Math.round(value * inv) / inv;
+        // };
+        // const processedLatLng = L.latLng({
+        //     lat: round(event.latlng.lat),
+        //     lng: round(event.latlng.lng),
+        // });
+        const processedLatLng = event.latlng;
+
+        createMarker(processedLatLng);
 
         const setSelectedPoint = options.setSelectedPoint;
         if (setSelectedPoint) {
-            setSelectedPoint(`${event.latlng.lat},${event.latlng.lng}`);
+            setSelectedPoint(`${processedLatLng.lat},${processedLatLng.lng}`);
         }
     };
 

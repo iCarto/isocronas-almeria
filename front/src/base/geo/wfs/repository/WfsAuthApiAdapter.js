@@ -1,4 +1,3 @@
-import config from "../../../../../lingui.config";
 import {createWfsConfig, createWfsFilter} from "../model";
 import {WfsService} from "../service";
 

@@ -1,8 +1,3 @@
-const round = (value, step = 0.0005) => {
-    var inv = 1.0 / step;
-    return Math.round(value * inv) / inv;
-};
-
 class MapBoxIsochroneConfig {
     #profile;
     #coordinates;
@@ -13,7 +8,8 @@ class MapBoxIsochroneConfig {
     }
 
     get coordinates() {
-        return `${round(this.#coordinates.lng)},${round(this.#coordinates.lat)}`;
+        // return `${round(this.#coordinates.lng)},${round(this.#coordinates.lat)}`;
+        return `${this.#coordinates.lng},${this.#coordinates.lat}`;
     }
 
     get contours() {

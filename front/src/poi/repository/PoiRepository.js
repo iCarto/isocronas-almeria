@@ -1,15 +1,20 @@
 import {createEntityStore} from "base/entity/repository";
 import {createWfsAuthApiAdapter} from "base/geo/wfs/repository";
 import {createPoi} from "poi/model";
+import createLocalStorageStore from "./LocalStorageStore";
 
 const POI_WFS_URL = process.env.REACT_APP_POI_WFS_URL;
 const POI_WFS_TYPENAMES = process.env.REACT_APP_POI_WFS_TYPENAMES;
 
-const store = createEntityStore({
+const wfsStore = createEntityStore({
     adapter: createWfsAuthApiAdapter({
         url: POI_WFS_URL,
         typeNames: POI_WFS_TYPENAMES,
     }),
+});
+
+const localStorageStore = createLocalStorageStore({
+    keyPrefix: "poi_",
 });
 
 export const features_to_poi = features => {
@@ -20,11 +25,23 @@ export const features_to_poi = features => {
 
 const PoiRepository = {
     get(id) {
-        return store.getFeatures(id);
+        return wfsStore.getFeatures(id);
     },
 
-    getFeatures(filter = {}) {
-        return store.getFeatures(filter);
+    getFeatures() {
+        const cacheKey = localStorageStore.generateKey("features");
+        const cachedData = localStorageStore.getWithCache(cacheKey);
+
+        if (cachedData !== null) {
+            return Promise.resolve(cachedData);
+        }
+
+        // If no valid cache, fetch fresh data
+        return wfsStore.getFeatures().then(features => {
+            // Update cache with the new data
+            localStorageStore.setCache(cacheKey, features);
+            return features;
+        });
     },
 };
 
