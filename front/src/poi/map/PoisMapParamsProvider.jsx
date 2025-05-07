@@ -26,8 +26,28 @@ const PoisMapParamsProvider = ({children = null}) => {
         municipalities.find(municipality => municipality.code === code);
 
     useEffect(() => {
+        if (searchParams.get("selected_point")) {
+            // {lat: coordinates[0], lng: coordinates[1]}
+            const size =
+                searchParams.get("travel_time") == "driving"
+                    ? 0.1
+                    : searchParams.get("travel_time") == "cycling"
+                      ? 0.05
+                      : 0.01;
+            const coordinates = searchParams
+                .get("selected_point")
+                .split(",")
+                .map(x => Number(x));
+            const bbox = [
+                coordinates[1] - size,
+                coordinates[0] - size,
+                coordinates[1] + size,
+                coordinates[0] + size,
+            ];
+            setBoundingBox(bbox);
+            return;
+        }
         if (municipalities.length === 0) return;
-
         const municipalityCode = searchParams.get("municipality");
         const municipality = findMunicipalityByCode(municipalityCode);
         if (municipalityCode) {
