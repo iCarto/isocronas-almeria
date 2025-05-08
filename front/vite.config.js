@@ -5,7 +5,11 @@ import {lingui} from "@lingui/vite-plugin";
 import {sentryVitePlugin} from "@sentry/vite-plugin";
 
 export default defineConfig(({mode}) => {
-    const env = loadEnv(mode, process.cwd(), "");
+    const env = loadEnv(mode, process.cwd(), "REACT_APP_");
+    console.log(process.cwd());
+    console.log("Mode:", mode);
+    console.log("SENTRY_AUTH_TOKEN:", env.REACT_APP_SENTRY_AUTH_TOKEN);
+    console.log("All env vars:", env);
 
     return {
         plugins: [
@@ -17,7 +21,7 @@ export default defineConfig(({mode}) => {
             lingui(),
             tsconfigPaths(),
             sentryVitePlugin({
-                authToken: process.env.SENTRY_AUTH_TOKEN,
+                authToken: env.REACT_APP_SENTRY_AUTH_TOKEN,
                 org: "icarto",
                 project: "isocronas",
             }),

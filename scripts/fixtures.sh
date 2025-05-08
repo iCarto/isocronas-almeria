@@ -1,7 +1,7 @@
 #!/bin/bash
 
 fixtures_this_dir="$(cd "$(dirname "${BASH_SOURCE[0]}")" > /dev/null && pwd)"
-source "${fixtures_this_dir}"/../server/variables.ini
+source "${fixtures_this_dir}"/../scripts/variables.ini
 # (cd "${fixtures_this_dir}/../tools" && bash fixtures.sh)
 
 ogr2ogr -update -overwrite -makevalid -nlt PROMOTE_TO_MULTI -lco GEOMETRY_NAME=geom -lco FID=id -f PostgreSQL PG:"dbname=${DBNAME} host=localhost port=${PG_PORT} user=${PG_USER}" "${fixtures_this_dir}"/../.cache/fixtures/base.gpkg

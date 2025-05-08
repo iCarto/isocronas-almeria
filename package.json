@@ -1,8 +1,5 @@
 {
     "private": true,
-    "scripts": {
-        "lint:markdown": "markdownlint-cli2 \"**/*.{md,mdx}\" \"!node_modules\""
-    },
     "devDependencies": {
         "markdownlint-cli2": "0.14.0",
         "markdownlint-cli2-formatter-pretty": "0.0.7",
@@ -10,12 +7,8 @@
         "stylelint": "16.3.1",
         "stylelint-config-html": "1.1.0",
         "stylelint-config-standard": "36.0.0",
-        "stylelint-order": "6.0.4"
-    },
-    "dependencies": {
-        "@turf/difference": "7.2.0",
-        "@turf/helpers": "7.2.0",
-        "@turf/points-within-polygon": "7.2.0",
+        "stylelint-order": "6.0.4",
         "markdownlint": "0.35.0"
-    }
+    },
+    "dependencies": {}
 }

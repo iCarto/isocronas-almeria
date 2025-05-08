@@ -2,13 +2,11 @@
 
 this_dir="$(cd "$(dirname "${BASH_SOURCE[0]}")" > /dev/null && pwd)"
 
-source "${this_dir}"/../server/variables.ini
-source "${this_dir}"/util/geoserver_delete.sh
-source "${this_dir}"/util/geoserver_create.sh
-source "${this_dir}"/../tools/output.sh
+source "${this_dir}"/../scripts/variables.ini
+source "${this_dir}"/util/geoserver_utils.sh
+source "${this_dir}"/../scripts/util/output.sh
 
-# TODO: Revisar como hacer esto de forma adecuada (funciones?, script?)
-# bash "${this_dir}/../server/drop_and_create_db.sh" --template template_snimf
+# bash "${this_dir}/util/drop_and_create_db.sh" --template mytemplate
 
 bash "${this_dir}"/fixtures.sh
 geoserver_delete_workspace

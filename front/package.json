@@ -45,7 +45,10 @@
         "react-router-dom": "^6.4.0",
         "react-router-hash-link": "^2.4.3",
         "terra-draw": "^1.0.0",
-        "terra-draw-leaflet-adapter": "^1.0.0"
+        "terra-draw-leaflet-adapter": "^1.0.0",
+        "@turf/difference": "7.2.0",
+        "@turf/helpers": "7.2.0",
+        "@turf/points-within-polygon": "7.2.0"
     },
     "devDependencies": {
         "@lingui/cli": "^4.11.4",

@@ -4,11 +4,9 @@
 set -euo pipefail
 
 this_dir="$(cd "$(dirname "${BASH_SOURCE[0]}")" > /dev/null && pwd)"
+source "${this_dir}"/../scripts/variables.ini
 
 bash -i "${this_dir}"/util/check-os-deps.sh
-
-PROJECT_NAME=isocronas_almeria
-PYTHON_VERSION=3.11.3
 
 cd "${this_dir}"/..
 
@@ -52,18 +50,23 @@ pre-commit gc
 pre-commit install --install-hooks --overwrite
 
 # backend stuff
-bash scripts/install.back.sh
+# bash scripts/install.back.sh
 
 # frontend stuf
 bash scripts/install.front.sh
 
-# ./scripts/util/prod-package.sh
+if [[ ! -f .env ]]; then
+    echo "
+PUBLIC_URL=
+GEOSERVER_SSL_KEYSTORE_PASSWORD=$(head -c 8192 /dev/urandom | LC_ALL=C tr -dc 'A-Za-z0-9_' | head -c 15)
+GEOSERVER_ADMIN_PASSWORD=$(head -c 8192 /dev/urandom | LC_ALL=C tr -dc 'A-Za-z0-9_' | head -c 15)
+" > .env
+fi
 
 # app-specific
 #-------------
 "${this_dir}"/util/setup-custom.sh
 mkdir -p .cache/fixtures
-# ln -s ../1_DEFINITIVOS .cache/raw
-# "${this_dir}"/reset_and_create_db.sh
+# ln -s <PATH_TO_DATA> .cache/raw
 
 echo "* DONE :)"
