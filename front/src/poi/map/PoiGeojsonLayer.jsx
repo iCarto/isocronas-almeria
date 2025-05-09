@@ -5,9 +5,9 @@ import {PoiGeojsonLayerDataProvider} from ".";
 const PoiGeojsonLayer = ({layerConfig}) => {
     return (
         <MapGeojsonLayerProvider layerConfig={layerConfig}>
-            <PoiGeojsonLayerDataProvider>
-                <PoisCategoryProvider />
-            </PoiGeojsonLayerDataProvider>
+            <PoisCategoryProvider>
+                <PoiGeojsonLayerDataProvider />
+            </PoisCategoryProvider>
         </MapGeojsonLayerProvider>
     );
 };

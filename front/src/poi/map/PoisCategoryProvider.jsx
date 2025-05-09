@@ -2,7 +2,7 @@ import {useMapGeojsonLayerContext} from "base/map/layer/geojson";
 import {useEffect} from "react";
 import {usePoisIsochroneContext} from ".";
 
-export default function PoisCategoryProvider({}) {
+export default function PoisCategoryProvider({children}) {
     const {
         layerConfig: {layer},
     } = useMapGeojsonLayerContext();
@@ -29,5 +29,5 @@ export default function PoisCategoryProvider({}) {
         layer.reload();
     }, [selectedElement]);
 
-    return null;
+    return children;
 }

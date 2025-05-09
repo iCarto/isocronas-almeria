@@ -8,7 +8,7 @@ import {useTurfUtil} from "base/geo/turf";
 
 let PoiGeojsonLayerDataContext = createContext(null);
 
-export default function PoiGeojsonLayerDataProvider({children}) {
+export default function PoiGeojsonLayerDataProvider({children = null}) {
     const {mapObjectRef, mapCRSType} = useMapContext();
     const {
         layerConfig: {layer, onSelectedItem},
