@@ -13,3 +13,4 @@ rm -rf .pytest_cache
 rm -rf .ruff_cache
 rm -rf front/dist
 rm -rf "${PROJECT_NAME}.egg-info"
+sudo rm -rf .cache/volumes
